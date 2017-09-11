@@ -52,7 +52,7 @@ h6 {
   font-size: 0.875rem;
 }
 
-p {
+p, li {
   font-size: 1.125rem;
   font-weight: 200;
   line-height: 1.8;
@@ -105,7 +105,7 @@ p {
 
 .row [class^="col"] {
   float: left;
-  margin: 0.5rem 2%;
+  padding: 0.5rem 2%;
   min-height: 0.125rem;
 }
 
