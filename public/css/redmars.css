@@ -10,21 +10,24 @@ h1 {
 	color: #222;
 /*	color: white;*/
 	font-weight: 400;
-	font-size: 3em;
 	display: inline-block;
 	margin-left: 30px;
 	text-shadow: 1px 2px 1px rgba(255,230,230,0.8), -1px -1px 1px rgba(255,200,200,0.2), 1px 2px 4px rgba(220,200,200,0.6);
 	z-index: 5;
 	position: relative;
 }
-h2 {
+h2, h3, h4 {
 	font-family: 'Jura', sans-serif;
 	color: #75552e;
-
+}
+.dateSpan {
+	font-family: 'Jura', sans-serif;
+	color: #75552e;
 }
 .navContainer {
 	background: white;
-	margin: 20px 0 80px 0;
+	margin-top: 20px;
+	margin-bottom: 80px;
 	position: relative;
 }
 .headerbar {
@@ -43,6 +46,8 @@ h2 {
 .btn {
 	margin-right: 40px;
 } .btn a {
+	text-decoration: none;
+} .headerLink {
 	text-decoration: none;
 }
 .navicons {
@@ -177,8 +182,129 @@ h2 {
 }
 
 .blogpost {
-	border: 1px solid #c69958;
-} 
+/*	border: 1px solid #c69958;*/
+	position: relative;
+} .blogpost h4 {
+	margin-left: 10px;
+	margin-top: 50px;
+} .blogpost h4:before {
+	position: relative;
+	left: -10px;
+	top: 4px;
+	content: url('../img/favicon20.png');
+	width: 10px;
+	height: 10px;
+	z-index: 1;
+}
 .dividerImg {
 	margin: 50px 0;
+}
+.dateSpan {
+	float: right;
+	font-size: 0.8em;
+}
+.projectThumb {
+	width: 100%;
+/*	border: 1px solid #c69958;*/
+	margin-bottom: 50px;
+} .projectThumb h5 {
+	text-align: right;
+	margin: 0;
+	margin-bottom: 5px;
+} .projectThumb h5:last-of-type {
+	margin-bottom: 50px;
+} .projectLink {
+	font-family: 'Nunito', Helvetica, sans-serif;
+	font-weight: normal;
+} .projectLink a {
+	color: #999;
+}
+.projectImg {
+	max-width: 100%;
+	border: 1px solid #D6D6D6;
+}
+.projectThumb video {
+	display: block;
+	margin: auto;
+} .projectThumb button {
+	display: block;
+	border: none;
+	font-size: 0.8em;
+	background: none;
+	color: #666;
+	margin: 10px auto;
+}
+
+/* About page */
+.aboutContainer {
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+.aboutDiv {
+	border: 1px solid #bd8f52;
+	border-radius: 10px;
+	padding: 30px;
+	box-shadow: 4px 6px 6px rgba(140,100,100,0.3);
+	margin-bottom: 30px;
+} .aboutDiv p {
+	margin-top: 0;
+} .aboutDiv p:last-of-type {
+	margin-bottom: 0;
+}
+.aboutImgDiv {
+	text-align: center;
+} .aboutImg {
+	margin-top: 15px;
+	display: inline-block;
+}
+.inlineImg {
+	display: inline-block;
+	float: right;
+	margin-left: 50px;
+	margin-bottom: 20px;
+	max-width: 30vw;
+} .noBottomMarginImg {
+	margin-bottom: 0;
+}
+.datestamp {
+	font-family: 'Jura', sans-serif;
+	font-size: 1.25rem;
+	color: white;
+	position: absolute;
+	top: -15px;
+	padding: 6px 12px;
+	background: #bd8f52;
+	border: 1px solid #bd8f52;
+	z-index: 1;
+} .datestampL {
+	left: 19px;
+	border-radius: 10px 0 0 0;
+} .datestampR {
+	right: 19px;
+	border-radius: 0 10px 0 0;
+}
+
+.spanTech {
+	padding: 0 5px;
+	border-radius: 5px;
+	font-weight: bold;
+}
+.spanHTML {
+	background: pink;
+} .spanCSS {
+	background: lightblue;
+} .spanJavascript {
+	background: lightgrey;
+} .spanNode {
+	background: lightgreen;
+} .spanFramework {
+	background: #ffcc99;
+} .spanDB {
+	background: #dfff80;
+}
+
+
+
+.centredDiv {
+	text-align: center;
 }

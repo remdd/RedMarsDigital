@@ -1,0 +1,50 @@
+<% include ./partials/header %>
+
+<div class="bgDiv solidBgDivLast">
+	<div class="container">
+		<div class="row">
+			<div class="col col-12">
+				<h2>Projects</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col col-12 projectThumb">
+				<h3>Chasing Shadows</h3>
+				<h5 class="projectLink"><a href="http://www.chasingshadowsphotography.com" target="_blank">www.chasingshadowsphotography.com</a></h5>
+				<h5 class="projectLink"><a href="http://www.chasingshadowsphotography.com/music" target="_blank">www.chasingshadowsphotography.com/music</a></h5>
+				<p>Portfolio website for a London-based photographer.</p>
+				<img class="projectImg" src="img/chasingshadows.jpg">
+				<p>The client had a clear concept in mind, with a sleek and minimal layout, and for the content of the site to be split in two distinct, self-contained sections.</p>
+				<p>The first of these would display her nature and travel photography, the second her gig and fashion photography. These two halves were to be visually distinct but consistent, with visitors to one section not necessarily needing to be aware of the existence of the other.</p>
+				<p>The final design delivered this using a discreet button (in the bottom-right of the browser window) to toggle between the two sections of the site, switching the theme from black-on-white (nature and travel galleries) to white-on-black (music and fashion galleries).</p>
+				<video autoplay loop height="284" width="600" id="csvid">
+					<source src="vid/chasingshadows.mp4" type="video/mp4">
+					<source src="vid/chasingshadows.ogg" type="video/ogg">
+					<p>Sorry, Your browser does not support the video tag.</p>
+				</video>
+				<button id="csbtn" onclick="csclick();"><i class="fa fa-pause" aria-hidden="true"></i></button>
+				<p>The site was built on <span class="spanTech spanNode">Node</span> and <span class="spanTech spanFramework">Express</span> foundations, using <span class="spanTech spanJavascript">jQuery</span>, <span class="spanTech spanCSS">Bootstrap</span> and <span class="spanTech spanJavascript">Masonry</span> on the front-end.
+			</div>
+
+			<div class="col col-12 projectThumb">
+				<h3>Butterfly Painter</h3>
+			</div>
+
+			<div class="col col-12 projectThumb">
+				<h3>Edutainment Console</h3>
+			</div>
+
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="js/projects.js"></script>
+
+
+<% include ./partials/footer %>
+

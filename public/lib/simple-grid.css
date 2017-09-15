@@ -103,7 +103,7 @@ p, li {
   width: 100%;
 }
 
-.row [class^="col"] {
+.row [class^="col"] {   /* ^= syntax means 'starts with' */
   float: left;
   padding: 0.5rem 2%;
   min-height: 0.125rem;
@@ -244,17 +244,17 @@ p, li {
 
 @media only screen and (min-width: 10em) { /* 160px */
   h1 {
-    font-size: 2.1em;
+    font-size: 1.9em;
     letter-spacing: 0px;
   }
   .headerbar {
     top: 128px;
   }
 }
-@media only screen and (min-width: 32em) { /* 512px */
+@media only screen and (min-width: 39em) { /* 624px */
   h1 {
-    font-size: 2.4em;
-    letter-spacing: 4px;
+    font-size: 2.2em;
+    letter-spacing: 3px;
   }
   .headerbar {
     top: 128px;
