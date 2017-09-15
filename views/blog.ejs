@@ -9,56 +9,18 @@
 		</div>
 
 		<div class="row">
-			<div class="col col-12 blogpost">
-				<h3>The latest blogpost</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. </p>
-				<p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. </p>
-				<span class="dateSpan">12 Sep 2017</span>
-			</div>
 
-			<img class="dividerImg" src="img/divider_1.jpg">
-
-			<div class="col col-12 blogpost">
-				<h3>Bootcamp</h3>
-				<p>My first serious step on my new road was a <a href="https://www.udemy.com/">Udemy</a> course; Colt Steele's <a href="https://www.udemy.com/the-web-developer-bootcamp/learn/v4/overview">Web Developer Bootcamp</a>.</p><p>Across 297 video tutorials, it covers a serious number of bases - from first principles and the essential skills of front-end development through to the command line, Node.js and back-end packages, databases, git and deployment.</p>
-				<p>Over the years I've dipped in and out of any number of courses and tutorials from various sources, and I have to say that for me Colt's bootcamp was head and shoulders above anything else I found.  As well as being a natural communicator, Colt has clearly put a huge amount of thought into the structure of each individual lesson and the bootcamp as a whole.  His extensive tutoring experience is obvious, and it's also clear that he's sought out and acted on student feedback to make sure the pacing is just right and that the key messages all stick.</p>
-				<p>In my opinion this course didn't put a foot wrong. I can't recommend it highly enough for anybody serious about getting to grips with the fundamentals of web programming from very first principles. So, thanks very much Colt!</p>
-				<span class="dateSpan">15 May 2017</span>
-			</div>
-
-			<img class="dividerImg" src="img/divider_2.jpg">
-
-			<div class="col col-12 blogpost">
-				<h3>Sudo reboot</h3>
-				<p>I've had what I would call a background interest in web design, and programming in general, since I was a teenager.  For whatever mix of reasons though I've never found the right opportunity, or the time, or the drive, to seriously immerse myself in the mysterious world of code and develop my understanding to the extent that I could consider making it part of my career.  But all that ends now!</p>
-				<p>I've spent the last 6 years working in the HR team at Sony Music UK.  The 9 before that were spent in the HR, payroll and finance teams of a mix of other companies up and down the UK.  Although there were plenty of ups along the way to go with the downs, in the back of my mind I was always fully aware that this career path was not my calling - far from it - and I'd felt stuck in a cul-de-sac for some time.</p>
-				<p>So, after waking one morning to a particularly stark vision of having plodded along in my payroll rut all the way to retirement, I threw caution to the wind and handed in my resignation.  I then made a promise to myself that 2017 would be the year that I finally rebooted myself and got round to installing that long list of pending life updates.</p>
-
-				<h4>Decisions decisions</h4>
-				<p>So what exactly does this reboot look like?  Well, I'm not totally sure!  I'll need a refresher in HTML and CSS, that's for sure; it's been a good while since I last made even a simple website.</p>
-				<p>I will also need to build on my rudimentary Javascript, and essentially start from scratch with the modern back-end ecosystem - Node, Express, and whatever else people seem to agree are the essential technologies this week.</p>
-				<p>I'd also like to expands on my professional use of Business Objects by digging deeper into SQL, and exploring alternative database technologies like mongoDB.</p>
-				<p>Oh and I also want to get properly acquainted with Linux, and find out just what a Raspberry Pi is capable of!  And who knows what other interesting tangents I might find myself heading down that I can't even picture yet?  Can't wait.</p>
-
-				<h4>Changing course</h4>
-				<p>It's not an easy decision to throw away your job.  It's exciting and terrifying in roughly equal measure, and everyone keeps telling me how 'brave' it is.  But I consider myself incredibly fortunate even to be able to consider it.</p>
-				<p>From my past life working in payroll I know that for far, far too many people, going without just one pay cheque can mean being unable to feed their family, or slipping into a spiral of debt, or finding themselves out on the street.</p>
-				<p>Compared to this I'm in a relatively safe position, for which I'm hugely thankful.  I don't have kids, and over the last couple of years have managed to prepare for this opportunity by squirreling away a modest safety net.  I've got no time to waste, and will need to be careful, but if I can stay disciplined I'll have at least a few months before the alarm bells start ringing in earnest.  I'm sure the time will fly by though - and I have a hell of a lot to learn!  Hopefully the red lines will loom close enough from day one that I don't let myself get complacent, and stay focused on making the most of this once-in-a-lifetime opportunity.</p>
-				<p>This blog will be an attempt to keep a record of my successes and failures along the way.  I have a few ideas for projects to start off with, and who knows what these will lead on to?  I'm looking forward to finding out.</p>
-				<p>It's time to get my career back on track.  Bring it on!</p>
-				<span class="dateSpan">03 Apr 2017</span>
-			</div>
-
-
-
-
-
-
-
-
-
-
-
+			<% blogPosts.docs.forEach(function(blogPost) { %>
+				<div class="col col-12 blogThumb">
+					<div class="truncatedBlogContent">
+						<a href="/blog/<%= blogPost._id %>" class="thumbLink blogTitle">
+							<h3><%= blogPost.title %></h3>
+						</a>
+						<span class="dateSpan"><%= blogPost.dateDisplay %></span>
+						<%- blogPost.content %>								<!-- note that EJS hyphen tag notation evaluates & renders HTML tags from string -->
+					</div>
+				</div>
+			<% }); %>
 
 		</div>
 	</div>

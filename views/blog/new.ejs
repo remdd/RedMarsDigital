@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+
+<div class="bgDiv solidBgDivLast">
+	<div class="container">
+		<div class="row">
+			<div class="col col-12">
+				<h3>New blog post</h3>
+				<form action="/blog" method="POST" id="newBlogPostForm">
+					<h4>Title</h4>
+					<input required class="newBlogPostFormTitle" type="text" name="blogPost[title]" form="newBlogPostForm" placeholder="Title of new blog post">
+					<h4>Body</h4>
+					<textarea required class="newBlogPostFormTextArea" name="blogPost[content]" form="newBlogPostForm" placeholder="Content of new blog post"></textarea>
+					<button form="newBlogPostForm" value="submit" id="submitBtn">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<% include ../partials/footer %>
+

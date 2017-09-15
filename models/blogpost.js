@@ -1,9 +1,13 @@
 var mongoose = require("mongoose");
+var	mongoosePaginate = require('mongoose-paginate');
 
-var BlogPostSchema = new mongoose.Schema({
+var blogPostSchema = new mongoose.Schema({
 	title: { type: String, required: true, unique: true },
-	content: String,
-	datePosted: Date
+	content: { type: String, required: true },
+	datePosted: Date,
+	dateDisplay: String
 });
 
-module.exports = mongoose.model("BlogPost", BlogPostSchema, "blogposts");
+blogPostSchema.plugin(mongoosePaginate);
+
+module.exports = mongoose.model("BlogPost", blogPostSchema, "blogposts");

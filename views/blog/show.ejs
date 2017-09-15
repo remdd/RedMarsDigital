@@ -1,0 +1,17 @@
+<% include ../partials/header %>
+
+<div class="bgDiv solidBgDivLast">
+	<div class="container">
+		<div class="row">
+			<div class="col col-12 blogpost">
+				<h3 class="blogTitle"><%= blogPost.title %></h3>
+				<span class="dateSpan"><%= blogPost.dateDisplay %></span>
+				<%- blogPost.content %>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<% include ../partials/footer %>
+

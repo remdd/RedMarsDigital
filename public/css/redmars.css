@@ -21,8 +21,12 @@ h2, h3, h4 {
 	color: #75552e;
 }
 .dateSpan {
+	position: absolute;
+	top: 10px;
+	right: 20px;
 	font-family: 'Jura', sans-serif;
 	color: #75552e;
+	font-size: 1em;
 }
 .navContainer {
 	background: white;
@@ -48,6 +52,8 @@ h2, h3, h4 {
 } .btn a {
 	text-decoration: none;
 } .headerLink {
+	text-decoration: none;
+} .thumbLink {
 	text-decoration: none;
 }
 .navicons {
@@ -182,8 +188,10 @@ h2, h3, h4 {
 }
 
 .blogpost {
-/*	border: 1px solid #c69958;*/
 	position: relative;
+	margin-top: 30px;
+} .blogpost h3 {
+	margin-top: 0;
 } .blogpost h4 {
 	margin-left: 10px;
 	margin-top: 50px;
@@ -198,10 +206,6 @@ h2, h3, h4 {
 }
 .dividerImg {
 	margin: 50px 0;
-}
-.dateSpan {
-	float: right;
-	font-size: 0.8em;
 }
 .projectThumb {
 	width: 100%;
@@ -307,4 +311,39 @@ h2, h3, h4 {
 
 .centredDiv {
 	text-align: center;
+}
+.newBlogPostFormTitle {
+	width: 100%;
+} .newBlogPostFormTextArea {
+	width: 100%;
+	min-height: 30vh;
+}
+
+.blogThumb {
+	position: relative;
+	width: 100%;
+	border: 1px solid #CCC;
+	border-radius: 10px;
+	margin-bottom: 30px;
+} .blogThumb:after {
+	content: '';
+	left: 0;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	height: 60px;
+	z-index: 1;
+	border-radius: 10px;
+	background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+} .truncatedBlogContent {
+/*	white-space: nowrap;*/
+	width: 100%;
+	max-height: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+} .blogThumb h3 {
+	margin-top: 0;
 }

@@ -1,0 +1,22 @@
+<% include ../partials/header %>
+
+<div class="bgDiv solidBgDivLast">
+	<div class="container">
+		<div class="row">
+			<div class="col col-12">
+				<h3>Edit blog post</h3>
+				<form action="/blog/<%= blogPost._id %>?_method=PUT" method="POST" id="updateBlogPostForm">
+					<h4>Title</h4>
+					<input required class="newBlogPostFormTitle" type="text" name="blogPost[title]" form="updateBlogPostForm" value="<%= blogPost.title %>">
+					<h4>Body</h4>
+					<textarea required class="newBlogPostFormTextArea" name="blogPost[content]" form="updateBlogPostForm"><%= blogPost.content %></textarea>
+					<button form="updateBlogPostForm" value="submit" id="submitBtn">Save</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<% include ../partials/footer %>
+
