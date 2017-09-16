@@ -28,6 +28,8 @@ app.use(methodOverride("_method"));
 
 
 
+var icons = ['Mariner4.png', 'Mars3.png', 'MRO.png', 'Phobos.png', 'Rover.png', 'Deimos.png', 'Sojourner.png'];
+
 
 //	ROUTES	//
 app.get('/', function(req, res) {
@@ -39,8 +41,15 @@ app.get('/about', function(req, res) {
 app.get('/projects', function(req, res) {
 	res.render('projects');
 });
+app.get('/projects/:name', function(req, res) {
+	console.log(req.params.name);
+	res.render('projects/' + req.params.name);
+});
 
 app.get('/blog', function(req, res) {
+	if(!(req.query.page)) {
+		req.query.page = 1;
+	}
 	BlogPost.paginate( {}, { 
 		limit: 10, 
 		sort: {datePosted: -1}, 
@@ -82,7 +91,26 @@ app.get('/blog/:id', function(req, res) {
 		} else if(!blogPost) {
 			res.render('404');
 		} else {
-			res.render('blog/show', {blogPost: blogPost});
+			BlogPost.find({"datePosted": {"$gt": blogPost.datePosted}}).sort({"datePosted": 1}).limit(1)
+			.exec(function(err, nextPost) {
+				if(err) {
+					console.log(err);
+					res.redirect('/blog');
+				} else {
+					BlogPost.find({"datePosted": {"$lt": blogPost.datePosted}}).sort({"datePosted": -1}).limit(1)
+					.exec(function(err, prevPost) {
+						if(err) {
+							console.log(err);
+							res.redirect('/blog');
+						} else {
+							var randomIcon = Math.floor(Math.random() * icons.length);
+							var footerIcon = icons[randomIcon];
+							console.log(footerIcon);
+							res.render('blog/show', {blogPost: blogPost, nextPost: nextPost[0], prevPost: prevPost[0], footerIcon: footerIcon});
+						}
+					});
+				}
+			});
 		};
 	});
 });

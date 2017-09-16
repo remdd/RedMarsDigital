@@ -3,12 +3,37 @@
 <div class="bgDiv solidBgDivLast">
 	<div class="container">
 		<div class="row">
+
+			<div>
+				<button class="btn"><a href="/blog/<%= blogPost._id %>/edit" class="btn">Edit</a></button>
+				<form action="/blog/<%= blogPost._id %>?_method=DELETE" method="POST">
+					<button disabled class="btn">Delete</button>
+				</form>
+			</div>
+
 			<div class="col col-12 blogpost">
 				<h3 class="blogTitle"><%= blogPost.title %></h3>
 				<span class="dateSpan"><%= blogPost.dateDisplay %></span>
 				<%- blogPost.content %>
 			</div>
 		</div>
+
+		<hr />
+
+		<div class="row">
+			<div class="col col-12 centredDiv">
+				<img src="/img/<%= footerIcon %>">		
+			</div>
+		</div>
+
+		<% if(nextPost) { %>
+			<p>Next post: <a href="/blog/<%= nextPost._id %>"><%= nextPost.title %></a> (<%= nextPost.dateDisplay %>)</p>
+		<% } %>
+
+		<% if(prevPost) { %>
+			<p>Previous post: <a href="/blog/<%= prevPost._id %>"><%= prevPost.title %></a> (<%= prevPost.dateDisplay %>)</p>
+		<% } %>
+
 	</div>
 </div>
 

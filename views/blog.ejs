@@ -10,6 +10,10 @@
 
 		<div class="row">
 
+			<% if(blogPosts.total > blogPosts.limit) { %>
+				<p>Showing <%= blogPosts.limit %> results per page - page <%= blogPosts.page %> of <%= blogPosts.pages %> (<%= blogPosts.total %> results total)</p>
+			<% } %>
+
 			<% blogPosts.docs.forEach(function(blogPost) { %>
 				<div class="col col-12 blogThumb">
 					<div class="truncatedBlogContent">
