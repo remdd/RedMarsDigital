@@ -214,6 +214,7 @@ h2, h3, h4 {
 	min-height: 300px;
 	display: inline-block;
 	margin-bottom: 30px;
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
 } .projectThumb h3 {
 	margin: 0 0 10px 0;
 } .projectThumb span {

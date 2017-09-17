@@ -19,4 +19,10 @@ $(function() {
 		}
 		csplaying = !csplaying;
 	};
+
+	$('.grid').masonry({
+		// options
+		itemSelector: '.gridItem',
+		columnWidth: 0
+	});
 });
