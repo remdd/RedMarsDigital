@@ -316,16 +316,15 @@ h2, h3, h4 {
 	background: pink;
 } .spanCSS {
 	background: lightblue;
-} .spanJavascript {
+} .spanLanguage {
 	background: lightgrey;
-} .spanNode {
+} .spanLibrary {
 	background: lightgreen;
 } .spanFramework {
 	background: #ffcc99;
 } .spanDB {
 	background: #dfff80;
-}
-
+} 
 
 
 .centredDiv {
@@ -369,4 +368,13 @@ h2, h3, h4 {
 	max-width: 100%;
 	display: inline-block;
 	text-align: center;
+}
+#globe {
+	width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+canvas {
+	background: url('/img/Stars.jpg');
+	background-size: cover;
 }
