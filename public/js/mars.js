@@ -4,7 +4,7 @@ var LIGHT_POS_Y = 300;
 var LIGHT_POS_Z = 100;
 
 var CAMERA_POS_X = 1800;
-var CAMERA_POS_Y = 500;
+var CAMERA_POS_Y = 0;
 
 var POS_Z = 1800;
 
@@ -18,6 +18,11 @@ var NEAR = 1;
 var FAR = 4000;
 
 var timer = 0;
+
+var speed = 0.002;
+
+var points_geography = [];
+var points_missions = [];
 
 
 // some global variables and initialization code
@@ -61,7 +66,7 @@ $(document).ready(function()  {
 
 //  animation
 function render() {
-    timer += 0.005;
+    timer += speed;
     camera.position.x = (Math.cos( timer ) *  1800);
     camera.position.z = (Math.sin( timer ) *  1800);
    	light.position.x = (Math.cos( timer + 0.75 ) *  1800);
@@ -96,26 +101,45 @@ function addLight() {
 
 //  add points of interest
 function addPoints() {
-    var geometry = new THREE.SphereGeometry(10, 8, 8);
-    var material = new THREE.MeshPhongMaterial({
-        color: 0xffd196,
-        shininess: 0.4,
-        opacity: 0.2
-    });
     for(var i = 0; i < points.length; i++) {
         var x = points[i].long;
         var y = points[i].lat;
-        console.log(x + ", " + y);
         var position = latLongToVector3(y, x, points[i].height);
-        var point = new THREE.Mesh(geometry, material);
-        point.receiveShadow = true;
-        console.log(position);
-        point.position.copy(position);
-        console.log(point.position);
 
+        if(points[i].type === 'geography') {
+            var geometry = new THREE.SphereGeometry(8, 8, 8);
+            var material = new THREE.MeshPhongMaterial({
+                color: 0xffc132,
+                shininess: 0.4,
+                opacity: 0.2
+            });
+        } else if(points[i].type === 'mission') {
+            var geometry = new THREE.BoxGeometry(10, 10, 10);
+            var material = new THREE.MeshPhongMaterial({
+                color: 0x8ad4fc,
+                shininess: 0.4,
+                opacity: 0.2
+            });
+        } else if(points[i].type === 'newest') {
+            var geometry = new THREE.BoxGeometry(20, 10, 10);
+            var material = new THREE.MeshPhongMaterial({
+                color: 0xFFFFFF,
+                shininess: 0.4,
+                opacity: 0.2
+            });
+        }
+        var point = new THREE.Mesh(geometry, material);
+        point.marsname = points[i].name;
+        point.receiveShadow = true;
+        point.position.copy(position);
         point.lookAt( new THREE.Vector3(0, 0, 0) );
         scene.add(point);
-        console.log(point);
+
+        if(points[i].type === 'geography') {
+            points_geography.push(point);
+        } else if(points[i].type === 'mission') {
+            points_missions.push(point);
+        }
     }
 
 }
@@ -126,39 +150,170 @@ function latLongToVector3(lat, lon, height) {
 
     var phi = (lat)*Math.PI/180;
     var theta = (lon-180)*Math.PI/180;
-
-    console.log("phi: " + phi);
-    console.log("theta: " + theta);
-
     var x = -(radius+height) * Math.cos(phi) * Math.cos(theta);
     var y = (radius+height) * Math.sin(phi);
     var z = (radius+height) * Math.cos(phi) * Math.sin(theta);
-
-    console.log("x: " + x);
-    console.log("y: " + y);
-    console.log("z: " + z);
-
     return new THREE.Vector3(x,y,z);
 }
 
+$('.gbut').click(function() {
+    $('.gbut').removeClass('selecti');
+    $(this).addClass('selecti');
+    var but = $(this).attr('id');
+    switch(but) {
+        case 'gbutb3':
+            speed = -0.015
+            break;
+        case 'gbutb2':
+            speed = -0.006
+            break;
+        case 'gbutb1':
+            speed = -0.002
+            break;
+        case 'gbutp':
+            speed = 0
+            break;
+        case 'gbutf1':
+            speed = 0.002
+            break;
+        case 'gbutf2':
+            speed = 0.006
+            break;
+        case 'gbutf3':
+            speed = 0.015
+            break;
+        default:
+            speed = 0.002
+    }
+});
+
+$('.obut').click(function() {
+    $(this).toggleClass('selecti');
+    var but = $(this).attr('id');
+    switch(but) {
+        case 'obutgeography': {
+            if($(this).hasClass('selecti')) {
+                $.each(points_geography, function(index, point) {
+                    console.log(point);
+                    point.visible = true;
+                });
+                break;
+            } else {
+                $.each(points_geography, function(index, point) {
+                    console.log(point);
+                    point.visible = false;
+                });
+                break;
+            }
+        }
+        case 'obutmissions': {
+            if($(this).hasClass('selecti')) {
+                $.each(points_missions, function(index, point) {
+                    console.log(point);
+                    point.visible = true;
+                });
+                break;
+            } else {
+                $.each(points_missions, function(index, point) {
+                    console.log(point);
+                    point.visible = false;
+                });
+                break;
+            }
+        }
+    }
+});
+
+//  Points of interest to display on the globe
 var points = [
     {
-        name: 'Site One',
-        lat: 50,
-        long: -20,
-        height: 0,
-    },
-    {
-        name: 'Site Two',
-        lat: 0,
+        name: 'Airy-0 crater',
+        description: 'This crater defines the prime meridian, or line of zero longitude, on Mars. It was named after the Astronomer Royal Sir ',
+        type: 'geography',
+        img: '',
+        lat: -5.1,
         long: 0,
-        height: 0,
+        height: 0
     },
     {
-        name: 'Site Three',
-        lat: -20,
-        long: 165,
-        height: 0,
+        name: 'Olympus Mons',
+        description: 'The tallest mountain in the solar system, standing nearly 14 miles above its surroundings.',
+        type: 'geography',
+        lat: 18.4,
+        long: 226.5,
+        height: 0
+    },
+    {
+        name: 'Isidis Planitia',
+        description: "A vast plain in one of Mars' three particularly apparent 'impact basins', formed about 4 billion years ago by a collision with a large (perhaps 30 miles in diameter) asteroid or comet.",
+        type: 'geography',
+        lat: 12.9,
+        long: 87,
+        height: 0
+    },
+    {
+        name: 'Hellas Planitia',
+        description: '',
+        type: 'geography',
+        lat: -40,
+        long: 160,
+        height: 0
+    },
+    {
+        name: 'Beagle 2',
+        description: 'Landing site of the British spacecraft that failed to operate after landing, on Christmas Day 2003. Its fate was unknown at the time, until spotted by the Mars Reconnaissance Orbiter in late 2014.',
+        type: 'mission',
+        lat: 11.31,
+        long: 90.25,
+        height: 0
+    },
+    {
+        name: 'Viking 1',
+        description: "NASA's Viking 1, the first spacecraft to achieve a soft landing on Mars and complete its objectives, touched down here on July 20, 1976.",
+        type: 'mission',
+        lat: 22.27,
+        long: 312.05,
+        height: 0
+    },
+    {
+        name: 'Mars 2',
+        description: "The Soviet Union's Mars 2 probe was the first man-made object to reach the surface of Mars, on November 27 1971, but the descent module's parachute failed to deploy and it is presumed to have been destroyed on impact.",
+        type: 'newest',
+        lat: -45,
+        long: 47,
+        height: 0
+    },
+    {
+        name: 'Mars 3',
+        description: "Running from 1960 to 1973, the Soviet Mars programme suffered a very high failure rate - but their Mars 3 probe can claim mankind's first (and to date Russia's only) successful soft landing on Mars. Unforunately however it failed after just 14.5 seconds, having transmitted just a single partial image.",
+        type: 'mission',
+        lat: -45,
+        long: 202,
+        height: 0
+    },
+    {
+        name: 'Curiosity',
+        description: "The landing site of NASA's most recent and instrument-packed rover to date. Curiosity touched down on August 6, 2012, and is still returning incredibly valuable scientific data.",
+        type: 'mission',
+        lat: -4.59,
+        long: 137.44,
+        height: 0
+    },
+    {
+        name: 'Spirit',
+        description: "The second of NASA's pair of Mars Exploration Rovers to touch down in early 2004. After 5 years and 4 months of successful exploration, Spirit became stuck and immobilized in May 2009 and eventually stopped communicating the following year.",
+        type: 'mission',
+        lat: -14.57,
+        long: 175.47,
+        height: 0
+    },
+    {
+        name: 'Opportunity',
+        description: "NASA's pair of Mars Exploration Rovers were each planned to operate for 90 sols (about 92 Earth days). Instead, Spirit managed over 2,200 sols before getting stuck - and Opportunity is still going strong at the time of writing, over 14 years later.",
+        type: 'mission',
+        lat: -1.95,
+        long: 354.47,
+        height: 0
     }
 
 ];

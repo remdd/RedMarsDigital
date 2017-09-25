@@ -1,18 +1,30 @@
 <% include ./partials/header %>
 
-<div class="bgDiv solidBgDivLast">
+<div class="bgDiv solidBgDivLast bgDivBlack">
 	<div class="container">
 		<div class="row">
 			<div class="col col-12">
 				<h2>Mars</h2>
 			</div>
+		</div>
 
-
+		<div class="globeRow">
 		  	<div class="col col-12" id="globe"></div>
 
+		  	<div class="controlDiv" id="globeControls">
+		  		<i id="gbutb3" class="gbut fa fa-fast-backward" aria-hidden="true"></i>
+		  		<i id="gbutb2" class="gbut fa fa-backward" aria-hidden="true"></i>
+		  		<i id="gbutb1" class="gbut fa fa-play flipi" aria-hidden="true"></i>
+		  		<i id="gbutp" class="gbut fa fa-pause" aria-hidden="true"></i>
+		  		<i id="gbutf1" class="gbut fa fa-play selecti" aria-hidden="true"></i>
+				<i id="gbutf2" class="gbut fa fa-forward" aria-hidden="true"></i>
+				<i id="gbutf3" class="gbut fa fa-fast-forward" aria-hidden="true"></i>
+		  	</div>
 
-
-
+		  	<div class="controlDiv" id="overlayControls">
+		  		<i id="obutgeography" class="obut fa fa-area-chart selecti" aria-hidden="true"></i>
+		  		<i id="obutmissions" class="obut fa fa-rocket selecti" aria-hidden="true"></i>
+		  	</div>
 		</div>
 	</div>
 </div>

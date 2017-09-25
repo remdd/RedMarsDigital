@@ -137,6 +137,8 @@ h2, h3, h4 {
     width: 200vw;
     height: 75%;
     background: inherit;
+} .bgDivBlack {
+	background: black;
 }
 .imgBgDivContainer {
 	padding: 100px 0 80px 0;
@@ -374,7 +376,31 @@ h2, h3, h4 {
 	padding-left: 0;
 	padding-right: 0;
 }
+.globeRow {
+	position: relative;
+}
 canvas {
 	background: url('/img/Stars.jpg');
 	background-size: cover;
+}
+.controlDiv {
+	position: absolute;
+}
+#globeControls {
+	bottom: 20px;
+	left: 20px;
+} #overlayControls {
+	bottom: 20px;
+	right: 20px;
+} .controlDiv i {
+	color: #333333;
+	padding-right: 3px;
+	padding-left: 3px;
+} .flipi {
+    transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+} .controlDiv i.selecti {
+	color: #999999;
 }
