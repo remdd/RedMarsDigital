@@ -393,6 +393,7 @@ canvas {
 	bottom: 20px;
 	right: 20px;
 } .controlDiv i {
+	transition: color 0.3s;
 	color: #333333;
 	padding-right: 3px;
 	padding-left: 3px;

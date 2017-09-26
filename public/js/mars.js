@@ -23,7 +23,8 @@ var speed = 0.002;
 
 var points_geography = [];
 var points_missions = [];
-
+var point_full_opacity = 0.7;
+var point_fade_time = 300;
 
 // some global variables and initialization code
 // simple basic renderer
@@ -75,6 +76,7 @@ function render() {
     light.lookAt(scene.position);
     renderer.render( scene, camera );
     requestAnimationFrame( render );
+    TWEEN.update();
 }
 
 // add Mars
@@ -107,25 +109,25 @@ function addPoints() {
         var position = latLongToVector3(y, x, points[i].height);
 
         if(points[i].type === 'geography') {
-            var geometry = new THREE.SphereGeometry(8, 8, 8);
-            var material = new THREE.MeshPhongMaterial({
+            var geometry = new THREE.SphereGeometry(12, 8, 8);
+            var material = new THREE.MeshLambertMaterial({
                 color: 0xffc132,
-                shininess: 0.4,
-                opacity: 0.2
+                transparent: true,
+                opacity: point_full_opacity
             });
         } else if(points[i].type === 'mission') {
-            var geometry = new THREE.BoxGeometry(10, 10, 10);
-            var material = new THREE.MeshPhongMaterial({
+            var geometry = new THREE.BoxGeometry(15, 15, 15);
+            var material = new THREE.MeshLambertMaterial({
                 color: 0x8ad4fc,
-                shininess: 0.4,
-                opacity: 0.2
+                transparent: true,
+                opacity: point_full_opacity
             });
         } else if(points[i].type === 'newest') {
             var geometry = new THREE.BoxGeometry(20, 10, 10);
-            var material = new THREE.MeshPhongMaterial({
+            var material = new THREE.MeshLambertMaterial({
                 color: 0xFFFFFF,
-                shininess: 0.4,
-                opacity: 0.2
+                transparent: true,
+                opacity: point_full_opacity
             });
         }
         var point = new THREE.Mesh(geometry, material);
@@ -194,14 +196,12 @@ $('.obut').click(function() {
         case 'obutgeography': {
             if($(this).hasClass('selecti')) {
                 $.each(points_geography, function(index, point) {
-                    console.log(point);
-                    point.visible = true;
+                    var tween = new TWEEN.Tween( point.material ).to( { opacity: point_full_opacity }, point_fade_time ).start();
                 });
                 break;
             } else {
                 $.each(points_geography, function(index, point) {
-                    console.log(point);
-                    point.visible = false;
+                    var tween = new TWEEN.Tween( point.material ).to( { opacity: 0 }, point_fade_time ).start();
                 });
                 break;
             }
@@ -209,14 +209,12 @@ $('.obut').click(function() {
         case 'obutmissions': {
             if($(this).hasClass('selecti')) {
                 $.each(points_missions, function(index, point) {
-                    console.log(point);
-                    point.visible = true;
+                    var tween = new TWEEN.Tween( point.material ).to( { opacity: point_full_opacity }, point_fade_time ).start();
                 });
                 break;
             } else {
                 $.each(points_missions, function(index, point) {
-                    console.log(point);
-                    point.visible = false;
+                    var tween = new TWEEN.Tween( point.material ).to( { opacity: 0 }, point_fade_time ).start();
                 });
                 break;
             }
