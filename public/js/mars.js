@@ -1,17 +1,4 @@
-// Constants
-var LIGHT_POS_X = 800;
-var LIGHT_POS_Y = 0;
-var LIGHT_POS_Z = 100;
-
-var camera_pos = {
-    x: 1800,
-    y: 0,
-    z: 1800
-}
-
-// var camera_pos_x = 1800;
-// var camera_pos_y = 0;
-
+//  Constants
 var WIDTH = $('#globe').width();
 var HEIGHT = WIDTH * 0.6;
 
@@ -21,40 +8,47 @@ var FOV = 45;
 var NEAR = 1;
 var FAR = 4000;
 
+//  Global vars
+var camera_pos = {
+    x: 1800,
+    y: 0,
+    z: 1800
+}
+var light_pos = {
+    x: 1800,
+    y: 200,
+    z: 1800
+}
+
 var timer = 0;
-
 var speed = 0.002;
-
 var points_geography = [];
 var points_missions = [];
 var point_full_opacity = 0.7;
 var point_fade_time = 300;
-var camera_angle_time = 1000;
+var camera_angle_time = 2000;
 
-// some global variables and initialization code
-// simple basic renderer
+//  basic renderer
 var renderer = new THREE.WebGLRenderer( { alpha: true });
 renderer.setSize(WIDTH,HEIGHT);
 renderer.setClearColor(0x000000, 0);
 renderer.shadowMap.enabled = true;
 renderer.shadowMapSoft = true;
 
-
-// add it to the target element
+//  add renderer to DOM
 var mapDiv = document.getElementById("globe");
 mapDiv.appendChild(renderer.domElement);
 
-// setup a camera that points to the center
+//  setup a camera that points to the origin
 var camera = new THREE.PerspectiveCamera(FOV,WIDTH/HEIGHT,NEAR,FAR);
 camera.position.set(camera_pos.x, camera_pos.y, camera_pos.z);
 camera.lookAt(new THREE.Vector3(0,0,0));
 
-// create a basic scene and add the camera
+//  create a basic scene and add the camera
 var scene = new THREE.Scene();
 scene.add(camera);
 
 //	run on document ready
-
 $(document).ready(function()  {
     addLight();
     var mars = addMars();
@@ -75,8 +69,8 @@ function render() {
     timer += speed;
     camera.position.x = (Math.cos( timer ) *  camera_pos.x);
     camera.position.z = (Math.sin( timer ) *  camera_pos.z);
-   	light.position.x = (Math.cos( timer + 0.75 ) *  camera_pos.x);
-    light.position.z = (Math.sin( timer + 0.75 ) *  camera_pos.z);
+   	light.position.x = (Math.cos( timer + 0.75 ) *  light_pos.x);
+    light.position.z = (Math.sin( timer + 0.75 ) *  light_pos.z);
     camera.lookAt( scene.position );
     light.lookAt(scene.position);
     renderer.render( scene, camera );
@@ -104,7 +98,7 @@ function addLight() {
     light = new THREE.DirectionalLight(0xffffff, 1, 500);
     light.castShadow = true;
     scene.add(light);
-    light.position.set(LIGHT_POS_X,LIGHT_POS_Y,LIGHT_POS_Z);
+    light.position.set(light_pos.x, light_pos.y, light_pos.z);
 }
 
 //  add points of interest
@@ -238,46 +232,61 @@ $('.lbut').click(function() {
     } else if(camera.position.y < 0) {
         startstate = 'down';
     }
-    console.log(startstate);
-    $(this).addClass('selecti');
-    $('.lbut').css('pointer-events', 'none');
     var but = $(this).attr('id');
     switch(but) {
         case 'lbutup':
-            if(startstate === 'down') {
+            if(startstate === 'up') {
+                break;
+            } else if(startstate === 'down') {
                 tweenmid();
             } else {
                 tweenup();
             }
+            $(this).addClass('selecti');
+            $('.lbut').css('pointer-events', 'none');
+            setTimeout(function() {
+                $('.lbut').css('pointer-events', 'auto');
+                $('.lbut').removeClass('selecti');
+            }, camera_angle_time);
             break;
         case 'lbutdown':
-            if(startstate === 'up') {
+            if(startstate === 'down') {
+                break;
+            } else if(startstate === 'up') {
                 tweenmid();
             } else {
                 tweendown();
             }
+            $(this).addClass('selecti');
+            $('.lbut').css('pointer-events', 'none');
+            setTimeout(function() {
+                $('.lbut').css('pointer-events', 'auto');
+                $('.lbut').removeClass('selecti');
+            }, camera_angle_time);
             break;
         default:
             var tween = new TWEEN.Tween( camera.position ).to( { y: 0 } , camera_angle_time ).start();
             var tween2 = new TWEEN.Tween( camera_pos ).to( { x: 1800, z: 1800 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.Out).start();
     }
-    setTimeout(function() {
-        $('.lbut').css('pointer-events', 'auto');
-        $('.lbut').removeClass('selecti');
-    }, camera_angle_time);
 });
 
 function tweenup() {
     var tween = new TWEEN.Tween( camera.position ).to( { y: 1200 } , camera_angle_time ).start();
     var tween2 = new TWEEN.Tween( camera_pos ).to( { x: 1342, z: 1342 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.In).start();
+    var tweenl = new TWEEN.Tween( light.position ).to( { y: 600 } , camera_angle_time ).start();
+    var tweenl2 = new TWEEN.Tween( light_pos ).to( { x: 1342, z: 1342 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.In).start();
 };
 function tweendown() {
     var tween = new TWEEN.Tween( camera.position ).to( { y: -1200 } , camera_angle_time ).start();
     var tween2 = new TWEEN.Tween( camera_pos ).to( { x: 1342, z: 1342 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.In).start();
+    var tweenl = new TWEEN.Tween( light.position ).to( { y: -600 } , camera_angle_time ).start();
+    var tweenl2 = new TWEEN.Tween( light_pos ).to( { x: 1342, z: 1342 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.In).start();
 };
 function tweenmid() {
     var tween = new TWEEN.Tween( camera.position ).to( { y: 0 } , camera_angle_time ).start();
     var tween2 = new TWEEN.Tween( camera_pos ).to( { x: 1800, z: 1800 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.Out).start();
+    var tweenl = new TWEEN.Tween( light.position ).to( { y: 100 } , camera_angle_time ).start();
+    var tweenl2 = new TWEEN.Tween( light_pos ).to( { x: 1800, z: 1800 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.Out).start();
 };
 
 //  Points of interest to display on the globe
@@ -316,6 +325,38 @@ var points = [
         height: 0
     },
     {
+        name: 'North polar cap',
+        description: "Mars' northern ice cap is largely formed of water ice. In winter, this becomes covered by a layer of carbon dioxide frozen from the Martian atmosphere, which then sublimes back to a gas in the higher temperatures of the Martian summer.",
+        type: 'geography',
+        lat: 90,
+        long: 0,
+        height: 0
+    },
+    {
+        name: 'South polar cap',
+        description: "Mars' permanent south polar ice cap is considerably smaller than that at the north pole. Due to Mars' relatively eccentric (ie more oval than circular) oribt around the sun, winters in the southern hemisphere are however longer and colder than those in the north.",
+        type: 'geography',
+        lat: -90,
+        long: 0,
+        height: 0
+    },
+    {
+        name: 'Valles Marineris',
+        description: "This gigantic canyon system stretches over 4,000 km, dwarfing Earth's 446 km Grand Canyon. It was discovered by - and takes its name from - the Mariner 9 orbiter, which reached Mars in 1971 and became the first spacecraft to oribt a planet other than the Earth.",
+        type: 'geography',
+        lat: -9.9,
+        long: 287,
+        height: 0
+    },
+    {
+        name: 'Tharsis Montes',
+        description: "The Tharsis Montes is a chain of three large shield volcanoes named (from southwest to northeast) Arsia Mons, Pavonis Mons and Ascraeus Mons. Each of these would utterly dwarf even the tallest mountains on Earth.",
+        type: 'geography',
+        lat: 1.3,
+        long: 247.2,
+        height: 0
+    },
+    {
         name: 'Beagle 2',
         description: 'Landing site of the British spacecraft that failed to operate after landing, on Christmas Day 2003. Its fate was unknown at the time, until spotted by the Mars Reconnaissance Orbiter in late 2014.',
         type: 'mission',
@@ -334,7 +375,7 @@ var points = [
     {
         name: 'Mars 2',
         description: "The Soviet Union's Mars 2 probe was the first man-made object to reach the surface of Mars, on November 27 1971, but the descent module's parachute failed to deploy and it is presumed to have been destroyed on impact.",
-        type: 'newest',
+        type: 'mission',
         lat: -45,
         long: 47,
         height: 0
@@ -353,6 +394,14 @@ var points = [
         type: 'mission',
         lat: -4.59,
         long: 137.44,
+        height: 0
+    },
+    {
+        name: 'Pathfinder',
+        description: "The 1996-97 Mars Pathfinder mission was made up of a lander, the 'Carl Sagan Memorial Station', and a small 10.5kg rover called 'Sojourner'.",
+        type: 'mission',
+        lat: 19.75,
+        long: 326.9,
         height: 0
     },
     {
