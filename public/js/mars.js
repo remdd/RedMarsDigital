@@ -1,12 +1,16 @@
 // Constants
 var LIGHT_POS_X = 800;
-var LIGHT_POS_Y = 300;
+var LIGHT_POS_Y = 0;
 var LIGHT_POS_Z = 100;
 
-var CAMERA_POS_X = 1800;
-var CAMERA_POS_Y = 0;
+var camera_pos = {
+    x: 1800,
+    y: 0,
+    z: 1800
+}
 
-var POS_Z = 1800;
+// var camera_pos_x = 1800;
+// var camera_pos_y = 0;
 
 var WIDTH = $('#globe').width();
 var HEIGHT = WIDTH * 0.6;
@@ -25,6 +29,7 @@ var points_geography = [];
 var points_missions = [];
 var point_full_opacity = 0.7;
 var point_fade_time = 300;
+var camera_angle_time = 1000;
 
 // some global variables and initialization code
 // simple basic renderer
@@ -41,7 +46,7 @@ mapDiv.appendChild(renderer.domElement);
 
 // setup a camera that points to the center
 var camera = new THREE.PerspectiveCamera(FOV,WIDTH/HEIGHT,NEAR,FAR);
-camera.position.set(CAMERA_POS_X,CAMERA_POS_Y, POS_Z);
+camera.position.set(camera_pos.x, camera_pos.y, camera_pos.z);
 camera.lookAt(new THREE.Vector3(0,0,0));
 
 // create a basic scene and add the camera
@@ -68,15 +73,16 @@ $(document).ready(function()  {
 //  animation
 function render() {
     timer += speed;
-    camera.position.x = (Math.cos( timer ) *  1800);
-    camera.position.z = (Math.sin( timer ) *  1800);
-   	light.position.x = (Math.cos( timer + 0.75 ) *  1800);
-    light.position.z = (Math.sin( timer + 0.75 ) *  1800);
+    camera.position.x = (Math.cos( timer ) *  camera_pos.x);
+    camera.position.z = (Math.sin( timer ) *  camera_pos.z);
+   	light.position.x = (Math.cos( timer + 0.75 ) *  camera_pos.x);
+    light.position.z = (Math.sin( timer + 0.75 ) *  camera_pos.z);
     camera.lookAt( scene.position );
     light.lookAt(scene.position);
     renderer.render( scene, camera );
     requestAnimationFrame( render );
     TWEEN.update();
+    // console.log("cam x: " + camera.position.x + ", cam y: " + camera.position.y + ", cam z: " + camera.position.z);
 }
 
 // add Mars
@@ -158,6 +164,7 @@ function latLongToVector3(lat, lon, height) {
     return new THREE.Vector3(x,y,z);
 }
 
+//  Globe rotation button control
 $('.gbut').click(function() {
     $('.gbut').removeClass('selecti');
     $(this).addClass('selecti');
@@ -189,6 +196,7 @@ $('.gbut').click(function() {
     }
 });
 
+//  Overlay button control
 $('.obut').click(function() {
     $(this).toggleClass('selecti');
     var but = $(this).attr('id');
@@ -221,6 +229,56 @@ $('.obut').click(function() {
         }
     }
 });
+
+//  Latitude button control
+$('.lbut').click(function() {
+    var startstate;
+    if(camera.position.y > 0) {
+        startstate = 'up';
+    } else if(camera.position.y < 0) {
+        startstate = 'down';
+    }
+    console.log(startstate);
+    $(this).addClass('selecti');
+    $('.lbut').css('pointer-events', 'none');
+    var but = $(this).attr('id');
+    switch(but) {
+        case 'lbutup':
+            if(startstate === 'down') {
+                tweenmid();
+            } else {
+                tweenup();
+            }
+            break;
+        case 'lbutdown':
+            if(startstate === 'up') {
+                tweenmid();
+            } else {
+                tweendown();
+            }
+            break;
+        default:
+            var tween = new TWEEN.Tween( camera.position ).to( { y: 0 } , camera_angle_time ).start();
+            var tween2 = new TWEEN.Tween( camera_pos ).to( { x: 1800, z: 1800 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.Out).start();
+    }
+    setTimeout(function() {
+        $('.lbut').css('pointer-events', 'auto');
+        $('.lbut').removeClass('selecti');
+    }, camera_angle_time);
+});
+
+function tweenup() {
+    var tween = new TWEEN.Tween( camera.position ).to( { y: 1200 } , camera_angle_time ).start();
+    var tween2 = new TWEEN.Tween( camera_pos ).to( { x: 1342, z: 1342 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.In).start();
+};
+function tweendown() {
+    var tween = new TWEEN.Tween( camera.position ).to( { y: -1200 } , camera_angle_time ).start();
+    var tween2 = new TWEEN.Tween( camera_pos ).to( { x: 1342, z: 1342 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.In).start();
+};
+function tweenmid() {
+    var tween = new TWEEN.Tween( camera.position ).to( { y: 0 } , camera_angle_time ).start();
+    var tween2 = new TWEEN.Tween( camera_pos ).to( { x: 1800, z: 1800 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.Out).start();
+};
 
 //  Points of interest to display on the globe
 var points = [
