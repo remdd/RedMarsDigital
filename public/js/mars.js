@@ -26,7 +26,8 @@ var points_geography = [];
 var points_missions = [];
 var point_full_opacity = 0.7;
 var point_fade_time = 300;
-var camera_angle_time = 2000;
+var camera_angle_time = 1000;
+var point_labelled;
 
 //  basic renderer
 var renderer = new THREE.WebGLRenderer( { alpha: true });
@@ -38,6 +39,8 @@ renderer.shadowMapSoft = true;
 //  add renderer to DOM
 var mapDiv = document.getElementById("globe");
 mapDiv.appendChild(renderer.domElement);
+var $canvas = $('canvas').first();
+window.addEventListener('mousemove', onMouseMove, false);
 
 //  setup a camera that points to the origin
 var camera = new THREE.PerspectiveCamera(FOV,WIDTH/HEIGHT,NEAR,FAR);
@@ -76,7 +79,36 @@ function render() {
     renderer.render( scene, camera );
     requestAnimationFrame( render );
     TWEEN.update();
+
+    raycaster.setFromCamera(mouseVector, camera);
+    var intersects = raycaster.intersectObjects(scene.children);
+
+    console.log(intersects);
+
+    // for(var i = 0; i < intersects.length; i++) {
+    //     if(intersects[i].object.name != 'Mars') {
+    //         point_labelled = intersects[i].object;
+    //         if(intersects[i].object.name != point_labelled.name) {
+    //             highlight(point_labelled);
+    //         }
+    //         // intersects[i].object.material.color.set(0xff0000);
+    //     }
+    // }
     // console.log("cam x: " + camera.position.x + ", cam y: " + camera.position.y + ", cam z: " + camera.position.z);
+}
+
+function highlight(point) {
+    var geometry = new THREE.SphereGeometry(20, 8, 8);
+    var material = new THREE.MeshLambertMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: point_full_opacity
+    });
+    var highlight = new THREE.Mesh(geometry, material);
+    highlight.receiveShadow = true;
+    highlight.position.copy(point.position);
+    highlight.lookAt( new THREE.Vector3(0, 0, 0) );
+    scene.add(highlight);
 }
 
 // add Mars
@@ -89,6 +121,7 @@ function addMars() {
     });
     mars = new THREE.Mesh(geometry, material);
     mars.castShadow = true;
+    mars.name = 'Mars';
     mars.position.set(0, 0, 0);
     return mars;
 }
@@ -106,7 +139,8 @@ function addPoints() {
     for(var i = 0; i < points.length; i++) {
         var x = points[i].long;
         var y = points[i].lat;
-        var position = latLongToVector3(y, x, points[i].height);
+        var height = 0;
+        var position = latLongToVector3(y, x, height);
 
         if(points[i].type === 'geography') {
             var geometry = new THREE.SphereGeometry(12, 8, 8);
@@ -269,7 +303,6 @@ $('.lbut').click(function() {
             var tween2 = new TWEEN.Tween( camera_pos ).to( { x: 1800, z: 1800 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.Out).start();
     }
 });
-
 function tweenup() {
     var tween = new TWEEN.Tween( camera.position ).to( { y: 1200 } , camera_angle_time ).start();
     var tween2 = new TWEEN.Tween( camera_pos ).to( { x: 1342, z: 1342 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.In).start();
@@ -289,6 +322,24 @@ function tweenmid() {
     var tweenl2 = new TWEEN.Tween( light_pos ).to( { x: 1800, z: 1800 } , camera_angle_time ).easing(TWEEN.Easing.Quadratic.Out).start();
 };
 
+
+//  Projection vectors
+var raycaster = new THREE.Raycaster();
+var mouseVector = new THREE.Vector2();
+
+function onMouseMove(e) {
+    var offset = $canvas.offset();
+    var canvasWidth = $canvas.width();
+    var canvasHeight = $canvas.height();
+
+    mouseVector.x = (e.pageX - offset.left) / (canvasWidth) * 2 - 1;
+    mouseVector.y = (e.pageY - offset.top) / (canvasHeight) * -2 + 1;
+}
+
+//  Point-of-interest selection
+/*function on
+*/
+
 //  Points of interest to display on the globe
 var points = [
     {
@@ -297,128 +348,112 @@ var points = [
         type: 'geography',
         img: '',
         lat: -5.1,
-        long: 0,
-        height: 0
+        long: 0
     },
     {
         name: 'Olympus Mons',
         description: 'The tallest mountain in the solar system, standing nearly 14 miles above its surroundings.',
         type: 'geography',
         lat: 18.4,
-        long: 226.5,
-        height: 0
+        long: 226.5
     },
     {
         name: 'Isidis Planitia',
         description: "A vast plain in one of Mars' three particularly apparent 'impact basins', formed about 4 billion years ago by a collision with a large (perhaps 30 miles in diameter) asteroid or comet.",
         type: 'geography',
         lat: 12.9,
-        long: 87,
-        height: 0
+        long: 87
     },
     {
         name: 'Hellas Planitia',
         description: '',
         type: 'geography',
         lat: -40,
-        long: 160,
-        height: 0
+        long: 160
     },
     {
         name: 'North polar cap',
         description: "Mars' northern ice cap is largely formed of water ice. In winter, this becomes covered by a layer of carbon dioxide frozen from the Martian atmosphere, which then sublimes back to a gas in the higher temperatures of the Martian summer.",
         type: 'geography',
         lat: 90,
-        long: 0,
-        height: 0
+        long: 0
     },
     {
         name: 'South polar cap',
         description: "Mars' permanent south polar ice cap is considerably smaller than that at the north pole. Due to Mars' relatively eccentric (ie more oval than circular) oribt around the sun, winters in the southern hemisphere are however longer and colder than those in the north.",
         type: 'geography',
         lat: -90,
-        long: 0,
-        height: 0
+        long: 0
     },
     {
         name: 'Valles Marineris',
         description: "This gigantic canyon system stretches over 4,000 km, dwarfing Earth's 446 km Grand Canyon. It was discovered by - and takes its name from - the Mariner 9 orbiter, which reached Mars in 1971 and became the first spacecraft to oribt a planet other than the Earth.",
         type: 'geography',
         lat: -9.9,
-        long: 287,
-        height: 0
+        long: 287
     },
     {
         name: 'Tharsis Montes',
         description: "The Tharsis Montes is a chain of three large shield volcanoes named (from southwest to northeast) Arsia Mons, Pavonis Mons and Ascraeus Mons. Each of these would utterly dwarf even the tallest mountains on Earth.",
         type: 'geography',
         lat: 1.3,
-        long: 247.2,
-        height: 0
+        long: 247.2
     },
     {
         name: 'Beagle 2',
         description: 'Landing site of the British spacecraft that failed to operate after landing, on Christmas Day 2003. Its fate was unknown at the time, until spotted by the Mars Reconnaissance Orbiter in late 2014.',
         type: 'mission',
         lat: 11.31,
-        long: 90.25,
-        height: 0
+        long: 90.25
     },
     {
         name: 'Viking 1',
         description: "NASA's Viking 1, the first spacecraft to achieve a soft landing on Mars and complete its objectives, touched down here on July 20, 1976.",
         type: 'mission',
         lat: 22.27,
-        long: 312.05,
-        height: 0
+        long: 312.05
     },
     {
         name: 'Mars 2',
         description: "The Soviet Union's Mars 2 probe was the first man-made object to reach the surface of Mars, on November 27 1971, but the descent module's parachute failed to deploy and it is presumed to have been destroyed on impact.",
         type: 'mission',
         lat: -45,
-        long: 47,
-        height: 0
+        long: 47
     },
     {
         name: 'Mars 3',
         description: "Running from 1960 to 1973, the Soviet Mars programme suffered a very high failure rate - but their Mars 3 probe can claim mankind's first (and to date Russia's only) successful soft landing on Mars. Unforunately however it failed after just 14.5 seconds, having transmitted just a single partial image.",
         type: 'mission',
         lat: -45,
-        long: 202,
-        height: 0
+        long: 202
     },
     {
         name: 'Curiosity',
         description: "The landing site of NASA's most recent and instrument-packed rover to date. Curiosity touched down on August 6, 2012, and is still returning incredibly valuable scientific data.",
         type: 'mission',
         lat: -4.59,
-        long: 137.44,
-        height: 0
+        long: 137.44
     },
     {
         name: 'Pathfinder',
         description: "The 1996-97 Mars Pathfinder mission was made up of a lander, the 'Carl Sagan Memorial Station', and a small 10.5kg rover called 'Sojourner'.",
         type: 'mission',
         lat: 19.75,
-        long: 326.9,
-        height: 0
+        long: 326.9
     },
     {
         name: 'Spirit',
         description: "The second of NASA's pair of Mars Exploration Rovers to touch down in early 2004. After 5 years and 4 months of successful exploration, Spirit became stuck and immobilized in May 2009 and eventually stopped communicating the following year.",
         type: 'mission',
         lat: -14.57,
-        long: 175.47,
-        height: 0
+        long: 175.47
     },
     {
         name: 'Opportunity',
         description: "NASA's pair of Mars Exploration Rovers were each planned to operate for 90 sols (about 92 Earth days). Instead, Spirit managed over 2,200 sols before getting stuck - and Opportunity is still going strong at the time of writing, over 14 years later.",
         type: 'mission',
         lat: -1.95,
-        long: 354.47,
-        height: 0
+        long: 354.47
     }
 
 ];
