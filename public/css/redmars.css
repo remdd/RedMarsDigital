@@ -378,6 +378,22 @@ h2, h3, h4 {
 	padding-right: 0;
 	border: 3px solid #222222;
 }
+#pointInfo {
+	position: absolute;
+	left: 20px;
+	top: 20px;
+} #pointInfo h4 {
+	font-size: 1.5em;
+	margin: 0 0 20px 0;
+	background: black;
+} #pointInfo div {
+	color: white;
+	white-space: pre-wrap;	
+	font-size: 1.1em;
+	max-width: 200px;
+	width: 200px;
+	background: black;
+}
 .globeRow {
 	position: relative;
 }

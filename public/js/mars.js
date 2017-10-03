@@ -67,6 +67,8 @@ $(document).ready(function()  {
     });
 });
 
+
+
 //  animation
 function render() {
     timer += speed;
@@ -81,34 +83,7 @@ function render() {
     TWEEN.update();
 
     raycaster.setFromCamera(mouseVector, camera);
-    var intersects = raycaster.intersectObjects(scene.children);
 
-    console.log(intersects);
-
-    // for(var i = 0; i < intersects.length; i++) {
-    //     if(intersects[i].object.name != 'Mars') {
-    //         point_labelled = intersects[i].object;
-    //         if(intersects[i].object.name != point_labelled.name) {
-    //             highlight(point_labelled);
-    //         }
-    //         // intersects[i].object.material.color.set(0xff0000);
-    //     }
-    // }
-    // console.log("cam x: " + camera.position.x + ", cam y: " + camera.position.y + ", cam z: " + camera.position.z);
-}
-
-function highlight(point) {
-    var geometry = new THREE.SphereGeometry(20, 8, 8);
-    var material = new THREE.MeshLambertMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: point_full_opacity
-    });
-    var highlight = new THREE.Mesh(geometry, material);
-    highlight.receiveShadow = true;
-    highlight.position.copy(point.position);
-    highlight.lookAt( new THREE.Vector3(0, 0, 0) );
-    scene.add(highlight);
 }
 
 // add Mars
@@ -165,7 +140,8 @@ function addPoints() {
             });
         }
         var point = new THREE.Mesh(geometry, material);
-        point.marsname = points[i].name;
+        point.mars_name = points[i].name;
+        point.mars_description = points[i].description;
         point.receiveShadow = true;
         point.position.copy(position);
         point.lookAt( new THREE.Vector3(0, 0, 0) );
@@ -327,6 +303,7 @@ function tweenmid() {
 var raycaster = new THREE.Raycaster();
 var mouseVector = new THREE.Vector2();
 
+//  Select point of interest on mouseover
 function onMouseMove(e) {
     var offset = $canvas.offset();
     var canvasWidth = $canvas.width();
@@ -334,6 +311,37 @@ function onMouseMove(e) {
 
     mouseVector.x = (e.pageX - offset.left) / (canvasWidth) * 2 - 1;
     mouseVector.y = (e.pageY - offset.top) / (canvasHeight) * -2 + 1;
+
+    var intersects = raycaster.intersectObjects(scene.children);
+
+    if(intersects.length > 0 && intersects[0].object.name != 'Mars' && intersects[0].object.name != 'highlight' && intersects[0].object.material.opacity > 0) {
+        console.log(intersects[0].object.mars_name);
+        console.log(intersects[0].object);
+        scene.remove(scene.getObjectByName('highlight'));
+        highlightPoint(intersects[0].object);
+    }
+    // console.log("cam x: " + camera.position.x + ", cam y: " + camera.position.y + ", cam z: " + camera.position.z);
+}
+
+function highlightPoint(point) {
+    var geometry = new THREE.SphereGeometry(20, 8, 8);
+    var material = new THREE.MeshLambertMaterial({
+        color: 0xffffff,
+        transparent: true,
+        opacity: 0.3
+    });
+    highlight = new THREE.Mesh(geometry, material);
+    highlight.receiveShadow = true;
+    highlight.position.copy(point.position);
+    highlight.lookAt( new THREE.Vector3(0, 0, 0) );
+    highlight.name = 'highlight';
+    scene.add(highlight);
+    highlightLabel(point);
+}
+
+function highlightLabel(point) {
+    $('#pointInfo h4').text(point.mars_name);
+    $('#pointInfo div').text(point.mars_description);
 }
 
 //  Point-of-interest selection
@@ -344,7 +352,7 @@ function onMouseMove(e) {
 var points = [
     {
         name: 'Airy-0 crater',
-        description: 'This crater defines the prime meridian, or line of zero longitude, on Mars. It was named after the Astronomer Royal Sir ',
+        description: 'This crater defines the prime meridian, or line of zero longitude, on Mars.\n\nIt was named after the Astronomer Royal Sir ',
         type: 'geography',
         img: '',
         lat: -5.1,
@@ -373,35 +381,35 @@ var points = [
     },
     {
         name: 'North polar cap',
-        description: "Mars' northern ice cap is largely formed of water ice. In winter, this becomes covered by a layer of carbon dioxide frozen from the Martian atmosphere, which then sublimes back to a gas in the higher temperatures of the Martian summer.",
+        description: "Mars' northern ice cap is largely formed of water ice.\n\nIn winter, this becomes covered by a layer of carbon dioxide frozen from the Martian atmosphere, which then sublimes back to a gas in the higher temperatures of the Martian summer.",
         type: 'geography',
         lat: 90,
         long: 0
     },
     {
         name: 'South polar cap',
-        description: "Mars' permanent south polar ice cap is considerably smaller than that at the north pole. Due to Mars' relatively eccentric (ie more oval than circular) oribt around the sun, winters in the southern hemisphere are however longer and colder than those in the north.",
+        description: "Mars' permanent south polar ice cap is considerably smaller than that at the north pole.\n\nDue to Mars' relatively eccentric (ie more oval than circular) oribt around the sun, winters in the southern hemisphere are however longer and colder than those in the north.",
         type: 'geography',
         lat: -90,
         long: 0
     },
     {
         name: 'Valles Marineris',
-        description: "This gigantic canyon system stretches over 4,000 km, dwarfing Earth's 446 km Grand Canyon. It was discovered by - and takes its name from - the Mariner 9 orbiter, which reached Mars in 1971 and became the first spacecraft to oribt a planet other than the Earth.",
+        description: "This gigantic canyon system stretches over 4,000 km, dwarfing Earth's 446 km-long Grand Canyon.\n\nIt was discovered by (and takes its name from) NASA's Mariner 9 orbiter, which reached Mars in 1971 and became the first spacecraft to oribt a planet other than the Earth.",
         type: 'geography',
         lat: -9.9,
         long: 287
     },
     {
         name: 'Tharsis Montes',
-        description: "The Tharsis Montes is a chain of three large shield volcanoes named (from southwest to northeast) Arsia Mons, Pavonis Mons and Ascraeus Mons. Each of these would utterly dwarf even the tallest mountains on Earth.",
+        description: "The Tharsis Montes is a chain of three large shield volcanoes named (from southwest to northeast) Arsia Mons, Pavonis Mons and Ascraeus Mons.\n\nEach of these would utterly dwarf even the tallest mountains on Earth.",
         type: 'geography',
         lat: 1.3,
         long: 247.2
     },
     {
         name: 'Beagle 2',
-        description: 'Landing site of the British spacecraft that failed to operate after landing, on Christmas Day 2003. Its fate was unknown at the time, until spotted by the Mars Reconnaissance Orbiter in late 2014.',
+        description: 'Landing site of the British spacecraft that failed to operate after landing, on Christmas Day 2003.\n\nIts fate was unknown at the time, until spotted by the Mars Reconnaissance Orbiter in late 2014.',
         type: 'mission',
         lat: 11.31,
         long: 90.25
@@ -422,14 +430,14 @@ var points = [
     },
     {
         name: 'Mars 3',
-        description: "Running from 1960 to 1973, the Soviet Mars programme suffered a very high failure rate - but their Mars 3 probe can claim mankind's first (and to date Russia's only) successful soft landing on Mars. Unforunately however it failed after just 14.5 seconds, having transmitted just a single partial image.",
+        description: "Running from 1960 to 1973, the Soviet Mars programme suffered a very high failure rate - but their Mars 3 probe can claim mankind's first (and to date Russia's only) successful soft landing on Mars.\n\nUnforunately however it failed after just 14.5 seconds, having transmitted just a single partial image.",
         type: 'mission',
         lat: -45,
         long: 202
     },
     {
         name: 'Curiosity',
-        description: "The landing site of NASA's most recent and instrument-packed rover to date. Curiosity touched down on August 6, 2012, and is still returning incredibly valuable scientific data.",
+        description: "The landing site of NASA's most recent and instrument-packed rover to date.\n\nCuriosity touched down on August 6, 2012, and is still returning incredibly valuable scientific data.",
         type: 'mission',
         lat: -4.59,
         long: 137.44
@@ -443,14 +451,14 @@ var points = [
     },
     {
         name: 'Spirit',
-        description: "The second of NASA's pair of Mars Exploration Rovers to touch down in early 2004. After 5 years and 4 months of successful exploration, Spirit became stuck and immobilized in May 2009 and eventually stopped communicating the following year.",
+        description: "The second of NASA's pair of Mars Exploration Rovers touched down here in early 2004.\n\nAfter 5 years and 4 months of successful exploration, Spirit became stuck and immobilized in May 2009 and eventually stopped communicating the following year.",
         type: 'mission',
         lat: -14.57,
         long: 175.47
     },
     {
         name: 'Opportunity',
-        description: "NASA's pair of Mars Exploration Rovers were each planned to operate for 90 sols (about 92 Earth days). Instead, Spirit managed over 2,200 sols before getting stuck - and Opportunity is still going strong at the time of writing, over 14 years later.",
+        description: "NASA's pair of Mars Exploration Rovers were each planned to operate for 90 sols (about 92 Earth days).\n\nInstead, Spirit managed over 2,200 sols before getting stuck - and at the time of writing Opportunity is still going strong, over 14 years later.",
         type: 'mission',
         lat: -1.95,
         long: 354.47
