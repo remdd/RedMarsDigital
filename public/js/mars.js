@@ -142,6 +142,8 @@ function addPoints() {
         var point = new THREE.Mesh(geometry, material);
         point.mars_name = points[i].name;
         point.mars_description = points[i].description;
+        point.mars_img = points[i].img;
+        point.mars_caption = points[i].caption;
         point.receiveShadow = true;
         point.position.copy(position);
         point.lookAt( new THREE.Vector3(0, 0, 0) );
@@ -340,8 +342,21 @@ function highlightPoint(point) {
 }
 
 function highlightLabel(point) {
-    $('#pointInfo h4').text(point.mars_name);
-    $('#pointInfo div').text(point.mars_description);
+    $('.pointDetails').fadeOut('fast', function() {
+        if(point.mars_img) {
+            $('#pointImg img').attr('src', '/img/' + point.mars_img);
+        } else {
+            $('#pointImg img').attr('src', '');
+        }
+        if(point.mars_caption) {
+            $('#pointImg div').text(point.mars_caption);
+        } else {
+            $('#pointImg div').text('');
+        }
+        $('#pointInfo h4').text(point.mars_name);
+        $('#pointInfo div').text(point.mars_description);
+        $(this).fadeIn('fast');
+    })
 }
 
 //  Point-of-interest selection
@@ -352,9 +367,10 @@ function highlightLabel(point) {
 var points = [
     {
         name: 'Airy-0 crater',
-        description: 'This crater defines the prime meridian, or line of zero longitude, on Mars.\n\nIt was named after the Astronomer Royal Sir ',
+        description: 'This crater defines the prime meridian, or line of zero longitude, on Mars.\n\nIt was named after the Astronomer Royal Sir George Biddell Airy, whose telescope at Greenwich observatory in London came to define the prime meridian on Earth.',
         type: 'geography',
-        img: '',
+        img: 'point_Airy0.jpg',
+        caption: 'Airy-0 crater, as seen by the Mars Global Surveyor orbiter in 2001.',
         lat: -5.1,
         long: 0
     },
@@ -362,20 +378,26 @@ var points = [
         name: 'Olympus Mons',
         description: 'The tallest mountain in the solar system, standing nearly 14 miles above its surroundings.',
         type: 'geography',
+        img: 'point_Olympus.jpg',
+        caption: "Olympus Mons, as seen by Viking 1 in 1978.\n\nThe outer 'scarp' ringing the volcano is about 340 miles in diameter.",
         lat: 18.4,
         long: 226.5
     },
     {
         name: 'Isidis Planitia',
-        description: "A vast plain in one of Mars' three particularly apparent 'impact basins', formed about 4 billion years ago by a collision with a large (perhaps 30 miles in diameter) asteroid or comet.",
+        description: "A vast plain in one of Mars' three particularly evident ancient 'impact basins', formed around 4 billion years ago in a collision with a large (probably about 30 miles in diameter) asteroid or comet.",
         type: 'geography',
+        img: 'point_Isidis.jpg',
+        caption: "Detail of a southern area within Isidis Planitia, thought to potentially indicate an ancient shoreline from Mars' watery past.",
         lat: 12.9,
         long: 87
     },
     {
         name: 'Hellas Planitia',
-        description: '',
+        description: 'Hellas basin is thought to be the largest known visible impact crater in the Solar System, with a diameter of around 1,400 miles.',
         type: 'geography',
+        img: 'point_Hellas.jpg',
+        caption: "The floor of Hellas crater is about 5.6 miles deep, with an atmospheric pressure more than twice that at the Martian equivalent of 'sea level'.",
         lat: -40,
         long: 160
     },
@@ -383,6 +405,8 @@ var points = [
         name: 'North polar cap',
         description: "Mars' northern ice cap is largely formed of water ice.\n\nIn winter, this becomes covered by a layer of carbon dioxide frozen from the Martian atmosphere, which then sublimes back to a gas in the higher temperatures of the Martian summer.",
         type: 'geography',
+        img: 'point_NorthCap.jpg',
+        caption: "Mars' North pole in summer, at near-minimum ice levels.\n\nThe permanent ice cap shown here is around 620 miles in diameter.",
         lat: 90,
         long: 0
     },
@@ -390,12 +414,14 @@ var points = [
         name: 'South polar cap',
         description: "Mars' permanent south polar ice cap is considerably smaller than that at the north pole.\n\nDue to Mars' relatively eccentric (ie more oval than circular) oribt around the sun, winters in the southern hemisphere are however longer and colder than those in the north.",
         type: 'geography',
+        img: 'point_SouthCap.jpg',
+        caption: "'Spider' formations in Mars' far South.\n\nThese distinctive patterns form as dust is deposited by frozen carbon dioxide subliming back to a gas, whilst trapped under ice.",
         lat: -90,
         long: 0
     },
     {
         name: 'Valles Marineris',
-        description: "This gigantic canyon system stretches over 4,000 km, dwarfing Earth's 446 km-long Grand Canyon.\n\nIt was discovered by (and takes its name from) NASA's Mariner 9 orbiter, which reached Mars in 1971 and became the first spacecraft to oribt a planet other than the Earth.",
+        description: "This gigantic canyon system stretches for around 2,500 miles, dwarfing the 277 mile-long Grand Canyon on Earth.\n\nIt was discovered by (and takes its name from) NASA's Mariner 9 orbiter, which reached Mars in 1971 and became the first spacecraft to oribt a planet other than the Earth.",
         type: 'geography',
         lat: -9.9,
         long: 287
@@ -416,7 +442,7 @@ var points = [
     },
     {
         name: 'Viking 1',
-        description: "NASA's Viking 1, the first spacecraft to achieve a soft landing on Mars and complete its objectives, touched down here on July 20, 1976.",
+        description: "NASA's Viking 1, the first spacecraft to succesfully achieve a soft landing on Mars and complete its objectives, touched down here on July 20, 1976.",
         type: 'mission',
         lat: 22.27,
         long: 312.05
@@ -430,8 +456,10 @@ var points = [
     },
     {
         name: 'Mars 3',
-        description: "Running from 1960 to 1973, the Soviet Mars programme suffered a very high failure rate - but their Mars 3 probe can claim mankind's first (and to date Russia's only) successful soft landing on Mars.\n\nUnforunately however it failed after just 14.5 seconds, having transmitted just a single partial image.",
+        description: "Running from 1960 to 1973, the Soviet Mars programme suffered a very high failure rate - but their Mars 3 probe can claim mankind's first (and to date Russia's only) successful soft landing on Mars.\n\nUnforunately however it failed after just 14.5 seconds, having returned just one partial image.",
         type: 'mission',
+        img: 'point_Mars3.png',
+        caption: 'The first photograph ever returned from the surface of another planet.',
         lat: -45,
         long: 202
     },
