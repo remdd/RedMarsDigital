@@ -11,7 +11,7 @@
 		<div class="globeRow">
 		  	<div class="col col-12" id="globe"></div>
 
-		  	<div class="controlDiv" id="globeControls">
+		  	<div class="controlDiv tooltip" id="globeControls">
 		  		<i id="gbutb3" class="gbut fa fa-fast-backward" aria-hidden="true"></i>
 		  		<i id="gbutb2" class="gbut fa fa-backward" aria-hidden="true"></i>
 		  		<i id="gbutb1" class="gbut fa fa-play flipi" aria-hidden="true"></i>
@@ -19,18 +19,20 @@
 		  		<i id="gbutf1" class="gbut fa fa-play selecti" aria-hidden="true"></i>
 				<i id="gbutf2" class="gbut fa fa-forward" aria-hidden="true"></i>
 				<i id="gbutf3" class="gbut fa fa-fast-forward" aria-hidden="true"></i>
+				<div class="tooltipText tooltipControls">Rotation controls</div>
 		  	</div>
 
 		  	<div class="controlDiv" id="overlayControls">
-		  		<i id="lbutup" class="lbut fa fa-chevron-up" aria-hidden="true"></i>
-		  		<i id="lbutdown" class="lbut fa fa-chevron-down" aria-hidden="true"></i>
-		  		<i id="obutmissions" class="obut fa fa-rocket selecti" aria-hidden="true"></i>
-		  		<i id="obutgeography" class="obut fa fa-circle selecti" aria-hidden="true"></i>
+		  		<i id="lbutup" class="lbut fa fa-chevron-up tooltip" aria-hidden="true"><div class="tooltipText tooltipUp">Increase latitude</div></i>
+		  		<i id="lbutdown" class="lbut fa fa-chevron-down tooltip" aria-hidden="true"><div class="tooltipText tooltipDown">Decrease latitude</div></i>
+		  		<i id="obutmissions" class="obut fa fa-rocket selecti tooltip" aria-hidden="true"><div class="tooltipText tooltipMissions">Toggle missions</div></i>
+		  		<i id="obutgeography" class="obut fa fa-circle selecti tooltip" aria-hidden="true"><div class="tooltipText tooltipGeography">Toggle geography</div></i>
 		  	</div>
 
 		  	<div class="pointDetails controlDiv" id="pointInfo">
 		  		<h4></h4>
 		  		<div></div>
+		  		<span class="closeSpan"><span class="closeBtn">X</span><span class="closeDiv">close</span></span>
 		  	</div>
 
 		  	<div class="pointDetails controlDiv" id="pointImg">

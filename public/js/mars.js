@@ -21,7 +21,7 @@ var light_pos = {
 }
 
 var timer = 0;
-var speed = 0.002;
+var speed = 0.001;
 var points_geography = [];
 var points_missions = [];
 var point_full_opacity = 0.7;
@@ -183,13 +183,13 @@ $('.gbut').click(function() {
             speed = -0.006
             break;
         case 'gbutb1':
-            speed = -0.002
+            speed = -0.001
             break;
         case 'gbutp':
             speed = 0
             break;
         case 'gbutf1':
-            speed = 0.002
+            speed = 0.001
             break;
         case 'gbutf2':
             speed = 0.006
@@ -356,12 +356,14 @@ function highlightLabel(point) {
         $('#pointInfo h4').text(point.mars_name);
         $('#pointInfo div').text(point.mars_description);
         $(this).fadeIn('fast');
-    })
+        $('.closeSpan').fadeIn('fast');
+    });
 }
 
-//  Point-of-interest selection
-/*function on
-*/
+$('.closeSpan').click(function() {
+    scene.remove(scene.getObjectByName('highlight'));
+    $('.pointDetails').fadeOut('fast'); 
+});
 
 //  Points of interest to display on the globe
 var points = [
@@ -451,7 +453,7 @@ var points = [
         description: "NASA's Viking 1 mission included both an orbiter and a lander component.\n\nThe lander was the first vehicle to succesfully achieve a soft landing on Mars and complete its objectives, touching down here on July 20, 1976.",
         type: 'mission',
         img: 'point_Viking1.jpg',
-        caption: 'The Viking 1 orbiter, which remained active until 1980.\n\nIt may now have impacted Mars, though it is thought more likely that it remains in a decaying orbit.',
+        caption: 'The Viking 1 orbiter, which continued to return images until 1980.\n\nAfter the end of its mission it was left in a decaying orbit and may by now have crashed onto the planet, though it is thought more likely that this is yet to happen.',
         lat: 22.27,
         long: 312.05
     },
