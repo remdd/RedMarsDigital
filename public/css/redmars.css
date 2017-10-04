@@ -389,7 +389,7 @@ h2, h3, h4 {
 } #pointInfo div {
 	color: white;
 	white-space: pre-wrap;	
-	font-size: 1.1em;
+	font-size: 1em;
 	max-width: 200px;
 	background: black;
 } #pointImg {
@@ -404,7 +404,7 @@ h2, h3, h4 {
 	right: 0;
 	color: white;
 	white-space: pre-wrap;	
-	font-size: 1.1em;
+	font-size: 1em;
 	text-align: right;
 	width: 200px;
 	background: black;
