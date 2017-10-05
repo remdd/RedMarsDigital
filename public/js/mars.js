@@ -400,8 +400,8 @@ var points = [
         type: 'geography',
         img: 'point_Hellas.jpg',
         caption: "The floor of Hellas crater is about 5.6 miles deep, with an atmospheric pressure more than twice that at the Martian datum (the equivalent of 'sea level').",
-        lat: -40,
-        long: 160
+        lat: -42.4,
+        long: 70.5
     },
     {
         name: 'North polar cap',
@@ -471,13 +471,13 @@ var points = [
         description: "Running from 1960 to 1973, the Soviet Mars programme suffered a very high failure rate - but their Mars 3 probe can claim mankind's first (and to date Russia's only) successful soft landing on Mars.\n\nUnforunately however it failed after just 14.5 seconds, having returned just one partial image.",
         type: 'mission',
         img: 'point_Mars3.png',
-        caption: 'The first photograph ever returned from the surface of another planet.\n\nAccording to the Soviet Academy of Sciences, no horizon, terrain features or other usable information are discernable.',
+        caption: 'The first photograph ever returned from the surface of another planet.\n\nAccording to the Soviet Academy of Sciences, the image contains no horizon, terrain features or other usable information - just noise.',
         lat: -45,
         long: 202
     },
     {
         name: 'Curiosity',
-        description: "The landing site of NASA's most recent and most scientifically capable rover mission to date.\n\nCuriosity touched down on August 6, 2012, and is still returning incredibly valuable scientific data.",
+        description: "The landing site of NASA's most recent and most scientifically capable rover mission to date.\n\nCuriosity touched down on August 6, 2012, and continues to return valuable scientific data.",
         type: 'mission',
         img: 'point_Curiosity.jpg',
         caption: "A section of a selfie taken by Curiosity's 'Mars Hand Lens Imager' instrument on August 5, 2015.",

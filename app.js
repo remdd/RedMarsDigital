@@ -141,6 +141,10 @@ app.put('/blog/:id', function(req, res) {
 app.get('/creative', function(req, res) {
 	res.render('creative');
 });
+app.get('/creative/:name', function(req, res) {
+	console.log(req.params.name);
+	res.render('creative/' + req.params.name);
+});
 app.get('/mars', function(req, res) {
 	res.render('mars');
 });

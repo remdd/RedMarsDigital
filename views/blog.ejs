@@ -15,15 +15,15 @@
 			<% } %>
 
 			<% blogPosts.docs.forEach(function(blogPost) { %>
-				<div class="col col-12 blogThumb">
-					<div class="truncatedBlogContent">
-						<a href="/blog/<%= blogPost._id %>" class="thumbLink blogTitle">
-							<h3><%= blogPost.title %></h3>
-						</a>
-						<span class="dateSpan"><%= blogPost.dateDisplay %></span>
-						<%- blogPost.content %>								<!-- note that EJS hyphen tag notation evaluates & renders HTML tags from string -->
+				<a href="/blog/<%= blogPost._id %>" class="thumbLink blogTitle">
+					<div class="col col-12 blogThumb">
+						<div class="truncatedBlogContent">
+								<h3><%= blogPost.title %></h3>
+							<span class="dateSpan"><%= blogPost.dateDisplay %></span>
+							<%- blogPost.content %>								<!-- note that EJS hyphen tag notation evaluates & renders HTML tags from string -->
+						</div>
 					</div>
-				</div>
+				</a>
 			<% }); %>
 
 		</div>
