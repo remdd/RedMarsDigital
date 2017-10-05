@@ -338,6 +338,10 @@ h2, h3, h4 {
 	text-align: center;
 }
 
+.alertDiv {
+	margin-top: 30px;
+}
+
 /*	Blog	*/
 .blogThumb {
 	position: relative;

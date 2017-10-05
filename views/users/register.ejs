@@ -1,0 +1,39 @@
+<% include ../partials/header %>
+
+<div class="bgDiv solidBgDivLast">
+	<div class="container">
+		<div class="row">
+
+			<h3>Sign up for a Red Mars Digital account</h3>
+			<form action="/register" method="POST" name="register">
+				<div class="registerFormDiv">
+					<h5 class="registerLabel">Username: </h5>
+					<input required type="text" name="user[username]" placeholder="Username">
+				</div>
+
+				<hr />
+
+				<div class="registerFormDiv">
+					<h5 class="registerLabel">Email: </h5>
+					<input required type="email" name="user[email]" id="email" placeholder="Email"">
+				</div>
+
+				<hr />
+
+				<div class="registerFormDiv">
+					<h5 class="registerLabel">Password: </h5>
+					<input required type="password" name="password" id="password" placeholder="Password" minlength="8" maxlength="20" pattern="(?=.*\d)(?=.*[a-zA-Z]).{8,20}">
+				</div>
+
+				<hr>
+
+				<button class="btn btn-primary">Submit</button>
+			</form>
+
+
+		</div>
+	</div>
+</div>
+
+<% include ../partials/footer %>
+

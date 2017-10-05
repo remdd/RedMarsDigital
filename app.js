@@ -6,7 +6,13 @@ var express 				= require('express'),
 	mongoosePaginate 		= require('mongoose-paginate'),
 	bodyParser 				= require('body-parser'),
 	methodOverride			= require('method-override'),
+	User					= require('./models/user'),
 	BlogPost				= require('./models/blogpost'),
+	passport				= require('passport'),
+	LocalStrategy			= require('passport-local'),
+	expressSession			= require('express-session'),
+	mongoDBStore			= require('connect-mongodb-session')(expressSession),
+	flash					= require('connect-flash'),
 	app 					= express();
 
 app.set('view engine', 'ejs');
@@ -26,8 +32,55 @@ app.use(bodyParser.urlencoded({extended: true}));
 //	Use method-override to look for _method in URL to convert to specified request (PUT or DELETE)
 app.use(methodOverride("_method"));
 
+//	MongoDBStore config
+var store = new mongoDBStore(
+	{
+		uri: process.env.DBPATH,
+		collection: 'sessions'
+	}, function(err) {
+		if(err) {
+			console.log(err);
+		}
+	}
+);
+//	MongoDBStore start error catching
+store.on('error', function(err) {
+	if(err) {
+		console.log(err);
+	}
+});
 
+//	Express-session and Passport usage
+app.use(expressSession({
+	secret: process.env.EXP_KEY,
+	store: store,									//	Connects to MongoDBStore
+	resave: true,									//	Was false - need to read into, is 'true' a risk?
+	saveUninitialized: true,						//	Was false - need to read into, is 'true' a risk?
+	httpOnly: true,									//	Don't let browser javascript access cookies
+	secure: false									//	Set to true to limit cookies to https only (SET FOR PRODUCTION)
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
+passport.use(new LocalStrategy({
+	usernameField: 'email',
+	passwordField: 'password'
+}, User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+//	Flash message use
+
+app.use(flash());
+//	Middleware to make req.user etc available to all routes
+app.use(function(req, res, next){
+	res.locals.currentUser = req.user;
+	res.locals.error = req.flash("error");
+	res.locals.success = req.flash("success");
+	next();
+});
+
+//	Icon array for random display in footer of blogPosts
 var icons = ['Mariner4.png', 'Mars3.png', 'MRO.png', 'Phobos.png', 'Rover.png', 'Deimos.png', 'Sojourner.png'];
 
 
@@ -149,11 +202,48 @@ app.get('/mars', function(req, res) {
 	res.render('mars');
 });
 
+//	Render login form
+app.get('/login', function(req, res) {
+	res.render('users/login');
+});
+
+//	Login route
+app.post('/login', passport.authenticate('local', {
+	successRedirect: '/',
+	failureRedirect: 'about',
+	failureFlash: true,
+	successFlash: 'Welcome!'
+}));
+
+//	Logout route
+app.get('/logout', function(req, res) {
+	req.logout();			// all that passport requires to end session
+	req.flash("success", "You have successfully logged out.");
+	res.redirect('/findings');
+});
+
+//	Render new user form
+app.get('/register', function(req, res) {
+	res.render('users/register');
+});
+
+//	Register new user route
+app.post('/register', function(req, res) {
+	var newUser = new User(req.body.user);
+	User.register(newUser, req.body.password, function(err, user) {
+		if(err) {
+			req.flash('error', err);
+			res.redirect('/register');
+		} else {
+			req.flash('success', 'Success!');
+			res.redirect('/index');
+		}
+	});
+});
+
 app.get('*', function(req,res) {
 	res.render('404')
 });
-
-
 
 
 function addDate(req) {
