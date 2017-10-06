@@ -13,6 +13,7 @@ var express 				= require('express'),
 	expressSession			= require('express-session'),
 	mongoDBStore			= require('connect-mongodb-session')(expressSession),
 	flash					= require('connect-flash'),
+	striptags				= require('striptags');
 	app 					= express();
 
 app.set('view engine', 'ejs');
@@ -118,13 +119,14 @@ app.get('/blog', function(req, res) {
 
 });
 //	NEW - show form to create new finding
-app.get('/blog/new', function(req, res) {
+app.get('/blog/new', isLoggedIn, function(req, res) {
 	res.render('blog/new');
 });
 //	CREATE blog post
-app.post('/blog', function(req, res) {
+app.post('/blog', isLoggedIn, function(req, res) {
 	console.log(req.body.blogPost);
 	req = addDate(req);
+	req.body.blogPost.textContent = striptags(req.body.blogPost.content);
 	BlogPost.create(req.body.blogPost, function(err, blogPost) {
 		if(err) {
 			console.log(err);
@@ -168,7 +170,7 @@ app.get('/blog/:id', function(req, res) {
 	});
 });
 //	EDIT blog post
-app.get('/blog/:id/edit', function(req, res) {
+app.get('/blog/:id/edit', isLoggedIn, function(req, res) {
 	BlogPost.findById(req.params.id)
 	.exec(function(err, blogPost) {
 		if(err) {
@@ -180,7 +182,8 @@ app.get('/blog/:id/edit', function(req, res) {
 	});
 });
 //	UPDATE blog post
-app.put('/blog/:id', function(req, res) {
+app.put('/blog/:id', isLoggedIn, function(req, res) {
+	req.body.blogPost.textContent = striptags(req.body.blogPost.content);
 	BlogPost.findByIdAndUpdate(req.params.id, req.body.blogPost, function(err, blogPost) {
 		if(err) {
 			console.log(err);
@@ -222,29 +225,36 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
-//	Render new user form
-app.get('/register', function(req, res) {
-	res.render('users/register');
-});
+// //	Render new user form
+// app.get('/register', function(req, res) {
+// 	res.render('users/register');
+// });
 
-//	Register new user route
-app.post('/register', function(req, res) {
-	var newUser = new User(req.body.user);
-	User.register(newUser, req.body.password, function(err, user) {
-		if(err) {
-			req.flash('error', err);
-			res.redirect('/register');
-		} else {
-			req.flash('success', 'Success!');
-			res.redirect('/index');
-		}
-	});
-});
+// //	Register new user route
+// app.post('/register', function(req, res) {
+// 	var newUser = new User(req.body.user);
+// 	User.register(newUser, req.body.password, function(err, user) {
+// 		if(err) {
+// 			req.flash('error', err);
+// 			res.redirect('/register');
+// 		} else {
+// 			req.flash('success', 'Success!');
+// 			res.redirect('/index');
+// 		}
+// 	});
+// });
 
 app.get('*', function(req,res) {
 	res.render('404')
 });
 
+function isLoggedIn(req, res, next) {
+	if(req.isAuthenticated()) {
+		return next();
+	}
+	req.flash("error", "You must be logged in to do that!");
+	res.redirect('/login');
+}
 
 function addDate(req) {
 	var m_names = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
@@ -257,6 +267,12 @@ function addDate(req) {
 	req.body.blogPost.dateDisplay = curr_date + " " + m_names[curr_month] + " " + curr_year;
 	return req;
 }
+
+// function stripHtml(html) {
+// 	var temporaryElement = document.createElement('div');
+// 	temporaryElement.innerHTML = html;
+// 	return temporaryElement.textContent || temporaryElement.innerText || "";
+// }
 
 app.listen(process.env.PORT, process.env.IP, function() {
 	console.log("Server started");
