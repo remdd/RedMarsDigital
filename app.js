@@ -210,7 +210,7 @@ app.get('/login', function(req, res) {
 //	Login route
 app.post('/login', passport.authenticate('local', {
 	successRedirect: '/',
-	failureRedirect: 'about',
+	failureRedirect: '/',
 	failureFlash: true,
 	successFlash: 'Welcome!'
 }));
@@ -219,7 +219,7 @@ app.post('/login', passport.authenticate('local', {
 app.get('/logout', function(req, res) {
 	req.logout();			// all that passport requires to end session
 	req.flash("success", "You have successfully logged out.");
-	res.redirect('/findings');
+	res.redirect('/');
 });
 
 //	Render new user form
