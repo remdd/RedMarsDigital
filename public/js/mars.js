@@ -432,7 +432,7 @@ var points = [
     },
     {
         name: 'Tharsis Montes',
-        description: "The Tharsis Montes is a chain of three large shield volcanoes named (from southwest to northeast) Arsia Mons, Pavonis Mons and Ascraeus Mons.\n\nEach of these would utterly dwarf even the tallest mountains on Earth.",
+        description: "The Tharsis Montes are a chain of three large shield volcanoes named (from southwest to northeast) Arsia Mons, Pavonis Mons and Ascraeus Mons.\n\nEach of these would utterly dwarf even the tallest mountains on Earth.",
         type: 'geography',
         img: 'point_Pavonis.jpg',
         caption: 'The summit caldera of Pavonis Mons.\n\nThe central crater is about 28 miles across and 2.8 miles deep.',
@@ -459,7 +459,7 @@ var points = [
     },
     {
         name: 'Mars 2',
-        description: "The Soviet Union's Mars 2 probe was the first man-made object to reach the surface of Mars, on November 27 1971.\n\nUnfortunately the descent module's parachute failed to deploy and it is presumed to have been destroyed on impact.",
+        description: "The Soviet Union's Mars 2 probe was the first man-made object to reach the surface of Mars, on November 27 1971.\n\nUnfortunately the descent module's parachute failed to deploy and it is assumed to have been destroyed on impact.",
         type: 'mission',
         img: 'point_Mars2.jpg',
         caption: "A model of the Mars 2 lander in Moscow's Memorial Museum of Cosmonautics.\n\nThe orbiter component of the mission, on which the lander was mounted in transit, operated successfully - and remains in orbit today.",

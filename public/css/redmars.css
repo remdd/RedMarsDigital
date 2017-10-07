@@ -221,6 +221,8 @@ button {
 	width: 10px;
 	height: 10px;
 	z-index: 1;
+} .blogpost a {
+	text-decoration-color: #999999; 
 }
 .dividerImg {
 	margin: 50px 0;
@@ -260,6 +262,8 @@ button {
 	background: none;
 	color: #666;
 	margin: 10px auto;
+} .projectDiv a {
+	text-decoration-color: #999999; 
 } .projectLink {
 	font-family: 'Nunito', Helvetica, sans-serif;
 	font-weight: normal;
