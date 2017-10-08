@@ -52,19 +52,13 @@ var scene = new THREE.Scene();
 scene.add(camera);
 
 //	run on document ready
-$(document).ready(function()  {
+$(document).ready(function() {
     addLight();
     var mars = addMars();
     scene.add(mars);
     addPoints();
-    
     render();
-
-    $(window).resize(function() {
-        WIDTH = $('#globe').width();
-        HEIGHT = WIDTH * 0.6;
-        renderer.setSize(WIDTH,HEIGHT);
-    });
+    setInfoDisplay();
 });
 
 
@@ -317,8 +311,6 @@ function onMouseMove(e) {
     var intersects = raycaster.intersectObjects(scene.children);
 
     if(intersects.length > 0 && intersects[0].object.name != 'Mars' && intersects[0].object.name != 'highlight' && intersects[0].object.material.opacity > 0) {
-        console.log(intersects[0].object.mars_name);
-        console.log(intersects[0].object);
         scene.remove(scene.getObjectByName('highlight'));
         highlightPoint(intersects[0].object);
     }
@@ -344,17 +336,20 @@ function highlightPoint(point) {
 function highlightLabel(point) {
     $('.pointDetails').fadeOut('fast', function() {
         if(point.mars_img) {
-            $('#pointImg img').attr('src', '/img/' + point.mars_img);
+            $('.pointImg img').attr('src', '/img/' + point.mars_img);
         } else {
-            $('#pointImg img').attr('src', '');
+            $('.pointImg img').attr('src', '');
         }
         if(point.mars_caption) {
-            $('#pointImg div').text(point.mars_caption);
+            $('.pointImg div').text(point.mars_caption);
+            $('.pointImg p').text(point.mars_caption);
         } else {
-            $('#pointImg div').text('');
+            $('.pointImg div').text('');
+            $('.pointImg p').text('');
         }
-        $('#pointInfo h4').text(point.mars_name);
-        $('#pointInfo div').text(point.mars_description);
+        $('.pointInfo h4').text(point.mars_name);
+        $('.pointInfo div').text(point.mars_description);
+        $('.pointInfo p').text(point.mars_description);
         $(this).fadeIn('fast');
         $('.closeSpan').fadeIn('fast');
     });
@@ -364,6 +359,25 @@ $('.closeSpan').click(function() {
     scene.remove(scene.getObjectByName('highlight'));
     $('.pointDetails').fadeOut('fast'); 
 });
+
+//  Determine whether 'point info' panes should be displayed overlaying or below the globe
+$(window).resize(function() {
+    setInfoDisplay();
+});
+function setInfoDisplay() {
+    WIDTH = $('#globe').width();
+    HEIGHT = WIDTH * 0.6;
+    renderer.setSize(WIDTH,HEIGHT);
+    if($(window).width() < 1152) {
+        $('.globeOverlayLeft').addClass('hiddenOverlay');
+        $('.globeOverlayRight').addClass('hiddenOverlay');
+        $('.footerInfo').show();
+    } else {
+        $('.globeOverlayLeft').removeClass('hiddenOverlay');
+        $('.globeOverlayRight').removeClass('hiddenOverlay');
+        $('.footerInfo').hide();
+    }
+}
 
 //  Points of interest to display on the globe
 var points = [
