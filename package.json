@@ -21,6 +21,7 @@
     "mongoose": "^4.11.11",
     "mongoose-paginate": "^5.0.3",
     "morgan": "^1.8.2",
+    "node-static": "^0.7.10",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose-email": "^0.1.3",
