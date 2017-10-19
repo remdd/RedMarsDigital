@@ -204,6 +204,9 @@ app.get('/creative/:name', function(req, res) {
 app.get('/mars', function(req, res) {
 	res.render('mars');
 });
+app.get('/todo', isLoggedIn, function(req, res) {
+	res.render('todo');
+});
 
 //	Render login form
 app.get('/login', function(req, res) {
