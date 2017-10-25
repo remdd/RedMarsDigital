@@ -145,6 +145,7 @@ function addPoints() {
             points_missions.push(point);
         }
     }
+    preloadImages(points);
 }
 
 // convert the positions from a lat, lon to a position on a sphere.
@@ -374,6 +375,17 @@ function setInfoDisplay() {
         $('.globeOverlayLeft').removeClass('hiddenOverlay');
         $('.globeOverlayRight').removeClass('hiddenOverlay');
         $('.footerInfo').hide();
+    }
+}
+
+//  Preload images
+function preloadImages(points) {
+    var images = [];
+    function preload() {
+        for(var i = 0; i < points.length; i++) {
+            images[i] = new Image();
+            images[i].src = '/img/' + points[i].img;
+        }
     }
 }
 
