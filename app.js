@@ -8,6 +8,8 @@ var express 				= require('express'),
 	methodOverride			= require('method-override'),
 	User					= require('./models/user'),
 	BlogPost				= require('./models/blogpost'),
+	ToDoItem				= require('./models/todoitem'),
+	ToDoCategory			= require('./models/todocategory'),
 	passport				= require('passport'),
 	LocalStrategy			= require('passport-local'),
 	expressSession			= require('express-session'),
@@ -205,7 +207,110 @@ app.get('/mars', function(req, res) {
 	res.render('mars');
 });
 app.get('/todo', isLoggedIn, function(req, res) {
-	res.render('todo');
+	ToDoCategory.find({})
+	.populate( { path: "todos", options: { sort: {'complete': 1, 'name': 1}} } )
+	.sort( {'complete': 1, 'name': 1} )
+	.exec(function(err, categories) {
+		if(err) {
+			console.log(err);
+			req.flash('error', 'Something went wrong...');
+			res.redirect('back');
+		} else {
+			res.render('todo', { categories: categories });
+		}
+	});
+});
+app.post('/todo/newCat', isLoggedIn, function(req, res) {
+	ToDoCategory.create(req.body, function(err, category) {
+		if(err) {
+			console.log(err);
+			req.flash("error", "Something went wrong...");
+			res.redirect('back');
+		} else {
+			console.log(category.name);
+			res.redirect('next');
+		}
+	});
+});
+app.put('/todo/:id', isLoggedIn, function(req, res) {
+	ToDoItem.findOne( { 'name': req.params.id } , function(err, todo) {
+		if(err) {
+			console.log(err);
+			req.flash('error', 'Something went wrong...');
+			res.redirect('back');
+		} else {
+			var complete = true;
+			if(todo.complete) {
+				complete = false;
+			}
+			ToDoItem.findByIdAndUpdate(todo._id, { 'complete': complete }, function(err, todo) {
+				if(err) {
+					console.log(err);
+					req.flash('error', 'Something went wrong...');
+					res.redirect('back');
+				} else {
+					res.json(todo);
+				}
+			});
+		}
+	});
+});
+app.post('/todo/newToDo', isLoggedIn, function(req, res) {
+	ToDoItem.create(req.body, function(err, todo) {
+		if(err) {
+			console.log(err);
+			req.flash("error", "Something went wrong...");
+			res.redirect('back');
+		} else {
+			ToDoCategory.findOneAndUpdate( { 'name': req.body.cat }, { $push: { todos: todo._id } }, function(err, cat) {
+				if(err) {
+					console.log(err);
+					req.flash("error", "Something went wrong...");
+					res.redirect('back');
+				} else {
+					res.json(todo);
+				}
+			});
+		}
+	});
+});
+app.delete('/todo/:id', isLoggedIn, function(req, res) {
+	ToDoItem.findOne( { name: req.params.id }, function(err, todo) {
+		if(err) {
+			console.log(err);
+			req.flash("error", "Something went wrong...");
+			res.redirect('back');
+		} else {
+			ToDoItem.findByIdAndRemove(todo._id, function(err) {
+				if(err) {
+					console.log(err);
+					req.flash("error", "Something went wrong...");
+					res.redirect('back');
+				} else {
+					res.json(todo);
+				}
+			});
+		}
+	})
+});
+app.delete('/todo/cat/:id', isLoggedIn, function(req, res) {
+	ToDoCategory.findOne( { name: req.params.id }, function(err, cat) {
+		if(err) {
+			console.log(err);
+			req.flash("error", "Something went wrong...");
+			res.redirect('back');
+		} else {
+			ToDoCategory.findByIdAndRemove(cat._id, function(err) {
+				if(err) {
+					console.log(err);
+					req.flash("error", "Something went wrong...");
+					res.redirect('back');
+				} else {
+					res.json(cat);
+				}
+			});
+		}
+	})
 });
 
 //	Render login form

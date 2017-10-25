@@ -1,8 +1,8 @@
 var mongoose = require("mongoose");
 
-var toDoCategorySchema = new mongoose.Schema({
+var toDoItemSchema = new mongoose.Schema({
 	name: { type: String, required: true, unique: true },
 	complete: { type: Boolean, required: true, default: false }
 });
 
-module.exports = mongoose.model("ToDoCategory", toDoCategorySchema, "ToDoCategories");
+module.exports = mongoose.model("ToDoItem", toDoItemSchema, "ToDoItems");

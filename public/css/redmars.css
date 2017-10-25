@@ -550,4 +550,21 @@ canvas {
 	top: 15px;
 }
 
+.toDoList {
+	padding: 0;
+} .toDoList li {
+	list-style-type: none;
+} .toDoList li i {
+	color: #49351d;
+	padding: 0 5px 0 0;
+} .toDoList li h3 {
+	display: inline-block;
+}
 
+.complete {
+	text-decoration: line-through;
+}
+.inlineLabel {
+	padding-right: 30px;
+	display: inline-block;
+}
