@@ -25,4 +25,5 @@ $(function() {
 		itemSelector: '.gridItem',
 		columnWidth: 0
 	});
+	$('.grid').masonry('layout');
 });
