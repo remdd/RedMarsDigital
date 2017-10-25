@@ -26,5 +26,4 @@ $(window).on('load', function($) {
 		singleMode: true,
 		columnWidth: '.gridItem'
 	});
-	$grid.masonry();
 });
