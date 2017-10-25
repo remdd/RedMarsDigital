@@ -220,15 +220,14 @@ app.get('/todo', isLoggedIn, function(req, res) {
 		}
 	});
 });
-app.post('/todo/newCat', isLoggedIn, function(req, res) {
+app.post('/todo/cat', isLoggedIn, function(req, res) {
 	ToDoCategory.create(req.body, function(err, category) {
 		if(err) {
 			console.log(err);
 			req.flash("error", "Something went wrong...");
-			res.redirect('back');
 		} else {
-			console.log(category.name);
-			res.redirect('next');
+			console.log('success - added category');
+			req.flash('success', 'Successfully added Category.');
 		}
 	});
 });
@@ -237,7 +236,6 @@ app.put('/todo/:id', isLoggedIn, function(req, res) {
 		if(err) {
 			console.log(err);
 			req.flash('error', 'Something went wrong...');
-			res.redirect('back');
 		} else {
 			var complete = true;
 			if(todo.complete) {
@@ -247,8 +245,8 @@ app.put('/todo/:id', isLoggedIn, function(req, res) {
 				if(err) {
 					console.log(err);
 					req.flash('error', 'Something went wrong...');
-					res.redirect('back');
 				} else {
+					console.log('success - toggled todo');
 					res.json(todo);
 				}
 			});
@@ -260,14 +258,14 @@ app.post('/todo/newToDo', isLoggedIn, function(req, res) {
 		if(err) {
 			console.log(err);
 			req.flash("error", "Something went wrong...");
-			res.redirect('back');
 		} else {
 			ToDoCategory.findOneAndUpdate( { 'name': req.body.cat }, { $push: { todos: todo._id } }, function(err, cat) {
 				if(err) {
 					console.log(err);
 					req.flash("error", "Something went wrong...");
-					res.redirect('back');
 				} else {
+					console.log('success - added todo');
+					req.flash('success', 'Successfully added ToDo item.');
 					res.json(todo);
 				}
 			});
@@ -285,9 +283,10 @@ app.delete('/todo/:id', isLoggedIn, function(req, res) {
 				if(err) {
 					console.log(err);
 					req.flash("error", "Something went wrong...");
-					res.redirect('back');
 				} else {
-					res.json(todo);
+					console.log('success - deleted todo');
+					req.flash('success', 'Successfully deleted ToDo item.');
+					res.json({});
 				}
 			});
 		}
@@ -300,17 +299,19 @@ app.delete('/todo/cat/:id', isLoggedIn, function(req, res) {
 			req.flash("error", "Something went wrong...");
 			res.redirect('back');
 		} else {
+		console.log('deleting cat...');
 			ToDoCategory.findByIdAndRemove(cat._id, function(err) {
 				if(err) {
 					console.log(err);
 					req.flash("error", "Something went wrong...");
-					res.redirect('back');
 				} else {
-					res.json(cat);
+					console.log('success - deleted category');
+					req.flash('success', 'Category deleted successfully.');
+					res.json({});
 				}
 			});
 		}
-	})
+	});
 });
 
 //	Render login form

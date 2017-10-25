@@ -2,9 +2,34 @@
 
 <div class="bgDiv solidBgDivLast">
 	<div class="container">
+
 		<div class="row">
 			<div class="col col-12">
 				<h2>To-do list</h2>
+
+				<form>
+					<label class="inlineLabel" for="newToDo"><h3>Add new ToDo Item</h3></label>
+					<select id="catList" default="Misc">
+						<% categories.forEach(function(category) { %>
+							<option value="<%= category.name %>" label="<%= category.name %>"><%= category.name %></option>
+						<% }) %>
+					</select>
+					<input required type="text" name="newToDo" id="newToDo" placeholder="New ToDo item">
+					<button id="addToDoBtn">Add</button>
+				</form>
+
+				<form>
+					<label class="inlineLabel" for="newCategory"><h3>Add new Category</h3></label>
+					<input type="text" name="newCategory" id="newCategory" placeholder="New Category name">
+					<button id="addCategoryBtn">Add</button>
+				</form>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="row">
+			<div class="col col-12">
 				<ul class="toDoList">
 					<% categories.forEach(function(category) { %>
 					<li data-name="<%= category.name %>">
@@ -37,31 +62,6 @@
 
 			</div>
 		</div>
-
-		<div class="row">
-			<div class="col col-12">
-
-				<form>
-					<label class="inlineLabel" for="newToDo"><h3>Add new ToDo Item</h3></label>
-					<select id="catList" default="Misc">
-						<% categories.forEach(function(category) { %>
-							<option value="<%= category.name %>" label="<%= category.name %>"><%= category.name %></option>
-						<% }) %>
-					</select>
-					<input required type="text" name="newToDo" id="newToDo" placeholder="New ToDo item">
-					<button id="addToDoBtn">Add</button>
-				</form>
-
-				<form>
-					<label class="inlineLabel" for="newCategory"><h3>Add new Category</h3></label>
-					<input type="text" name="newCategory" id="newCategory" placeholder="New Category name">
-					<button id="addCategoryBtn">Add</button>
-				</form>
-			</div>
-		</div>
-
-
-
 	</div>
 </div>
 
@@ -71,15 +71,17 @@
 		var newCategory = {
 			name: $('#newCategory').val()
 		}
-		$.ajax("/todo/newCat", {
+		$.ajax("/todo/cat", {
 			data: newCategory,
 			type: 'post'
 		}).done(function() {
 			location.reload();
+			console.log('new cat DONE');
 		});
 	});
 
 	$('#addToDoBtn').click(function() {
+		console.log('adding todo...');
 		var newToDo = {
 			name: $('#newToDo').val(),
 			cat: $('#catList').val()
@@ -89,7 +91,8 @@
 			data: newToDo,
 			type: 'post'
 		}).done(function() {
-			location.reload();
+			console.log('new todo DONE');
+			window.location.href = '/todo/'
 		});
 	});
 
@@ -107,15 +110,19 @@
 				$that.siblings().first().next().removeClass('fa-check-circle-o');
 				$that.siblings().first().next().addClass('fa-circle-o');
 			}
+			console.log('toggle todo DONE');
+			window.location.href = '/todo/'
 		});	
 	});
 
 	$('.deleteItemBtn').click(function() {
+		console.log('deleting todo...');
 		var itemName = $(this).parent().attr('data-name');
 		$.ajax('/todo/' + itemName, {
 			type:'delete'
 		}).done(function() {
-			location.reload();
+			console.log('delete todo DONE');
+			window.location.href = '/todo/'
 		});
 	});
 
@@ -124,7 +131,8 @@
 		$.ajax('/todo/cat/' + catName, {
 			type:'delete'
 		}).done(function() {
-			location.reload();
+			console.log('delete cat DONE');
+			window.location.href = '/todo/'
 		});
 	});
 

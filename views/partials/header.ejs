@@ -32,6 +32,9 @@
 						<span class="btn"><a href="/blog">Blog</a></span>
 						<span class="btn"><a href="/creative">Creative</a></span>
 						<span class="btn"><a href="/mars">Mars</a></span>
+						<% if(currentUser) { %>
+							<span class="btn"><a href="/todo">Todo</a></span>
+						<% } %>
 					</div>
 					<div class="col col-3-sm navicons">
 						<% if(currentUser) { %>
