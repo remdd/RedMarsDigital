@@ -381,11 +381,9 @@ function setInfoDisplay() {
 //  Preload images
 function preloadImages(points) {
     var images = [];
-    function preload() {
-        for(var i = 0; i < points.length; i++) {
-            images[i] = new Image();
-            images[i].src = '/img/' + points[i].img;
-        }
+    for(var i = 0; i < points.length; i++) {
+        images[i] = new Image();
+        images[i].src = '/img/' + points[i].img;
     }
 }
 
