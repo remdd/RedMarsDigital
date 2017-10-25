@@ -346,7 +346,7 @@ function highlightLabel(point) {
         $('.pointInfo h4').text(point.mars_name);
         $('.pointInfo div').text(point.mars_description);
         $('.pointInfo p').text(point.mars_description);
-        $('.pointimg').imagesLoaded(function() {
+        $('.pointimg').imagesLoaded().done(function() {
             $that.fadeIn('fast');
             $('.closeSpan').fadeIn('fast');
         })
