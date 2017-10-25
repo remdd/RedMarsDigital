@@ -20,10 +20,11 @@ $(function() {
 		csplaying = !csplaying;
 	};
 
-	$('.grid').masonry({
+	var $grid = $('.grid').masonry({
 		// options
 		itemSelector: '.gridItem',
-		columnWidth: 0
+		singleMode: true,
+		columnWidth: '.gridItem'
 	});
-	$('.grid').masonry('layout');
+	$grid.masonry();
 });
