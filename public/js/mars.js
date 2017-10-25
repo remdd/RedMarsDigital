@@ -61,8 +61,6 @@ $(document).ready(function() {
     setInfoDisplay();
 });
 
-
-
 //  animation
 function render() {
     timer += speed;
@@ -75,9 +73,7 @@ function render() {
     renderer.render( scene, camera );
     requestAnimationFrame( render );
     TWEEN.update();
-
     raycaster.setFromCamera(mouseVector, camera);
-
 }
 
 // add Mars
@@ -149,7 +145,6 @@ function addPoints() {
             points_missions.push(point);
         }
     }
-
 }
 
 // convert the positions from a lat, lon to a position on a sphere.
@@ -335,6 +330,7 @@ function highlightPoint(point) {
 
 function highlightLabel(point) {
     $('.pointDetails').fadeOut('fast', function() {
+        var $that = $(this);
         if(point.mars_img) {
             $('.pointImg img').attr('src', '/img/' + point.mars_img);
         } else {
@@ -350,8 +346,10 @@ function highlightLabel(point) {
         $('.pointInfo h4').text(point.mars_name);
         $('.pointInfo div').text(point.mars_description);
         $('.pointInfo p').text(point.mars_description);
-        $(this).fadeIn('fast');
-        $('.closeSpan').fadeIn('fast');
+        $('.pointimg').imagesLoaded(function() {
+            $that.fadeIn('fast');
+            $('.closeSpan').fadeIn('fast');
+        })
     });
 }
 
