@@ -21,7 +21,7 @@ var express 				= require('express'),
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(logger('dev'));
-app.use(favicon('public/img/favicon.png'));
+app.use(favicon('public/img/favicon20.png'));
 
 dotenv.config({path: '.env'});				//	Loads environment variables file
 

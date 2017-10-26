@@ -106,6 +106,8 @@ button {
 	background-size: cover;
 	padding-bottom: 20px;
 	position: relative;
+} .homelink {
+	text-decoration-color: #999999; 
 }
 .solidBgDiv {
 	background: white;
