@@ -434,15 +434,18 @@ figure {
 
 /*	Mars globe	*/
 canvas {
+}
+.globeWrapper {
 	background: url('/img/Stars.jpg');
 	background-size: cover;
+	width: 100%;
+	padding-bottom: 60%;
+	border: 3px solid #222222;
 }
 #globe {
 	position: relative;
 	width: 100%;
-	padding-left: 0;
-	padding-right: 0;
-	border: 3px solid #222222;
+	padding: 0;
 }
 .globeOverlayLeft {
 	position: absolute;
@@ -498,7 +501,7 @@ canvas {
 	bottom: 20px;
 	right: 20px;
 } .hiddenOverlay {
-	opacity: 0;
+	display: none !important;
 } .controlDiv i {
 	transition: color 0.3s;
 	color: #333333;

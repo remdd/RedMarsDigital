@@ -46,14 +46,15 @@ var store = new mongoDBStore(
 		}
 	}
 );
-//	MongoDBStore start error catching
+
+//	Catch MongoDBStore errors on startup
 store.on('error', function(err) {
 	if(err) {
 		console.log(err);
 	}
 });
 
-//	Express-session and Passport usage
+//	Express-session and Passport config
 app.use(expressSession({
 	secret: process.env.EXP_KEY,
 	store: store,									//	Connects to MongoDBStore
@@ -62,6 +63,7 @@ app.use(expressSession({
 	httpOnly: true,									//	Don't let browser javascript access cookies
 	secure: false									//	Set to true to limit cookies to https only (SET FOR PRODUCTION)
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -69,12 +71,13 @@ passport.use(new LocalStrategy({
 	usernameField: 'email',
 	passwordField: 'password'
 }, User.authenticate()));
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//	Flash message use
-
+//	Flash messages
 app.use(flash());
+
 //	Middleware to make req.user etc available to all routes
 app.use(function(req, res, next){
 	res.locals.currentUser = req.user;
@@ -83,7 +86,7 @@ app.use(function(req, res, next){
 	next();
 });
 
-//	Icon array for random display in footer of blogPosts
+//	Array of images to enable display of random graphic in footer of blogPosts
 var icons = ['Mariner4.png', 'Mars3.png', 'MRO.png', 'Phobos.png', 'Rover.png', 'Deimos.png', 'Sojourner.png'];
 
 
@@ -91,14 +94,16 @@ var icons = ['Mariner4.png', 'Mars3.png', 'MRO.png', 'Phobos.png', 'Rover.png', 
 app.get('/', function(req, res) {
 	res.render('index');
 });
+
 app.get('/about', function(req, res) {
 	res.render('about');
 });
+
 app.get('/projects', function(req, res) {
 	res.render('projects');
 });
+
 app.get('/projects/:name', function(req, res) {
-	console.log(req.params.name);
 	res.render('projects/' + req.params.name);
 });
 
@@ -120,13 +125,14 @@ app.get('/blog', function(req, res) {
 	});
 
 });
-//	NEW - show form to create new finding
+
+//	NEW blog post form
 app.get('/blog/new', isLoggedIn, function(req, res) {
 	res.render('blog/new');
 });
+
 //	CREATE blog post
 app.post('/blog', isLoggedIn, function(req, res) {
-	console.log(req.body.blogPost);
 	req = addDate(req);
 	req.body.blogPost.textContent = striptags(req.body.blogPost.content);
 	BlogPost.create(req.body.blogPost, function(err, blogPost) {
@@ -138,6 +144,7 @@ app.post('/blog', isLoggedIn, function(req, res) {
 		}
 	});
 });
+
 //	SHOW blog post
 app.get('/blog/:id', function(req, res) {
 	BlogPost.findById(req.params.id)
@@ -162,7 +169,6 @@ app.get('/blog/:id', function(req, res) {
 						} else {
 							var randomIcon = Math.floor(Math.random() * icons.length);
 							var footerIcon = icons[randomIcon];
-							console.log(footerIcon);
 							res.render('blog/show', {blogPost: blogPost, nextPost: nextPost[0], prevPost: prevPost[0], footerIcon: footerIcon});
 						}
 					});
@@ -171,7 +177,8 @@ app.get('/blog/:id', function(req, res) {
 		};
 	});
 });
-//	EDIT blog post
+
+//	EDIT blog post form
 app.get('/blog/:id/edit', isLoggedIn, function(req, res) {
 	BlogPost.findById(req.params.id)
 	.exec(function(err, blogPost) {
@@ -183,6 +190,7 @@ app.get('/blog/:id/edit', isLoggedIn, function(req, res) {
 		}
 	});
 });
+
 //	UPDATE blog post
 app.put('/blog/:id', isLoggedIn, function(req, res) {
 	req.body.blogPost.textContent = striptags(req.body.blogPost.content);
@@ -199,13 +207,16 @@ app.put('/blog/:id', isLoggedIn, function(req, res) {
 app.get('/creative', function(req, res) {
 	res.render('creative');
 });
+
 app.get('/creative/:name', function(req, res) {
-	console.log(req.params.name);
 	res.render('creative/' + req.params.name);
 });
+
 app.get('/mars', function(req, res) {
 	res.render('mars');
 });
+
+//	ToDo list page - visible to registered users only
 app.get('/todo', isLoggedIn, function(req, res) {
 	ToDoCategory.find({})
 	.populate( { path: "todos", options: { sort: {'complete': 1, 'name': 1}} } )
@@ -220,17 +231,18 @@ app.get('/todo', isLoggedIn, function(req, res) {
 		}
 	});
 });
+
 app.post('/todo/cat', isLoggedIn, function(req, res) {
 	ToDoCategory.create(req.body, function(err, category) {
 		if(err) {
 			console.log(err);
 			req.flash("error", "Something went wrong...");
 		} else {
-			console.log('success - added category');
 			req.flash('success', 'Successfully added Category.');
 		}
 	});
 });
+
 app.put('/todo/:id', isLoggedIn, function(req, res) {
 	ToDoItem.findOne( { 'name': req.params.id } , function(err, todo) {
 		if(err) {
@@ -246,13 +258,13 @@ app.put('/todo/:id', isLoggedIn, function(req, res) {
 					console.log(err);
 					req.flash('error', 'Something went wrong...');
 				} else {
-					console.log('success - toggled todo');
 					res.json(todo);
 				}
 			});
 		}
 	});
 });
+
 app.post('/todo/newToDo', isLoggedIn, function(req, res) {
 	ToDoItem.create(req.body, function(err, todo) {
 		if(err) {
@@ -272,6 +284,7 @@ app.post('/todo/newToDo', isLoggedIn, function(req, res) {
 		}
 	});
 });
+
 app.delete('/todo/:id', isLoggedIn, function(req, res) {
 	ToDoItem.findOne( { name: req.params.id }, function(err, todo) {
 		if(err) {
@@ -284,7 +297,6 @@ app.delete('/todo/:id', isLoggedIn, function(req, res) {
 					console.log(err);
 					req.flash("error", "Something went wrong...");
 				} else {
-					console.log('success - deleted todo');
 					req.flash('success', 'Successfully deleted ToDo item.');
 					res.json({});
 				}
@@ -292,6 +304,7 @@ app.delete('/todo/:id', isLoggedIn, function(req, res) {
 		}
 	})
 });
+
 app.delete('/todo/cat/:id', isLoggedIn, function(req, res) {
 	ToDoCategory.findOne( { name: req.params.id }, function(err, cat) {
 		if(err) {
@@ -305,7 +318,6 @@ app.delete('/todo/cat/:id', isLoggedIn, function(req, res) {
 					console.log(err);
 					req.flash("error", "Something went wrong...");
 				} else {
-					console.log('success - deleted category');
 					req.flash('success', 'Category deleted successfully.');
 					res.json({});
 				}
@@ -334,6 +346,38 @@ app.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
+//	Catch-all
+app.get('*', function(req,res) {
+	res.render('404')
+});
+
+//	User auth middleware for hidden routes
+function isLoggedIn(req, res, next) {
+	if(req.isAuthenticated()) {
+		return next();
+	}
+	req.flash("error", "You must be logged in to do that!");
+	res.redirect('/login');
+}
+
+//	Convert date to dd-MMM-yyyy format
+function addDate(req) {
+	var m_names = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
+	var d = new Date();
+	req.body.blogPost.datePosted = d;
+	var curr_date = d.getDate();
+	var curr_month = d.getMonth();
+	var curr_year = d.getFullYear();
+	req.body.blogPost.dateDisplay = curr_date + " " + m_names[curr_month] + " " + curr_year;
+	return req;
+}
+
+// function stripHtml(html) {
+// 	var temporaryElement = document.createElement('div');
+// 	temporaryElement.innerHTML = html;
+// 	return temporaryElement.textContent || temporaryElement.innerText || "";
+// }
+
 // //	Render new user form
 // app.get('/register', function(req, res) {
 // 	res.render('users/register');
@@ -352,36 +396,6 @@ app.get('/logout', function(req, res) {
 // 		}
 // 	});
 // });
-
-app.get('*', function(req,res) {
-	res.render('404')
-});
-
-function isLoggedIn(req, res, next) {
-	if(req.isAuthenticated()) {
-		return next();
-	}
-	req.flash("error", "You must be logged in to do that!");
-	res.redirect('/login');
-}
-
-function addDate(req) {
-	var m_names = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec");
-	var d = new Date();
-	console.log(d);
-	req.body.blogPost.datePosted = d;
-	var curr_date = d.getDate();
-	var curr_month = d.getMonth();
-	var curr_year = d.getFullYear();
-	req.body.blogPost.dateDisplay = curr_date + " " + m_names[curr_month] + " " + curr_year;
-	return req;
-}
-
-// function stripHtml(html) {
-// 	var temporaryElement = document.createElement('div');
-// 	temporaryElement.innerHTML = html;
-// 	return temporaryElement.textContent || temporaryElement.innerText || "";
-// }
 
 app.listen(process.env.PORT, process.env.IP, function() {
 	console.log("Server started");
