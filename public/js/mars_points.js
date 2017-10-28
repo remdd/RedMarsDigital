@@ -146,3 +146,4 @@ var points = [
     }
 
 ];
+console.log('JSON loaded for ' + points.length + ' points of interest.');
