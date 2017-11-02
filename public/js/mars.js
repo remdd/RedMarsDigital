@@ -41,6 +41,7 @@ var $globe = $('#globe');
 $globe.append(renderer.domElement);
 var $canvas = $('canvas').first();
 window.addEventListener('mousemove', onMouseMove, false);
+window.addEventListener('click', onTouch, false);
 
 //  setup a camera that points to the origin
 var camera = new THREE.PerspectiveCamera(FOV,WIDTH / HEIGHT, NEAR, FAR);    //  Configure camera params
@@ -296,6 +297,23 @@ var mouseVector = new THREE.Vector2();
 
 //  Select point of interest on mouseover
 function onMouseMove(e) {
+    var offset = $canvas.offset();
+    var canvasWidth = $canvas.width();
+    var canvasHeight = $canvas.height();
+
+    mouseVector.x = (e.pageX - offset.left) / (canvasWidth) * 2 - 1;
+    mouseVector.y = (e.pageY - offset.top) / (canvasHeight) * -2 + 1;
+
+    var intersects = raycaster.intersectObjects(scene.children);
+
+    if(intersects.length > 0 && intersects[0].object.name != 'Mars' && intersects[0].object.name != 'highlight' && intersects[0].object.material.opacity > 0) {
+        scene.remove(scene.getObjectByName('highlight'));
+        highlightPoint(intersects[0].object);
+    }
+}
+
+//  Select point of interest on click(add touchscreen support)
+function onTouch(e) {
     var offset = $canvas.offset();
     var canvasWidth = $canvas.width();
     var canvasHeight = $canvas.height();
