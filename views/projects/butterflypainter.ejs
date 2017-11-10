@@ -5,8 +5,36 @@
 		<div class="row">
 			<div class="col col-12 projectDiv">
 				<h3>Butterfly Painter</h3>
-				<h5 class="projectLink">Due for installation at the <a href="http://www.wildlifeoasis.co.uk">Lakeland Wildlife Oasis</a> later in 2017</h5>
 				<p>An interactive, animated 3D installation for a zoo visitor centre in Cumbria.</p>
+				<h5 class="projectLink">Due for installation at the <a href="http://www.wildlifeoasis.co.uk">Lakeland Wildlife Oasis</a> later in 2017</h5>
+
+				<div class="centreDiv">
+					<hr>
+					<a href="https://unity3d.com/">
+						<div class="devicon-figure fig-img fig-unity">
+							<img src="/img/unity.png">
+						</div>
+					</a>
+					<a href="https://www.blender.org/">
+						<div class="devicon-figure fig-img fig-blender">
+							<img src="/img/blender.png">
+						</div>
+					</a>
+					<figure class="devicon-figure">
+						<i class="devicon-csharp-plain"></i>
+						<figcaption>C#</figcaption>
+					</figure>
+					<figure class="devicon-figure">
+						<i class="devicon-html5-plain"></i>
+						<figcaption>HTML5</figcaption>
+					</figure>
+					<figure class="devicon-figure">
+						<i class="devicon-jquery-plain"></i>
+						<figcaption>jQuery</figcaption>
+					</figure>
+					<hr>
+				</div>
+
 				<p>Visitors to the zoo encounter this installation in a softly lit room just before they enter the zoo's tropical butterfly hall. A rainforest scene is projected onto a wall, in which a number of animated butterflies are flying about.</p>
 
 				<div class="butterflyVideoWrapperWrapper">
@@ -32,9 +60,20 @@
 					<li>The butterfly model was adapted from a <a href="https://www.turbosquid.com/3d-models/blue-butterfly-3ds-free/607415">freely available model</a> using <a href="https://www.blender.org/"><span class="spanTech spanLanguage">Blender</span></a>, and animated within Unity.</li>
 					<li>The butterflies are controlled by a very simple AI, which (within set parameters) randomly reassigns each of them a flight path vector, movement speed and wing-flapping animation (from a small number of slightly different animation modes) at short random intervals.</li>
 					<li>Once a new wing has been painted and is saved by a user, a representation of their artwork is saved to a .png file to the browser's default download directory.</li>
-					<li>This directory is monitored by a <span class="spanTech spanLanguage">C#</span> script running in Unity. When a new file with the relevant filename is detected, a batch file is triggered which uses <a href="https://www.imagemagick.org/script/index.php"><span>Image Magick</span></a> command line tools to rotate and resize the image for mapping to the butterfly model in Unity, and copies the formatted output file to a Unity working directory.</li>
+					<li>This directory is monitored by a <span class="spanTech spanLanguage">C#</span> script running in Unity. When a new file with the relevant filename is detected, a batch file is triggered which uses <a href="https://www.imagemagick.org/script/index.php"><span class="spanTech">Image Magick</span></a> command line tools to rotate and resize the image for mapping to the butterfly model in Unity, and copies the formatted output file to a Unity working directory.</li>
 					<li>This working directory is also monitored by a Unity C# script which, on detection of a new formatted wing texture file, removes the 'eldest' butterfly in the scene and instantiates (out of camera shot) a new one mapped with the new wing texture.</li>
 				</ol>
+
+				<hr>
+
+				<div class="col col-12 centredDiv">
+					<img src="/img/<%= footerIcon %>">		
+				</div>
+
+				<p>Next project: <a href="/projects/edutainmentconsole">Edutainment Console</a></p>
+
+				<p>Previous project: <a href="/projects/chasingshadows">Chasing Shadows</a></p>
+
 			</div>
 		</div>
 	</div>

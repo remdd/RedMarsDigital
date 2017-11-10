@@ -27,6 +27,41 @@ button {
 	margin: 30px 10px 10px 0;
 	display: inline-block;
 }
+.devicon-figure {
+	margin: 20px 0;
+	display: inline-block;
+	width: 90px;
+	text-align: center;
+} .devicon-figure i {
+	display: inline-block;
+	margin: 0 auto;
+	color: #75552e;
+	font-size: 3em;
+} .devicon-figure figcaption {
+	color: #75552e;
+	width: 100%;
+	text-align: center;
+}
+hr {
+	border: 0;
+	color: #CCC;
+	background-color: #CCC;
+	height: 1px;
+	margin: 25px 0;
+}
+.fig-img {
+	display: inline-block;
+	padding-bottom: 20px;
+} .fig-unity img {
+	width: 100px;
+	padding-right: 45px;
+	padding-bottom: 14px;
+} .fig-blender img {
+	padding-bottom: 16px;
+	margin-right: 20px;
+	width: 140px;
+}
+
 .inlineForm {
 	display: inline-block;
 }
@@ -253,8 +288,6 @@ button {
 	text-align: right;
 	margin: 0;
 	margin-bottom: 5px;
-} .projectDiv h5:last-of-type {
-	margin-bottom: 50px;
 } .projectDiv button {
 	display: block;
 	border: none;
@@ -269,6 +302,7 @@ button {
 } .projectLink {
 	font-family: 'Nunito', Helvetica, sans-serif;
 	font-weight: normal;
+	margin-bottom: 10px;
 } .projectLink a {
 	color: #999;
 } .videoWrapper {
@@ -299,7 +333,19 @@ button {
 .padDiv {
 	clear: both;
 }
-
+.centreDiv {
+	padding-top: 10px;
+	width: 100%;
+	text-align: center;
+}
+.centreDiv a {
+	text-decoration: none;
+}
+.centreDiv hr:first-of-type {
+	margin-bottom: 15px;
+} .centreDiv hr:last-of-type {
+	margin-top: 5px;
+}
 /* About page */
 .aboutContainer {
 	overflow-y: hidden;
@@ -317,6 +363,10 @@ button {
 	margin-bottom: 0;
 } .aboutDiv a {
 	text-decoration-color: #999999; 
+} 
+.inlineDevicon {
+	float: right;
+	margin-left: 50px;
 }
 .aboutImgDiv {
 	text-align: center;
@@ -353,11 +403,11 @@ button {
 
 /*	Text span highlights	*/
 .spanTech {
-	padding: 0 5px;
-	border-radius: 5px;
+/*	padding: 0 5px;*/
+/*	border-radius: 5px;*/
 	font-weight: bold;
 }
-.spanHTML {
+/*.spanHTML {
 	background: pink;
 } .spanCSS {
 	background: lightblue;
@@ -369,7 +419,7 @@ button {
 	background: #ffcc99;
 } .spanDB {
 	background: #dfff80;
-} 
+} */
 
 .whiteTextCol p {
 	color: white;
@@ -420,10 +470,10 @@ button {
 	min-height: 30vh;
 }
 
-figure {
+.nohFigure {
 	margin: 20px 0;
 	display: inline-block;
-} figure img {
+} .nohFigure img {
 	width: 450px;
 	max-width: 100%;
 }

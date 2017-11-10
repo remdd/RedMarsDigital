@@ -104,7 +104,9 @@ app.get('/projects', function(req, res) {
 });
 
 app.get('/projects/:name', function(req, res) {
-	res.render('projects/' + req.params.name);
+	var randomIcon = Math.floor(Math.random() * icons.length);
+	var footerIcon = icons[randomIcon];
+	res.render('projects/' + req.params.name, { footerIcon: footerIcon });
 });
 
 app.get('/blog', function(req, res) {
@@ -209,7 +211,9 @@ app.get('/creative', function(req, res) {
 });
 
 app.get('/creative/:name', function(req, res) {
-	res.render('creative/' + req.params.name);
+	var randomIcon = Math.floor(Math.random() * icons.length);
+	var footerIcon = icons[randomIcon];
+	res.render('creative/' + req.params.name, { footerIcon: footerIcon });
 });
 
 app.get('/mars', function(req, res) {
