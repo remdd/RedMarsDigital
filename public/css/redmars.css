@@ -372,6 +372,7 @@ hr {
 } .aboutImg {
 	margin-top: 15px;
 	display: inline-block;
+	max-width: 100%;
 }
 .inlineImg {
 	display: inline-block;
