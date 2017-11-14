@@ -101,13 +101,15 @@ $(document).ready(function(){
 	});
 	// Touch controls
 	$('#canvas').on("touchstart", function(e){
-		var x = e.touches[0].clientX - $(this).offset().left;
-		var y = e.touches[0].clientY - $(this).offset().top;
+		var x = e.touches[0].pageX - $(this).offset().left;
+		var y = e.touches[0].pageY - $(this).offset().top;
 		touchCanvas(x, y);
 	});
 	$('#canvas').on("touchmove", function(e){
-		var x = e.touches[0].clientX - $(this).offset().left;
-		var y = e.touches[0].clientY - $(this).offset().top;
+		console.log('touchmove');
+		console.log(e);
+		var x = e.touches[0].pageX - $(this).offset().left;
+		var y = e.touches[0].pageY - $(this).offset().top;
 		dragCanvas(x, y);
 	});
 	// Mouse & touch controls
