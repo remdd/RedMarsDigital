@@ -106,8 +106,6 @@ $(document).ready(function(){
 		touchCanvas(x, y);
 	});
 	$('#canvas').on("touchmove", function(e){
-		console.log('touchmove');
-		console.log(e);
 		var x = e.touches[0].pageX - $(this).offset().left;
 		var y = e.touches[0].pageY - $(this).offset().top;
 		dragCanvas(x, y);
@@ -121,6 +119,11 @@ $(document).ready(function(){
 			strokes.push(stroke); 										//	'stroke' object is pushed to 'strokes' array
 			stroke = {};												//	'stroke' object is cleared ready for next newStroke
 			console.log(strokes.length);
+		}
+	});
+	$(window).on('touchmove', function(e) {
+		if(paint) {
+			e.preventDefault();
 		}
 	});
 
