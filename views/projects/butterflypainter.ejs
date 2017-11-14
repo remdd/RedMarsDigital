@@ -7,7 +7,7 @@
 				<h3>Butterfly Painter</h3>
 				<p>An interactive, animated 3D installation for a zoo visitor centre in Cumbria.</p>
 				<h5 class="projectLink">Due for installation at the <a href="http://www.wildlifeoasis.co.uk">Lakeland Wildlife Oasis</a> later in 2017</h5>
-
+				<h5 class="projectLink"><a href="https://github.com/remdd/LWO_ButterflyPainter">View on GitHub <i class="devicon-github-plain"></i></a></h5>
 				<div class="centreDiv">
 					<hr>
 					<a href="https://unity3d.com/">
@@ -48,18 +48,80 @@
 				</div>
 				<button id="csbtn" onclick="csclick();"><i class="fa fa-pause" aria-hidden="true"></i></button>
 
-				<p>Nearby, they find a wall-mounted touchscreen, displaying the application below - with which they can 'finger paint' onto a cutout representation of a butterfly's wing using basic paint controls and colour-picking palettes.<p>
-				<img class="projectImg" src="/img/butterflypainter.jpg">
-				<p>When they have finished colouring in their wing, they hit the 'finish' button to see an animated 3D version of their butterfly fly into the scene projected onto the wall, joining the others.</p>
+				<p>Nearby, they find a wall-mounted touchscreen, displaying an application recreated in the panel below - with which they can 'finger paint' onto a cutout representation of a butterfly's wing using basic paint controls and colour-picking palettes.<p>
+				<p>When a user has finished colouring in their wing, they hit the 'finish' button to see an animated 3D version of their butterfly fly into the scene projected onto the wall, joining the others.</p>
 				<p>The program maintains a specified number of butterflies - about 10 seems to work best - with each new addition replacing the 'oldest' butterfly in the scene (which will fly out of shot before being erased).</p>
-				<hr>
-				<p>Behind the scenes, the program flow works like this:</p>
+
+				<h4>Disclaimer!</h4>
+				<p>The replica app below uses a <strong>semi-functional copy</strong> of the code deployed in the finished installation.</p>
+				<p>Please do note that the final application was designed to run well on a single offline kiosk setup, with a specific hardware configuration. It was never intended to be made generally available on the web and the replica below is likely to have compatibility issues in some browsers.</p>
+				<p>Sadly this also means that the 'Finish' button in the replica below is disabled and will not generate an animated butterfly for you! The Unity application is compiled to a standalone executable that can't easily be delivered through the browser, and the flow of the full process requires scripts to be running on the local machine.</p>
+
+<!--	Replica of butterfly painter app 	-->
+
+				<link rel="stylesheet" type="text/css" href="/project_code/code_butterflypainter/butterflyPainter.css">
+				<link href="https://fonts.googleapis.com/css?family=Margarine" rel="stylesheet">
+				<script type="text/javascript" src="/project_code/code_butterflypainter/FlexiColorPicker-master/colorpicker.js"></script>
+				<script type="text/javascript" src="/project_code/code_butterflypainter/FileSaver.js-master/FileSaver.js"></script>
+
+				<div class="bpDiv">
+					<div id="canvasDiv">
+						<canvas id="canvas" width="256" height="512"></canvas>
+					</div>
+
+					<div id="paintControlsDiv">
+						<div class="controlContainer brushTypeControl">
+							<i class="fa fa-paint-brush active" id="typeBrushBtn" aria-hidden="true"></i>
+							<p class="iconLabelText">Paint mode</p>
+							<p class="iconLabelText iconLabelSubtext">Tap to paint your butterfly.</p>
+							<i class="fa fa-eyedropper inactive" id="typeEyedropperBtn" aria-hidden="true"></i>		
+							<p class="iconLabelText">Picker mode</p>
+							<p class="iconLabelText iconLabelSubtext">Tap to re-select a colour that you've already used.</p>
+						</div>
+						<div class="controlContainer brushPreviewControl">
+							<p class="labelText">Brush preview</p>
+							<div id="brushPreviewContainer">
+								<div id="brushPreview"></div>				
+							</div>
+						</div>
+						<div class="controlContainer brushSizeControl">
+							<p class="labelText">Brush size</p>
+							<input type="range" id="brushSizeSlider" value="33" min="5" max="60" id="brushSize">
+						</div>
+
+						<span id="paletteLabel">Tap the palettes to pick a colour.</span>
+					    <div id="picker"></div>
+					    <div id="slider"></div>
+					</div>
+
+					<div id="canvasControlsDiv">
+						<div id="undoBtn" class="btn">
+							<p class="bigText">Undo</p>
+							<p>your last brushstroke</p>
+						</div>
+						<div id="clearBtn" class="btn">
+							<p class="bigText">Clear all</p>
+							<p>and start again</p>
+						</div>
+						<div id="finishBtn" class="btn">
+							<p class="bigText">Finish</p>
+							<p>and add your butterfly!</p>
+						</div>
+					</div>
+				</div>
+
+				<script type="text/javascript" src="/project_code/code_butterflypainter/butterflyPainter.js"></script>
+
+				<h4>How it works</h4>
+
+				<p>Behind the scenes, the program flows like this:</p>
 				<ol>
-					<li>The touch-screen paint 'app' is built in <span class="spanTech spanHTML">HTML</span> and <span class="spanTech spanLibrary">jQuery</span>. A <span class="spanTech spanHTML">Canvas</span> element is defined by a series of quadratic curves outlining the wing template onto which the user can paint. The app is 'locked down' as a simple kiosk installation - i.e. browser navigation and all other controls not required for public interaction are disabled.</li>
-					<li>The projected 'scene' in which the butterflies are flying is a simple <a href="https://unity3d.com/"><span class="spanTech spanLanguage">Unity3D</span></a> application, with a static rainforest image displayed at the far end of an invisible 3D 'boundary box' within which the butterflies are constrained.</li>
+					<li>The touch-screen paint 'app' is built in <span class="spanTech spanHTML">HTML</span> and <span class="spanTech spanLibrary">jQuery</span>. A <span class="spanTech spanHTML">Canvas</span> element is defined by a series of quadratic curves outlining the wing template onto which the user can paint. The colour-picking palette code is adapted from <a href="https://github.com/DavidDurman/FlexiColorPicker">David Durman's FlexiColorPicker tool</a>.</li>
+					<li>The app is 'locked down' as a simple kiosk installation, i.e. browser navigation and all other controls not required for public interaction are disabled.</li>
+					<li>The projected 'scene' within which the butterflies are flying is a simple <a href="https://unity3d.com/"><span class="spanTech spanLanguage">Unity3D</span></a> app, with a static rainforest image displayed at the far end of an invisible 3D 'boundary box' within which the butterflies are constrained.</li>
 					<li>The butterfly model was adapted from a <a href="https://www.turbosquid.com/3d-models/blue-butterfly-3ds-free/607415">freely available model</a> using <a href="https://www.blender.org/"><span class="spanTech spanLanguage">Blender</span></a>, and animated within Unity.</li>
-					<li>The butterflies are controlled by a very simple AI, which (within set parameters) randomly reassigns each of them a flight path vector, movement speed and wing-flapping animation (from a small number of slightly different animation modes) at short random intervals.</li>
-					<li>Once a new wing has been painted and is saved by a user, a representation of their artwork is saved to a .png file to the browser's default download directory.</li>
+					<li>The butterflies are controlled by a very simple AI, which randomly reassigns each of them a flight path vector, movement speed and wing-flapping animation (from a small number of slightly different animation modes) at short random intervals.</li>
+					<li>Once a new wing design has been painted and is saved by a user, a representation of their artwork is saved to a .png file to the browser's default download directory.</li>
 					<li>This directory is monitored by a <span class="spanTech spanLanguage">C#</span> script running in Unity. When a new file with the relevant filename is detected, a batch file is triggered which uses <a href="https://www.imagemagick.org/script/index.php"><span class="spanTech">Image Magick</span></a> command line tools to rotate and resize the image for mapping to the butterfly model in Unity, and copies the formatted output file to a Unity working directory.</li>
 					<li>This working directory is also monitored by a Unity C# script which, on detection of a new formatted wing texture file, removes the 'eldest' butterfly in the scene and instantiates (out of camera shot) a new one mapped with the new wing texture.</li>
 				</ol>

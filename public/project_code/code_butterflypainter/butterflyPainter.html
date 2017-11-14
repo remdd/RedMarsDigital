@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Butterfly painter</title>
+	<link rel="stylesheet" type="text/css" href="butterflyPainter.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Margarine" rel="stylesheet">
+	<script type="text/javascript" src="../LWO_Kiosk/assets/lib/jQuery/jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="FlexiColorPicker-master/colorpicker.js"></script>
+	<script type="text/javascript" src="FileSaver.js-master/FileSaver.js"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Londrina+Solid" rel="stylesheet">
+
+</head>
+<body>
+
+	<div class="allDiv">
+		<div id="canvasDiv">
+			<canvas id="canvas" width="512" height="1024"></canvas>
+		</div>
+
+		<div id="paintControlsDiv">
+			<div class="controlContainer brushTypeControl">
+				<i class="fa fa-paint-brush active" id="typeBrushBtn" aria-hidden="true"></i>
+				<p class="iconLabelText">Paint mode</p>
+				<p class="iconLabelText iconLabelSubtext">Tap to paint your butterfly.</p>
+				<i class="fa fa-eyedropper inactive" id="typeEyedropperBtn" aria-hidden="true"></i>		
+				<p class="iconLabelText">Picker mode</p>
+				<p class="iconLabelText iconLabelSubtext">Tap to re-select a colour that you've already used.</p>
+			</div>
+			<div class="controlContainer brushPreviewControl">
+				<p class="labelText">Brush preview</p>
+				<div id="brushPreviewContainer">
+					<div id="brushPreview"></div>				
+				</div>
+			</div>
+			<div class="controlContainer brushSizeControl">
+				<p class="labelText">Brush size</p>
+				<input type="range" id="brushSizeSlider" value="33" min="5" max="60" id="brushSize">
+			</div>
+
+			<span id="paletteLabel">Tap the palettes to pick a colour.</span>
+		    <div id="picker"></div>
+		    <div id="slider"></div>
+		</div>
+
+		<div id="canvasControlsDiv">
+			<div id="undoBtn" class="btn">
+				<p class="bigText">Undo</p>
+				<p>your last brushstroke</p>
+			</div>
+			<div id="clearBtn" class="btn">
+				<p class="bigText">Clear all</p>
+				<p>and start again</p>
+			</div>
+			<div id="finishBtn" class="btn">
+				<p class="bigText">Finish</p>
+				<p>and add your butterfly!</p>
+			</div>
+		</div>
+	</div>
+		
+	<div class="infoModal">
+		<div class="modalContent">
+			<h3>A notice & warning about this content!</h3>
+			<p>blah</p>
+		</div>
+	</div>
+
+
+
+
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.slim.js"
+	  integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg="
+	  crossorigin="anonymous"></script>
+	<script type="text/javascript" src="butterflyPainter.js"></script>
+</body>
+</html>
