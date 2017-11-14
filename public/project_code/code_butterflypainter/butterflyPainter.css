@@ -24,6 +24,11 @@
 	margin-left: 50px;
 	touch-action: none
 }
+#picker {
+	touch-action: none
+} #slider {
+	touch-action: none
+}
 #picker::after {
 	content: "";
 	position: absolute;
