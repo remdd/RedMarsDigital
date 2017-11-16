@@ -1,0 +1,468 @@
+.backgroundDiv {
+    background: url('../img/JungleBG.jpg');
+}
+#divAll {
+  margin: 0;
+  width: 1920px;
+  height: 1080px;
+}
+#headerPane {
+  height: 120px;
+  width: 100%;
+}
+h1 {
+  font-family: 'Handlee', cursive;
+  margin-left: 400px;
+  margin-top: 0;
+  padding-top: 28px;
+  font-size: 2.5em;
+}
+#mainMenu {
+  width: 150px;
+  height: 44px;
+  border-radius: 20px;
+  margin-top: 25px;
+  padding-left: 10px;
+  position: relative;
+  left: -40px;
+  float: left;
+  font-size: 2.5em;
+  color: #133913;
+  border: 2px solid black;
+  background: rgba(240, 250, 240, 0.5);
+}
+#mainMenu span {
+  position: relative;
+  top: -8px;
+  font-size: .5em;
+  vertical-align: middle;
+}
+#mainMenu img {
+  position: relative;
+  top: -8px;
+  padding-top: 0;
+  height: 30px;
+  display: inline-block;
+  vertical-align: middle;
+}
+#mainMenu a {
+  text-decoration: none;
+  color: #133913;
+}
+
+#animalPane {
+  height: 713px;
+  width: 90%;
+  float: right;
+}
+
+#photoPane {
+  border: solid black 2px;
+  margin-left: 10px;
+  padding:  16px 19px 19px 16px;
+  background-image: url('../img/whoAmI/WoodTexture600.jpg');
+  width: 550px;
+  height: 550px;
+  float: left;
+}
+#photoPane img {
+  object-fit: cover;
+  width: 550px;
+  height: 550px;
+  border-top: 2px solid #6C4A46;
+  border-right: 1px solid #947C72;
+  border-bottom: 1px solid #947C72;
+  border-left: 2px solid #6C4A46;
+  transition: all 0.5s;
+}
+.noPhoto {
+  opacity: 0;
+  transition: opacity 1s;
+}
+#cluePane {
+  width: 1080px;
+  height: 100%;
+  float: left;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 1.2em;
+}
+#clueText {
+  margin: 0;
+  width: 620px;
+  height: 100%;
+  float: left;
+  font-size: 1.2em;
+}
+#clueText ol {
+  list-style-type: none;
+}
+#clueText ol li {
+  padding-bottom: 15px;
+}
+#clueImgsDiv {
+  float: right;
+  display: table-cell;
+  width: 400px;
+}
+#clueImgDiv1 {
+  display: inline-block;
+  vertical-align: top;
+  height: 340px;
+  line-height: 340px;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+}
+#clueImgDiv2 {
+  display: inline-block;
+  vertical-align: top;
+  height: 340px;
+  line-height: 340px;
+  width: 100%;
+  text-align: center;
+  padding: 0;
+}
+#clueImg1 {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 3px;
+  max-width: 90%;
+  max-height: 90%;
+  border: solid 2px;
+  border-image: url("../img/whoAmI/WoodTexture600.jpg") 30 round;
+}
+#clueImg2 {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 3px;
+  max-width: 90%;
+  max-height: 90%;
+  border: solid 2px;
+  border-image: url("../img/whoAmI/WoodTexture600.jpg") 30 round;
+}
+.revealedClueImgDiv {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.5s linear;
+}
+.hiddenClueImgDiv {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0s linear;
+}
+#clueText p, ol {
+  transition: all 0.5s;
+  margin: 2px;
+}
+
+#timeDiv {
+  float: left;
+  height: 850px;
+  width: 70px;
+  background-image: url("../img/whoAmI/TimerBG.jpg");
+  position: relative;
+  margin-left: 50px;
+  margin-top: 120px;
+}
+.timeBracketDiv {
+  border: solid 2px #1a0d00;
+  border-bottom: none;
+  display: block;
+  position: absolute;
+  height: 140px;
+  bottom: 5px;
+  width: calc(100% - 10px);
+  z-index: 3;
+  left: 3px;
+}
+.timeBracketDiv:nth-of-type(1) {
+  border-bottom: solid 2px #1a0d00;
+  bottom: 5px;
+}
+.timeBracketDiv:nth-of-type(2) {
+  bottom: 145px;
+}
+.timeBracketDiv:nth-of-type(3) {
+  bottom: 285px;
+}
+.timeBracketDiv:nth-of-type(4) {
+  bottom: 425px;
+}
+.timeBracketDiv:nth-of-type(5) {
+  bottom: 565px;
+}
+.timeBracketDiv:nth-of-type(6) {
+  bottom: 705px;
+}
+#timeLeft {
+  height: 840px;
+  width: 60px;
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  background-image: repeating-linear-gradient(to left,rgba(121, 210, 121, 0.6) 0%,rgba(75, 195, 75, 0.6) 100%);
+}
+.visibleTimer {
+  opacity: 1;
+  transition: opacity 0s linear; 
+}
+.fadedTimer {
+  opacity: 0;
+  transition: opacity 0.5s linear 2s;
+}
+
+#optionsPane {
+  width: 90%;
+  height: 140px;
+  float: right;
+}
+.choiceBtn {
+  font-family: 'Averia Sans Libre', cursive;
+  margin: 5px 18px;
+  margin-right: 0;
+  height: 60px;
+  width: 18%;
+  font-size: 1.4em;
+  background: rgba(121, 210, 121, 0.9);
+  border: solid 5px;
+  border-image: url("../img/whoAmI/WoodTextureBtn.jpg") 30 round;
+  transition: background 0.5s;
+  webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.choiceBtn:disabled {
+  background: #a6a6a6;
+  color: #666666;
+}
+.rightBtn {
+  animation-name: flash;
+}
+@keyframes flash {
+   0%, 100% {
+      background: rgba(121, 210, 121, 0.9);
+   }
+   50% {
+      background: rgba(181, 250, 181, 0.9);
+   }
+}
+.flashBtn {
+  animation: flash 1s linear infinite;
+}
+
+.clueImg {
+  border: 2px solid black;
+  margin-top: 10px;
+  max-width: 250px;
+  max-height: 250px;
+}
+.new {
+  color: green;
+}
+.revealed {
+  filter: blur(0px);
+  transition: 1s;
+}
+.obscured {
+  filter: blur(30px);
+  transition: none;
+}
+#startBtn {
+  font-family: 'Averia Sans Libre', cursive;  position: relative;
+  left: 200px;
+  top: -230px;
+  z-index: 2;
+  height: 60px;
+  width: 200px;
+  text-align: center; 
+  font-size: 1.2em;
+  background: rgba(121, 210, 121, 0.9);
+  border: solid 5px;
+  border-image: url("../img/whoAmI/WoodTextureBtn.jpg") 30 round;
+}
+#startBtn:disabled {
+  background: #a6a6a6;
+}
+.hiddenClue {
+  color: rgba(100, 100, 100, 0);
+  text-shadow: none;
+  visibility: none;
+}
+
+
+
+
+
+/* formatting for hint & popup */
+.modal {
+  text-shadow: none;
+  font-size: 1.2em;
+    display: none;    /* Hidden by default */
+    position: fixed;  /* Stay in place */
+    z-index: 5;     /* Sit on top */
+    padding-top: 720px; /* Location of the box */
+    padding-left: -500px;
+    left: -1380px;
+    top: 0;
+    width: 200%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.2); /* Black w/ opacity */
+}
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 100%;
+    width: 500px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1),0 6px 20px 0 rgba(0,0,0,0.09);
+    -webkit-animation-name: animateleft;
+    -webkit-animation-duration: 0.8s;
+    animation-name: animateleft;
+    animation-duration: 0.8s
+}
+.bigModal {
+  text-shadow: none;
+  font-size: 1.2em;
+    display: none;    /* Hidden by default */
+    position: fixed;  /* Stay in place */
+    z-index: 5;     /* Sit on top */
+    padding-top: 250px; /* Location of the box */
+    padding-left: 0px;
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.2); /* Black w/ opacity */
+}
+.bigModal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    text-align: auto;
+    border: 1px solid #888;
+    width: 520px;
+    height: 220px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1),0 6px 20px 0 rgba(0,0,0,0.09);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.8s;
+    animation-name: animatetop;
+    animation-duration: 0.8s
+}
+.bigModal-content-box {
+  padding: 20px;
+  float: left;
+  width: 480px;
+  height: 180px;
+  background: white;
+  text-align: center;
+} #firstLoadModalContent {
+  height: 420px;
+  width: 420px;
+  padding: 40px;
+}
+@-webkit-keyframes animateleft {
+    from {left:-100px; opacity:0} 
+    to {left:0; opacity:1}
+}
+@keyframes animateleft {
+    from {left:-100px; opacity:0}
+    to {left:0; opacity:1}
+}
+@-webkit-keyframes animatetop {
+    from {top:-100px; opacity:0} 
+    to {top:0; opacity:1}
+}
+@keyframes animatetop {
+    from {top:-100px; opacity:0}
+    to {top:0; opacity:1}
+}
+.modal-header {
+    padding: 10px 5px;
+    background-color: #5cb85c;
+    color: white;
+}
+.modal-header h2, h3 {
+  text-align: center;
+  margin: 5px;
+}
+.modal-content-box {
+  padding: 10px;
+  float: left;
+  width: 480px;
+  height: 140px;
+  background: white;
+  text-align: center;
+}
+.modal-body-left {
+  padding: 2px 2px;
+  width: 190px;
+  float: left;
+  text-align: left;
+}
+.modal-body-right {
+  padding: 2px 2px;
+  width: 190px;
+  float: right;
+  text-align: left;
+}
+.modal-footer {
+    height: 35px;
+    padding: 10px 50px;
+    padding-top: 80px;
+    padding-bottom: 10px;
+    background-color: #5cb85c;
+    color: white;
+}
+.modal-btn {
+  font-family: 'Averia Sans Libre', cursive;  position: relative;
+  display: inline-block;
+  padding: 12px;
+  margin: 10px auto;
+  text-align: center;
+  height: 60px;
+  width: 250px;
+  font-size: 1.0em;
+  background: rgba(121, 210, 121, 0.9);
+  border: solid 5px;
+  border-image: url("../img/whoAmI/WoodTextureBtn.jpg") 30 round;
+}
+.bigModalBtn {
+  font-family: 'Averia Sans Libre', cursive;  position: relative;
+  display: inline-block;
+  padding: 12px;
+  margin: 10px auto;
+  text-align: center;
+  height: 60px;
+  width: 220px;
+  font-size: 1.0em;
+  background: rgba(121, 210, 121, 0.9);
+  border: solid 5px;
+  border-image: url("../img/whoAmI/WoodTextureBtn.jpg") 30 round;
+}
+.modalQuitBtn {
+  color: white;
+  text-decoration: none;
+}
+.modal-footer, .modal-header > h1, h2, h3 {
+  text-shadow: none;
+} 
+.hiddenModalBtn {
+  display: none;
+}
+#spanBuffer {
+  display: inline-block;
+  width: 20px;
+}
+#outOfTimeContentBox {
+  height: 80px;
+}

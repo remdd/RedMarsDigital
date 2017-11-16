@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The story of the Lakeland Wildlife Oasis</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/LWO_common.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/story.css">
+	<link rel="stylesheet" type="text/css" href="assets/lib/animate.css">
+	<link rel="stylesheet" href="assets/lib/font-awesome-4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="assets/lib/jQuery/jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="assets/lib/jquery-scrollto/lib/jquery-scrollto.js"></script>
+	<script type="text/javascript" src="assets/js/story.js"></script>
+</head>
+<body>
+
+	<div class="backgroundDiv">
+		<canvas id="fireworkCanvas" width="1920" height="1080"></canvas>
+		<div id="fireworkOverlayText" class="hiddenFireworkOverlayText">14 April 1992...<br>Opening Day!<br><span id="fireworkFootnote">tap to continue...</span></div>
+
+		<div id="overlay" class="noOverlay"></div>
+
+		<div class="mainMenuBtn"><a href="index.html" id="mainMenuBtnLink"><img src="assets/img/home-sketch.png" class="mainMenuBtnImg"><span class="mainMenuBtnText">Main Menu</span></a></div>
+
+		<div id="allDiv">
+
+			<div id="timelineDiv">
+				<div class="arrowBorder" id="topLeftArrowBorder"></div>
+				<div class="arrowBorder" id="topRightArrowBorder"></div>
+				<div class="arrowBorder" id="bottomLeftArrowBorder"></div>
+				<div class="arrowBorder" id="bottomRightArrowBorder"></div>
+				<div class="timeBtn" id="upTimeBtn">
+					<div class="pointer upPointer"></div>
+					<div class="timeScrollBtn upScrollBtn">Previous</div>
+				</div>
+				<div id="timeStampsObscurer">
+					&nbsp;
+				</div>
+				<div id="timeStamps">
+					<div class="timelineContent timeGap timeGapLong">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="0">
+						<p class="timeYearOnly">1971</p>
+					</div>
+					<div class="timelineContent timeGap">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="1">
+						<p class="timeYearOnly">1988</p>
+					</div>
+					<div class="timelineContent timeGap">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="2">
+						<p class="timeYearOnly">1990</p>
+					</div>
+					<div class="timelineContent timeGap">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="3">
+						<p class="timeYearOnly">1991</p>
+					</div>
+					<div class="timelineContent timeGap">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="4">
+						<p class="timeMonthBoth">Early</p><p class="timeYearBoth">1992</p>
+					</div>
+					<div class="timelineContent timeGap">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="5">
+						<p class="timeMonthBoth">14 April</p><p class="timeYearBoth">1992</p>
+					</div>
+					<div class="timelineContent timeGap">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="6">
+						<p class="timeMonthBoth">18 May</p><p class="timeYearBoth">1996</p>
+					</div>
+					<div class="timelineContent timeGap">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="7">
+						<p class="timeYearOnly">2000</p>
+					</div>
+					<div class="timelineContent timeGap">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="8">
+						<p class="timeYearOnly">2005</p>
+					</div>
+					<div class="timelineContent timeGap">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="9">
+						<p class="timeYearOnly">2011</p>
+					</div> 
+					<div class="timelineContent timeGap">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="10">
+						<p class="timeYearOnly">2012</p>
+					</div> 
+					<div class="timelineContent timeGap">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="11">
+						<p class="timeYearOnly">2014</p>
+					</div> 
+					<div class="timelineContent timeGap">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="12">
+						<p class="timeYearOnly">2015</p>
+					</div> 
+					<div class="timelineContent timeGap">&nbsp;</div>
+					<div class="timelineContent timeStamp timeStop" data-timeStop="13">
+						<p class="timeYearSub">2017</p><p class="timeTextSub">...and beyond!</p>
+					</div> 
+					<div class="timelineContent timeGap timeGapLong">&nbsp;</div>
+				</div>
+				<div class="timeBtn" id="downTimeBtn">
+					<div class="timeScrollBtn downScrollBtn flashBtn">Next</div>
+					<div class="pointer downPointer flashDownPointer"></div>
+				</div>
+			</div>
+
+
+			<div id="contentAreaDiv">
+
+	<!-- Start of slides -->
+		<!-- Slide 1 -->
+				<div class="slide hiddenSlide" data-slide-1>
+					<div class="contentDiv revealDiv reveal1">
+						<p>It all started in 1971...</p>
+					</div>
+					<div class="contentDiv revealDiv reveal2">
+						<p>...when <span class="linkText">Dave Marsden</span> met <span class="linkText">Jo Whalley</span>.</p>
+						<p>Dave and Jo both worked at Chester Zoo - Dave in the <span class="popupLink" id="popuplink-chimp">chimpanzee</span> house, Jo in the <span class="popupLink" id="popuplink-giraffe">giraffe</span> house.</p> 
+						<p>Jo and Dave each knew since childhood that they wanted to spend their life working with animals, and both shared a dream of opening their own zoo one day.</p>					
+						<p>Sparks flew, and in 1977 they were married!</p>
+						<div>
+							<figure>
+								<img src="assets/img/story/Dave.jpg">
+								<figcaption>Dave in 1954.</figcaption>
+							</figure>
+							<figure>
+								<img src="assets/img/story/Jo.jpg">
+								<figcaption>Jo in 1962.</figcaption>
+							</figure>
+						</div>
+					</div>
+
+					<div class="contentDiv popupDiv" id="popup-chimp">
+						<img src="assets/img/story/Chimps.jpg">
+						<p>Chimpanzees at Chester Zoo.</p>
+						<p>Since 1956, Chester Zoo has been home to a troop of Western chimpanzees - a subspecies that the IUCN classed as critically endangered in 2016.</p>
+						<p>Chester Zoo plays a major role in Western chimpanzee captive breeding programmes and international conservation efforts, including funding the Gashaka Biodiversity Project in Nigeria.</p>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-giraffe">
+						<img src="assets/img/story/Giraffes.jpg">
+						<p>Rothschild's giraffes at Chester Zoo.</p>
+						<p>Giraffes are classed as a vulnerable species by the IUCN, with Rothschild's giraffes considered one of the most endangered subspecies.</p>
+						<p>Although wild populations appear to have recovered to some extent from their historically low point in the 1960s, it is estimated that there are still only about 1,670 Rothschild's giraffes remaining in the wild (as of 2016).</p>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+				</div>
+
+		<!-- Slide 2 -->
+				<div class="slide hiddenSlide" data-slide-2>
+					<div class="contentDiv revealDiv reveal1">
+						<p>Several years (and two children) later, with Dave still working at Chester Zoo, the Marsdens started to seriously look for opportunities to go into business for themselves.</p>
+						<p>Without any external funding or outside investment, money was extremely tight - and suitable places to build a new zoo from scratch were not exactly easy to find!</p>
+					</div>
+					<div class="contentDiv revealDiv reveal2">
+						<p>At the time Jo and Dave's concept was very different to the Lakeland Wildlife Oasis, however. The original plan was to build an 'interactive aquarium', with educational and hands-on exhbits displayed alongside marine life.</p>
+						<p>In 1988, after spending several weeks driving around the coast of England and Wales looking for a suitable site, they came across their first real opportunity - a good-sized plot of land in Gwynedd, North Wales, near a small beach called <span class="popupLink" id="popuplink-dinasmap">Dinas Dinlle</span>.</p>
+					</div>
+					<div class="contentDiv revealDiv reveal3">
+						<figure>
+							<img src="assets/img/story/Dinas3.jpg">
+							<figcaption>The "challenging" site at Dinas Dinlle. <br><span class="popupLink" id="popuplink-dinaspics">Tap to see more!</span></figcaption>
+						</figure>
+					</div>
+					<div class="contentDiv revealDiv reveal4">
+						<p>Although situated in an undeniably scenic part of the world, in many ways the site was however somewhat less than perfect!</p>
+						<p>The location was remote, part of the site of the former Air Force base RAF Llandwrog (more recently redeveloped and restored to use as Caernarfon Airport).</p>
+						<p>The land itself was overgrown and desolate, containing only a flock of bemused sheep and a cluster of abandoned ex-Air Force buildings... really little more than ruins!</p>
+						<p>Apart from a few more disused military buildings and other remnants of the former RAF station scattered around the area, there was little else nearby.</p>
+					</div>
+
+					<div class="contentDiv popupDiv" id="popup-dinaspics">
+						<div class="picGallery">
+							<div class="gallerySlide data-galslide-0 activeGalSlide">
+								<img src="assets/img/story/Dinas3.jpg">
+								<p>Jo contemplating the buildings at Dinas Dinlle, trying (and presumably struggling) to picture their potential to become North Wales' premier visitor attraction.</p>
+							</div>
+							<div class="gallerySlide data-galslide-1">
+								<img src="assets/img/story/Dinas2.jpg">
+								<p>A view of the site from the main road, with the edge of Snowdonia National Park visible in the distance.</p>
+							</div>
+							<div class="gallerySlide data-galslide-2">
+								<img src="assets/img/story/Dinas4.jpg">
+								<p>The remnants of the paths outside the buildings visible here give an idea of the general state of disrepair.</p>
+							</div>
+							<div class="gallerySlide data-galslide-3">
+								<img src="assets/img/story/Dinas1.jpg">
+								<p>Another view of the site from further down the main road.</p>
+							</div>						
+						</div>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+						<div class="popupBtn galleryPrevBtn flashBtn" id="dinasGalPrevBtn">
+							<span class="popupBtnText">Previous</span>
+						</div>
+						<div class="popupBtn galleryNextBtn flashBtn" id="dinasGalNextBtn">
+							<span class="popupBtnText">Next</span>
+						</div>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-dinasmap">
+						<img src="assets/img/story/DinasMap.png">
+						<span></span>
+						<img src="assets/img/story/DinasMap2.png">
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+
+				</div>
+
+		<!-- Slide 3 -->
+				<div class="slide hiddenSlide" data-slide-3>
+					<div class="contentDiv revealDiv reveal1">
+						<p>Unfortunately - or so it seemed at the time - the planning application for the Dinas Dinlle aquarium was turned down.</p>
+						<p>Jo and Dave appealed the decision, but without success. Reluctantly, they prepared to sell the site and went back to the drawing board.</p>
+						<p>In retrospect, however, given the 1998 opening of the £12 million Blue Planet aquarium in Ellesmere Port (just over 60 miles away from Dinas Dinlle), as well as the rise of the hugely successful Sea Life Centre brand in the 1990s and 2000s, this was probably a blessing in disguise...!</p>
+					</div>
+					<div class="contentDiv revealDiv reveal2">
+						<p>Luckily, before too long a new opportunity presented itself.</p>
+						<p>A garden plant wholesale business on the border of Cumbria and Lancashire had recently ceased trading, and was selling their premises.</p>
+						<p>Excitingly, the site contained a trio of large, well-maintained greenhouses that had acted as nurseries for thousands of house and garden plants destined to be sold on to garden centres and other retailers.</p>
+						<p>With a bit of work, these greenhouses would be absolutely perfect for a collection of tropical plants and animals.</p>
+						<p>The aquarium plans were shelved. The Marsdens would build a zoo instead!</p>
+					</div>
+					<div class="contentDiv revealDiv reveal3">
+						<figure>
+							<img src="assets/img/story/PlantLife1.jpg">
+							<figcaption>The site of the future Wildlife Oasis during Jo and Dave's first visit in 1990.</figcaption>
+							<figcaption><span class="popupLink" id="popuplink-plantlifepics">Tap to see more!</span></figcaption>				
+						</figure>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-plantlifepics">
+						<div class="picGallery">
+							<div class="gallerySlide data-galslide-2">
+								<img src="assets/img/story/PlantLife3.jpg">
+								<p>The main entrance.</p>
+							</div>
+							<div class="gallerySlide data-galslide-0 activeGalSlide">
+								<img src="assets/img/story/PlantLife1.jpg">
+								<p>Jo contemplating the buildings that would become the Lakeland Wildlife Oasis, presumably finding it easier to picture their transformation into a zoo than the ruins at Dinas Dinlle!</p>
+							</div>
+							<div class="gallerySlide data-galslide-1">
+								<img src="assets/img/story/PlantLife2.jpg">
+								<p>The south face of what would become the butterfly hall. An extension would shortly be built out from this wall of the greenhouse to house the entrance, gift shop and first room of exhibits.</p>
+							</div>
+							<div class="gallerySlide data-galslide-3">
+								<img src="assets/img/story/PlantLife4.jpg">
+								<p>The view south from the end of the car park, into the area which would later become the 'outside section' of the Oasis.</p>
+							</div>						
+							<div class="gallerySlide data-galslide-4">
+								<img src="assets/img/story/PlantLife5.jpg">
+								<p>The east side of the buildings, taken from the driveway round to the car park.</p>
+							</div>						
+						</div>
+
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+						<div class="popupBtn galleryPrevBtn flashBtn" id="plantlifeGalPrevBtn">
+							<span class="popupBtnText">Previous</span>
+						</div>
+						<div class="popupBtn galleryNextBtn flashBtn" id="plantlifeGalNextBtn">
+							<span class="popupBtnText">Next</span>
+						</div>
+					</div>
+				</div>
+
+		<!-- Slide 4 -->
+				<div class="slide hiddenSlide" data-slide-4>
+					<div class="contentDiv revealDiv reveal1">
+						<p>Although this new site was a very exciting prospect, there was clearly a huge amount of work to be done before it would be anywhere near ready to open to the public for the first time.</p>
+					</div>
+					<div class="contentDiv revealDiv reveal2">
+						<p>First, there was of course a great deal of 'life admin' to sort out.</p>
+						<p>Jo and Dave had to uproot the family from their home outside Chester and find somewhere new to live near the seed of their new zoo - in a new area they had barely set foot in and knew very little about.</p>
+						<p>The idea of living somewhere on the site itself was considered, but quickly rejected. The Wildlife Oasis was going to consume so much of their lives for the forseeable future that they both knew they would soon be thankful of having somewhere else to escape to from time to time!</p>
+						<hr>
+						<p>Eventually though they were ready. Dave left his job at Chester zoo, having worked there for exactly 20 years (to the day!), and the family moved to Milnthorpe, just a few miles further north along the A6, in 1991.</p>
+					</div>
+					<div class="contentDiv revealDiv reveal3">
+						<p>Transforming the trio of greenhouses from a plant nursery into tropical and butterfly halls, on a shoestring budget, took a great deal of work.</p>
+						<p>Along with any friends and family that they could recruit, Jo and Dave did everything possible themselves. Contractors were called in only where it was unavoidable, such as for building the extension that would house the zoo entrance, first rooms of exhibits and gift shop.</p>
+						<p>To make things just that little bit more complicated, an agreement was reached with some of the building's previous occupants for them to continue trading and running some parts of their business from the site, with building work carrying on around them, while they prepared to relocate to new premises.</p>
+					</div>
+				</div>
+
+		<!-- Slide 5 -->
+				<div class="slide hiddenSlide" data-slide-5>
+					<div class="contentDiv revealDiv reveal1">
+						<p>The target date for opening the Wildlife Oasis' doors to visitors was the 1992 Easter school holidays.</p>
+						<p>One early problem was how to advertise! The Oasis was still in the process of being built, and none of the exhibits would be close to finished in time to be photographed for marketing.</p>
+						<p>Jo tackled this problem by painting artist's impressions of some of the Oasis' work-in-progress exhibits and soon-to-be inhabitants, as can be seen from the very first leaflet.</p>
+						<figure>
+							<img src="assets/img/story/FirstLeafletCover.jpg">
+							<figcaption><span class="popupLink" id="popupLink-firstLeaflet">Tap to see the full leaflet!</span></figcaption>
+						</figure>
+					</div>
+					<div class="contentDiv revealDiv reveal2">
+						<p>Another very important thing that had to be taken care of before opening was of course the animals themselves!</p>
+						<hr>
+						<p>Among the very first inhabitants to arrive at the Wildlife Oasis were a pair of <span class="popupLink" id="popupLink-fruitBats">Indian fruit bats</span>, called Bertie and Belinda.</p>
+						<p>The bats actually arrived several months before the Oasis was to open, and in the absence of a more suitable temporary home took up their roost on the ceiling of the tropical hall while the last few weeks of building and landscaping were still in full swing.</p>
+						<p>Nobody was sure what they would make of all the frantic activity going on below them, but as it turned out they can't have been overly bothered!</p>
+						<p>With a few weeks still to go to opening day, a builder glancing up into the rafters spotted a tiny, furry face looking back at him. Wrapped up safely in Belinda's wings, this baby bat was the Oasis' very first birth - quickly named Barney.</p>
+						<p>Other original inhabitants of the Wildlife Oasis included a couple of black rat snakes from Chester Zoo, a pair of common marmosets, a few fish and various invertebrates.</p>
+					</div>
+
+					<div class="contentDiv popupDiv" id="popup-firstLeafletPics">
+						<div class="picGallery">
+							<div class="gallerySlide data-galslide-0 activeGalSlide">
+								<img src="assets/img/story/FirstLeafletOutside.jpg">
+								<p>The outside of the first Wildlife Oasis leaflet, featuring exactly zero photographs.</p>
+							</div>
+							<div class="gallerySlide data-galslide-1">
+								<img src="assets/img/story/FirstLeafletInside.jpg">
+								<p>Inside the first leaflet. The mechanical millipede, made from meccano, was one of the very first exhibits to be completed - built by Dave while still living in Chester. It is pictured here with Jo and Dave's two children, along with a couple of Dave's friends.</p>
+							</div>
+						</div>
+						<div class="popupBtn galleryFlipBtn flashBtn" id="firstLeafletGalFlipBtn">
+							<span class="popupBtnText">Other side</span>
+						</div>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+
+					<div class="contentDiv popupDiv" id="popup-fruitBats">
+						<figure>
+							<img src="assets/img/story/FruitBats.jpg">
+							<figcaption>Greater Indian fruit bats, also known as flying foxes - one of the world's largest bat species.</figcaption>
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+
+
+		<!-- Slide 6 -->
+				<div class="slide hiddenSlide" data-slide-6>
+					<div class="contentDiv revealDiv reveal2">
+						<p>Somehow, the Wildlife Oasis was <em>just</em> completed on time for its 'grand' opening.</p>
+						<p>After frantically stacking the shelves of the newly-built gift shop until the small hours that morning, and with the builders carrying their workbench out the back doors as the first visitors came in the front, the Oasis opened to the public.</p>
+						<p>At the time the Wildlife Oasis was considerably smaller than it is today, comprising just the first indoor rooms, butterfly hall, aquarium and tropical hall. There was no cafe, and nothing outdoors at all.</p>
+						<p>As well as the animals and plants, interactive exhibits built by Jo and Dave included a 'design your own mammal' computer programme and a 'whale weighing machine', as well as the mechanical millipede seen in the leaflet.</p>
+					</div>
+					<div class="contentDiv revealDiv reveal2">
+						<figure>
+							<img src="assets/img/story/EarlyAdvert.jpg">
+							<figcaption>Early newspaper advert for the Oasis.</figcaption>
+						</figure>
+					</div>
+					<div class="contentDiv revealDiv reveal2">
+						<figure>
+							<img src="assets/img/story/PosterDraft.jpg">
+							<figcaption>Design mockup of the first advertizing poster.</figcaption>
+						</figure>
+					</div>
+				</div>
+
+		<!-- Slide 7 -->
+				<div class="slide hiddenSlide" data-slide-7>
+					<div class="contentDiv revealDiv reveal1">
+						<p>Four years later, in 1996, the Oasis opened the doors on its first serious expansion. The space to the south of the car park was opened to visitors for the first time, a major milestone in the centre's development.</p>
+						<p>This new expansion hosted a large walkthrough aviary that was home to bird species such as <span class="popupLink" id="popupLink-waldrapp">Waldrapp ibis</span> and <span class="popupLink" id="popupLink-pigeon">Mauritius pink pigeon</span>, as well as the <span class="popupLink" id="popupLink-meerkatBabies">meerkat</span> enclosure (with its viewing dome) and core building of the monkey house that you see today.</p>
+						<p>Other new residents included Cuban hutias, and the introduction of free ranging species such as <span class="popupLink" id="popupLink-golden">golden pheasants</span> and the Oasis' first group of <span class="popupLink" id="popupLink-mara">Maras</span>.</p>
+						<figure>
+							<img src="assets/img/story/DefinitelyMaybeThumb.jpg">
+							<figcaption>Newspaper photo from the opening day of phase two. <br><span class="popupLink" id="popupLink-phase2clipping">Tap to see the full clipping.</span></figcaption>
+						</figure>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-phase2clipping">
+						<figure>
+							<img src="assets/img/story/DefinitelyMaybe.jpg">
+							<figcaption>Article from the Lakeland Echo - a Cumbria and North Lancs newspaper whose print edition ran for 30 years to 2010.</figcaption>
+							<figcaption>As you might see from the headline, in the mid-90s, at the height of Britpop, a visitor's centre called 'Oasis' was a gift to local journalists!</figcaption>
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-mara">
+						<figure>
+							<img src="assets/img/story/Mara.jpg">
+							<figcaption>Maras, also known as Patagonian hares, aren't hares at all - in fact they are closely related to guinea pigs.</figcaption>
+							<figcaption>They are common across the Patagonian steppes of Argentina, as well as Paraguay and other parts of South America.</figcaption>
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-golden">
+						<figure>
+							<img src="assets/img/story/GoldenPheasant.jpg">
+							<figcaption>A male golden pheasant. Like many other pheasant species, females are much less showy and have mottled brown plumage.</figcaption>
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-meerkatBabies">
+						<figure>
+							<img src="assets/img/story/MeerkatBabies.jpg">
+							<figcaption>A triplet of meerkat pups at the Oasis. Meerkat babies are always a favourite of visitors and staff alike!</figcaption>
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-waldrapp">
+						<figure>
+							<img src="assets/img/story/WaldrappIbis.jpg">
+							<figcaption>Waldrapp ibis, or Northern bald ibis, were once found across the Middle East, northern Africa and southern Europe - but are now critically endangered and confined mainly to a tiny wild population of around 500 in southern Morocco.</figcaption>
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-pigeon">
+						<figure>
+							<img src="assets/img/story/PinkPigeon.jpg">
+							<figcaption>The captive breeding and reintroduction efforts of the Durrell Wildlife Conservation Trust have been crucial to rescuing the pink pigeon from the brink of extinction.</figcaption>
+							<figcaption>In 1991, only 10 pink pigeons remained! Numbers have since recovered to a few hundred individuals, which although an improvement is still a very low number which leaves the future of this species seriously at risk.</figcaption>
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+				</div>
+
+		<!-- Slide 8 -->
+				<div class="slide hiddenSlide" data-slide-8>
+					<div class="contentDiv revealDiv reveal1">
+						<p>The new millenium brought two major new additions to the Wildlife Oasis.</p>
+						<hr>
+						<p>In May, the Creature Comforts Cafe opened for the first time. This new extension to the existing gift shop was opened by Chris Collier, CEO of the Cumbria Tourist Board.</p>
+						<figure>
+							<img src="assets/img/story/CafeClippingThumb.jpg">
+							<figcaption>Newspaper photo of the original cafe building. <br><span class="popupLink" id="popupLink-cafeClipping">Tap to see the full clipping.</span></figcaption>
+						</figure>
+					</div>
+					<div class="contentDiv revealDiv reveal2">
+						<p>Later in the year, in October, the Oasis became home to its first <span class="popupLink" id="popupLink-fossa">fossa</span> - a young female called Perdy.</p>
+						<hr>
+						<p>After the arrival of her mate Remus in 2002, Perdy would go on to succesfully raise a litter of 4 cubs in 2004.</p>
+						<figure>
+							<img src="assets/img/story/FossaCubs.jpg">
+							<figcaption>Two of Perdy's litter of cubs.</figcaption>
+						</figure>
+						<p>A successful captive breeding programme is a hugely important part of the international effort to safeguard the future of this highly vulnerable species.</p>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-cafeClipping">
+						<figure>
+							<img src="assets/img/story/CafeClipping.jpg">
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-fossa">
+						<figure>
+							<img src="assets/img/story/Fossa.jpg">
+							<figcaption>Fossas are unusual carnivores endemic to Madagascar.</figcaption>
+							<figcaption>Despite their feline appearance, they are in fact only distant relatives of cats - instead being more closely related to mongooses.</figcaption>
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+				</div>
+
+		<!-- Slide 9 -->
+				<div class="slide hiddenSlide" data-slide-9>
+					<div class="contentDiv revealDiv reveal1">
+						<img src="assets/img/story/TimFarron1.jpg">
+						<p>In 2005, the South American walkthrough exhibit was opened by local MP for Westmorland and Lonsdale (and future leader of the Liberal Democrats), Tim Farron.</p>
+						<br>
+						<img src="assets/img/story/TimFarron2.jpg">
+					</div>
+					<div class="contentDiv revealDiv reveal2">
+						<p>Originally housing <span class="popupLink" id="popupLink-squirrelMonkey">squirrel monkeys</span> and <span class="popupLink" id="popupLink-agouti">agouti</span>, the walkthrough enclosure later went on to home the Oasis' <span class="popupLink" id="popupLink-ringtail">ring-tailed</span> and <span class="popupLink" id="popupLink-brownLemur">brown</span> lemur troops.</p>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-squirrelMonkey">
+						<figure>
+							<img src="assets/img/story/SquirrelMonkeys.jpg">
+							<figcaption>Squirrel Monkeys can be found throughout much of the Amazon Basin, including parts of Brazil, Ecuador, Colombia, Guyana, Suriname, Venezuela, Peru and French Guiana.</figcaption>
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-agouti">
+						<figure>
+							<img src="assets/img/story/Agouti.jpg">
+							<figcaption>Agoutis are fairly large rodents that are related to guinea pigs and can grown up to 60cm long.</figcaption>
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-ringtail">
+						<figure>
+							<img src="assets/img/story/Ringtails.jpg">
+							<figcaption>A couple of ring-tailed lemurs soaking up the sun!</figcaption>
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-brownLemur">
+						<figure>
+							<img src="assets/img/story/BrownLemurs.jpg">
+							<figcaption>The brown lemur troop at the Wildlife Oasis.</figcaption>
+							<figcaption>Like all of the 100 or so species of lemur alive today, brown lemurs are endemic to Madagascar.</figcaption>
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+				</div>
+
+		<!-- Slide 10 -->
+				<div class="slide hiddenSlide" data-slide-10>
+					<div class="contentDiv revealDiv reveal1">
+						<img src="assets/img/story/Bingham.jpg">
+						<div>
+							<p>Probably the most spectacular new resident of the Wildlife Oasis (so far!) arrived in 2011.</p>
+							<p>The snow leopard enclosure with its walkthrough tunnel was completed early that year, and opened to the public on 9th April.</p>
+							<p>Local councillor Roger Bingham and Assistant Manager of the Wildlife Oasis, Caroline Howard, conducted the Nepal-themed ribbon-cutting ceremony.</p>
+							<p><span class="popupLink" id="popuplink-leopardOpening">Tap to see the snow leopard enclosure take shape!</span></p>
+						</div>
+					</div>
+					<div class="contentDiv revealDiv reveal2">
+						<img src="assets/img/story/PavanThumb.jpg">
+						<p><span class="popupLink" id="popupLink-pavan">Tap to enlarge.</span></p>
+						<p>Pavan, the Oasis' first snow leopard, was previously homed at the Cat Survival Trust, a conservation and education charity based in Hertfordshire.</p>
+						<p>The charity's mission includes work to secure long-term protection for the habitat of wild cats throughout the world, with successes to date including the creation of a 10,000 acre protected rain forest reserve in northeast Argentina.</p>
+						<p>Before moving to the Oasis, Pavan also found movie star fame as one of two leopards filmed for the role of Stelmaria, the dæmon of Lord Asriel (played by Daniel Craig), in the film adaptation of Philip Pullman's book 'The Golden Compass'.</p>
+					</div>
+
+					<div class="contentDiv popupDiv" id="popup-leopardOpening">
+						<div class="picGallery">
+							<div class="gallerySlide data-galslide-0 activeGalSlide">
+								<img src="assets/img/story/SLConstruct0.jpg">
+								<p>Mal, the Oasis' resident builder and multi-talented handyman, with keeper Adam, get construction underway.</p>
+							</div>
+							<div class="gallerySlide data-galslide-1">
+								<img src="assets/img/story/SLConstruct1.jpg">
+								<p>The early stages of building, with the main framework just completed.</p>
+							</div>
+							<div class="gallerySlide data-galslide-2">
+								<img src="assets/img/story/SLConstruct2.jpg">
+								<p>Progressing nicely, but a long way still to go!</p>
+							</div>
+							<div class="gallerySlide data-galslide-3">
+								<img src="assets/img/story/SLConstruct3.jpg">
+								<p>Foundations for the corridor and viewing tunnel being laid.</p>
+							</div>
+							<div class="gallerySlide data-galslide-4">
+								<img src="assets/img/story/SLConstruct4.jpg">
+								<p>The corridor and viewing tunnel start to take shape.</p>
+							</div>						
+							<div class="gallerySlide data-galslide-5">
+								<img src="assets/img/story/SLConstruct5.jpg">
+								<p>Mal again, hard at work on the viewing tunnel!</p>
+							</div>						
+							<div class="gallerySlide data-galslide-6">
+								<img src="assets/img/story/Bingham2.jpg">
+								<p>Roger Bingham gives his speech on opening day!</p>
+							</div>						
+						</div>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+						<div class="popupBtn galleryPrevBtn flashBtn" id="leopardOpeningGalPrevBtn">
+							<span class="popupBtnText">Previous</span>
+						</div>
+						<div class="popupBtn galleryNextBtn flashBtn" id="leopardOpeningGalNextBtn">
+							<span class="popupBtnText">Next</span>
+						</div>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-pavan">
+						<figure>
+							<img src="assets/img/story/Pavan.jpg">
+							<figcaption>Everybody's favourite kitty, Pavan - surely about as handsome as a cat can be...!</figcaption>
+						</figure>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+
+				</div>
+
+		<!-- Slide 11 -->
+				<div class="slide hiddenSlide" data-slide-11>
+					<div class="contentDiv revealDiv reveal1">
+						<p>2012 brought another milestone for the Wildlife Oasis.</p>
+						<p>This time it was not a new exhibit, but a decision about the long-term future of the centre that Jo and Dave had built up over the previous 20 years.</p>
+					</div>
+					<div class="contentDiv revealDiv reveal2">
+						<figure>
+							<img src="assets/img/story/Trustees.jpg">
+							<figcaption>Some members of the original LTNS trustee board.</figcaption>
+						</figure>
+						<p>The difficult choice was made that rather than continuing as a private business, the Marsdens would establish a charity: the <strong>Lakeland Trust for Natural Sciences</strong>.</p>
+						<p>The Wildlife Oasis would be entrusted to the charity, with oversight passed to a board of trustees who would continue to run the centre for the future in line with the charity's conservation and education objectives.</p>
+						<p>Jo and Dave were not ready just to walk away from the Oasis that they had put so much of themselves into, however!</p>
+						<p>Dave retired from his role at the Oasis, becoming one of the inaugral trustees - with Jo continuing her role as curator.</p>
+						<p>As well as some other family members, other trustees initially included ex-employees of the centre, as well as long-term associates of the Oasis who shared Jo and Dave's passion for wildlife, education and conservation.</p>
+					</div>
+					<div class="contentDiv revealDiv reveal3">
+						<p>The Lakeland Trust for Natural Sciences' objectives are:</p>
+						<ul class="fa-ul">
+							<li><i class="fa-li fa fa-paw"></i>Inspire an interest in and appreciation of natural history</li>
+							<li><i class="fa-li fa fa-paw"></i>Help people to understand and cherish the natural world</li>
+							<li><i class="fa-li fa fa-paw"></i>Contribute to wildlife conservation</li>
+						</ul>
+					</div>
+				</div>
+
+		<!-- Slide 12 -->
+				<div class="slide hiddenSlide" data-slide-12>
+					<div class="contentDiv revealDiv reveal1">
+						<p>8 months after his arrival at the Oasis, in December 2011, Pavan was joined at the Oasis by Tara - a young female snow leopard from Krefeld zoo in Germany.</p>
+						<img src="assets/img/story/Tara.jpg">
+						<p>After a very cautious start, and only once Tara had made sure that Pavan understood in no uncertain terms that SHE was the boss, the two leopards hit it off.</p>
+						<hr>
+						<p>A few years later, on 25 May 2014, the day that everyone at the Oasis had been keeping their fingers crossed for arrived.</p>
+						<p>Tara gave birth to a beautiful pair of cubs!</p>
+					</div>
+					<div class="contentDiv revealDiv reveal2">
+						<p>Following a public competition, the cubs were named Loki and Luna.</p>
+						<figure>
+							<img src="assets/img/story/Cubs0Thumb.jpg">
+							<p><span class="popupLink" id="popuplink-cubs">Tap to see more pictures of the cubs!</span></p>
+						</figure>
+					</div>
+					<div class="contentDiv revealDiv reveal3">	
+						<p>Wild snow leopard cubs quickly become independent and only stay with their mother for around 18-22 months, so all too soon it was time to say goodbye...</p>
+						<p>In July 2015 Luna, the female cub, was rehomed at Parco Faunistico Le Cornelle in Lombardy, Italy.</p>
+						<p>A few months later Loki, the male, moved to Płock Zoo in Poland.</p>
+					</div>
+
+					<div class="contentDiv popupDiv" id="popup-cubs">
+						<div class="picGallery">
+							<div class="gallerySlide data-galslide-0 activeGalSlide">
+								<img src="assets/img/story/Cubs0.jpg">
+								<p>One of the first pictures of the cubs in their den, at about 2 days old.</p>
+								<p>To everybody's relief, Tara proved an excellent mum and was fiercely protective of her new babies.</p>
+							</div>
+							<div class="gallerySlide data-galslide-1">
+								<img src="assets/img/story/Cubs1.jpg">
+								<p>The keepers at the Oasis were extremely careful not to disturb Tara throughout the crucial first weeks, before the cubs first ventured out of their den, and intruded on her new family only when absolutely necessary.</p>
+							</div>
+							<div class="gallerySlide data-galslide-2">
+								<img src="assets/img/story/Cubs5.jpg">
+								<p>One of the cubs in the den, at about 3 and a half weeks old.</p>
+							</div>
+							<div class="gallerySlide data-galslide-3">
+								<img src="assets/img/story/Cubs4.jpg">
+								<p>Loki at a few months old, exploring the world outside his den.</p>
+							</div>
+							<div class="gallerySlide data-galslide-4">
+								<img src="assets/img/story/Cubs3.jpg">
+								<p>Growing up, Loki and Luna were inseperable.</p>
+							</div>						
+							<div class="gallerySlide data-galslide-5">
+								<img src="assets/img/story/Cubs6.jpg">
+								<p>Snow leopard litters can range from one to five cubs, but twins are the most common.</p>
+							</div>						
+							<div class="gallerySlide data-galslide-6">
+								<img src="assets/img/story/Cubs2.jpg">
+								<p>Due to their remote mountain habitat and vast range the wild population of snow leopards is hard to count, but best estimates put the total number no higher than 7,000 - and falling.</p>
+							</div>						
+							<div class="gallerySlide data-galslide-7">
+								<img src="assets/img/story/Cubs7.jpg">
+								<p>The whole snow leopard family.</p>
+							</div>
+						</div>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+						<div class="popupBtn galleryPrevBtn flashBtn" id="cubsGalPrevBtn">
+							<span class="popupBtnText">Previous</span>
+						</div>
+						<div class="popupBtn galleryNextBtn flashBtn" id="cubsGalNextBtn">
+							<span class="popupBtnText">Next</span>
+						</div>
+					</div>
+				</div>
+
+		<!-- Slide 13 -->
+				<div class="slide hiddenSlide" data-slide-13>
+					<div class="contentDiv revealDiv reveal1">
+						<p>Situated in a low lying area on the fringes of the Lake District, England's wettest region, the outside section of the Oasis is unfortunately vulnerable to flooding.</p>
+						<figure>
+							<img src="assets/img/story/Canoe.jpg">
+							<figcaption>One memorable episode in the early 2000s saw the keepers resorting to a canoe to make part of their feeding rounds!</figcaption>
+						</figure>
+					</div>
+
+					<div class="contentDiv revealDiv reveal2">
+						<p>The winter of 2015-2016 however brought by far the worst period of floods that the Oasis had so far experienced.</p>
+						<p>Weeks of torrential downpours in November brought record levels of rainfall to much of Cumbria and the North West, flooding thousands of homes and businesses in the region - including the Wildlife Oasis.</p>
+						<hr>
+						<p>Before these waters had fully subsided, December brought further misery in the form of Storm Desmond.</p>
+						<p>At Honister Pass, just 30 miles north of the Oasis, this extratropical cyclone desposited 341mm of water on the day of 5th December alone - a new UK rain record for a 24 hour period.</p>
+						<figure>
+							<img src="assets/img/story/NovFlood0Thumb.jpg">
+							<figcaption><span class="popupLink" id="popuplink-floods">Tap to see more pictures from the 2015 floods.</span></figcaption>
+						</figure>
+					</div>
+					<div class="contentDiv revealDiv reveal3">
+						<p>The protracted period of flooding was a hard and extremely nerve-wracking time for the Oasis, which was forced to remain partially or entirely closed for several months.</p>
+						<p>On the bright side however the main indoor section of the Oasis remained *just* above the high water level. The situation also triggered a tremendous outpouring of support from volunteers to help with the eventual cleanup, and a fantastic fundraising effort from local businesses, visitors and other friends of the centre for an emergency relief fund.</p>
+						<p>To everyone who helped and contributed, <span class="flashText">we can't thank you enough!</span></p>
+						<p>Most importantly, the Oasis' inhabitants (although in many cases very unimpressed and grumpy about the situation) all made it through safe and sound.</p>
+					</div>
+
+					<div class="contentDiv popupDiv" id="popup-floods">
+						<div class="picGallery">
+							<div class="gallerySlide data-galslide-0 activeGalSlide">
+								<img src="assets/img/story/Floods1.jpg">
+								<p>Fossas are very nimble arboreal creatures, so although a bit taken aback by events Perdy coped with the floods better than some of the Oasis' other inhabitants.</p>
+							</div>
+							<div class="gallerySlide data-galslide-1">
+								<img src="assets/img/story/Floods2.jpg">
+								<p>As well as the canoe, the Oasis' keepers made good use of several pairs of kindly donated fishing waders.</p>
+							</div>
+							<div class="gallerySlide data-galslide-2">
+								<img src="assets/img/story/Floods4.jpg">
+								<p>The entrance to the Oasis and underwater car park.  The main buildings thankfully stayed dry, just by a matter of a couple of centimetres!</p>
+							</div>
+							<div class="gallerySlide data-galslide-4">
+								<img src="assets/img/story/Floods3.jpg">
+								<p>The main access path down towards the meerkat enclosure, completely submerged.</p>
+							</div>
+							<div class="gallerySlide data-galslide-3">
+								<img src="assets/img/story/Floods5.jpg">
+								<p>The floods reached the indoor section of the marmoset enclosure as well as the outdoor parts, but fortunately their elevated, heated dens stayed powered and dry.</p>
+							</div>						
+							<div class="gallerySlide data-galslide-5">
+								<img src="assets/img/story/Floods6.jpg">
+								<p>The view south across the neighbouring fields - the whole surrounding area was affected, not just the Oasis!</p>
+							</div>						
+							<div class="gallerySlide data-galslide-7">
+								<img src="assets/img/story/Floods7.jpg">
+								<p>The ring-tailed lemur troop were quite put out by all the water and were careful to keep their toes dry.</p>
+							</div>
+						</div>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+						<div class="popupBtn galleryPrevBtn flashBtn" id="floodsGalPrevBtn">
+							<span class="popupBtnText">Previous</span>
+						</div>
+						<div class="popupBtn galleryNextBtn flashBtn" id="floodsGalNextBtn">
+							<span class="popupBtnText">Next</span>
+						</div>
+					</div>
+
+		<!-- Slide 14 -->
+				<div class="slide hiddenSlide" data-slide-14>
+					<div class="contentDiv revealDiv reveal1">
+						<p>2017 marked the Oasis' 25th birthday which, <strong>for now</strong>, brings this story up to date.</p>
+						<hr>
+						<p>This has of course only been a short tour through the story of the Wildlife Oasis, without even a mention of many of the popular inhabitants over the years!</p>
+						<p>For example, previous visitors may remember the early successes of the <span class="popupLink" id="popupLink-kowari">kowari</span> breeding programme, or the lovable <span class="popupLink" id="popupLink-rhea">rheas</span> whose paddock eventually made way for the snow leopards.</p>
+						<p>And what about the ever-popular lungfish, or pacu? Or the leafcutter ants? Or axolotls? Or the huge variety of plant species that bring the tropical halls to life? There are a lot to choose from!</p>
+					</div>
+					<div class="contentDiv revealDiv reveal2">
+						<p>...but what's next for the Wildlife Oasis?</p>
+						<p>Well, there's no shortage of ideas!</p>
+						<p>The keepers at the Wildlife Oasis and the trustees of the Lakeland Trust for Natural Sciences are committed to helping the centre develop further, expanding on its conservation work and bringing more fascinating wildlife and educational interactive exhibits to the area.</p>
+						<hr>
+						<p>The biggest obstacle to these goals is of course the constant financial challenge involved in running the centre.</p>
+						<p>The cost of feeding, heating and properly caring for the Wildlife Oasis' inhabitants is very high - particularly through the winter months, during which visitor numbers are of course much lower.</p>
+						<p>The rate at which enclosures and exhibits deteriorate is also quite shocking! To keep the enclosures safe and looking anywhere close to their best, the maintenance, repair and rebuilding work never stops - which is of course a constant drain on the accounts.</p>
+					</div>
+					<div class="contentDiv revealDiv reveal3">
+						<p>If you support our work, we hope you'll join us on the next stage of our journey.</p>
+						<p>How can you do this?</p>
+						<p>Well, the best way is to come back and visit us again! Annual passes are available, and the cost of your visit today will be refunded should you want to upgrade your entry ticket.</p>
+						<p>Word of mouth support is incredibly valuable, so if you enjoyed your visit please tell your friends!</p>
+						<p>If you want to contribute even further, why not sponsor your favourite animal? The Oasis also offers a 'keeper for the day' experience, and is a great destination for school trips, birthday parties or other group visits. Just ask at reception to find out more about any of these.</p>
+						<p>Most of all, <span class="flashText">thank you for visiting</span> today - we hope to see you again soon!</p>
+					</div>
+
+					<div class="contentDiv popupDiv" id="popup-kowari">
+						<img src="assets/img/story/Kowari.jpg">
+						<p>The kowari is a small, carnivorous marsupial classed as Vulnerable by the IUCN.</p>
+						<p>Although several kowari litters were bred successfully at the Oasis, the captive breeding scheme was discontinued in Europe and moved to Australia in the mid-1990s.</p>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+					<div class="contentDiv popupDiv" id="popup-rhea">
+						<img src="assets/img/story/Rhea.jpg">
+						<p>Rheas are large, flightless birds from South America.</p>
+						<p>They belong to the ratite group, whose other living members include ostriches, emus, cassowaries and kiwis.</p>
+						<div class="popupBtn closeBtn flashBtn">
+							<span class="XBtn">X</span><span class="closeBtnText">Close</span>
+						</div>
+					</div>
+
+
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="assets/js/LWO_common.js"></script>
+	<script type="text/javascript" src="assets/js/fireworks.js"></script>
+
+
+</body>
+</html>

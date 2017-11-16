@@ -109,6 +109,10 @@ app.get('/projects/:name', function(req, res) {
 	res.render('projects/' + req.params.name, { footerIcon: footerIcon });
 });
 
+// app.get('/project_code/code_kiosk/index.html', function(req, res) {
+// 	res.render('project_code/code_kiosk/index.html');
+// });
+
 app.get('/blog', function(req, res) {
 	if(!(req.query.page)) {
 		req.query.page = 1;

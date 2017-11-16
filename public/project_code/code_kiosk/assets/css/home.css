@@ -1,0 +1,138 @@
+.backgroundDiv {
+	background: url('../img/FernBG_faded.jpg');
+}
+.homePage {
+	padding-top: 70px;
+}
+.leftDiv {
+	width: 40%;
+	float: left;
+	padding-top: 20px;
+} .leftDiv a {
+	color: black;
+	text-decoration: none;
+}
+
+/* Capsule buttons */
+.capsuleBtn {
+	position: relative;
+	width: 500px;
+	height: 50px;
+	border-radius: 100px;
+	border: solid 4px #0F1100;
+	box-shadow: 0 0 10px #0F1100;
+	background: #EEF3D3;
+	margin-left: 200px;
+	margin-bottom: 80px;
+	font-size: 1.5rem;
+	padding: 30px;
+} .capsuleBtn:first-of-type {
+	margin-top: 86px;
+} .capsuleBtnImg {
+	position: absolute;
+	left: -70px;
+	top: -16px;
+	width: 130px;
+	height: 130px;
+	border-radius: 80px;
+	border: solid 4px #EEF3D3;
+	box-shadow: 0 0 10px #0F1100;
+	background: #EEF3D3;
+	background-size: contain;
+	background-size: cover;
+} #capsuleEvol {
+	background-image: url('../img/home/Capsule_Ammonite.jpg');
+} #capsuleButterfly {
+	background-image: url('../img/home/Capsule_Butterfly.jpg');
+} #capsuleStory {
+	background-image: url('../img/home/Capsule_Pav.jpg');
+} #capsuleWho {
+	background-image: url('../img/home/Capsule_Pygmy.jpg');
+} #capsuleSearch {
+	background-image: url('../img/home/Capsule_Insect.jpg');
+} #capsuleDiff {
+	background-image: url('../img/home/Capsule_Frog.jpg');
+} .capsuleLabel {
+	position: absolute;
+	top: 0;	bottom: 0; left: 0; right: 0;
+	width: 100%;
+	height: 30%;
+	padding-left: 100px;
+	margin: auto;
+}
+.typeText {
+	position: absolute;
+	left: 390px;
+	top: 0;
+	color: #4f8239;
+}
+.typeIcon {
+	position: absolute;
+	left: 470px;
+	top: -15px;
+}
+
+/* Image Carousel */
+.rightDiv {
+	margin-left: 70px;
+	height: 880px;
+	width: 910px;
+	float: left;
+	position: relative;
+	padding: 30px;
+	padding-left: 60px;
+}
+/* delay on carousel for each individual image. Delay for image n = (total length / no of images) * (position in set - 1) */
+.rightDiv img:nth-of-type(1) {animation-delay: 0s;} 
+.rightDiv img:nth-of-type(2) {animation-delay: 5s;}
+.rightDiv img:nth-of-type(3) {animation-delay: 10s;}
+.rightDiv img:nth-of-type(4) {animation-delay: 15s;}
+.rightDiv img:nth-of-type(5) {animation-delay: 20s;}
+.rightDiv img:nth-of-type(6) {animation-delay: 25s;}
+.rightDiv img:nth-of-type(7) {animation-delay: 30s;}
+.rightDiv img:nth-of-type(8) {animation-delay: 35s;}
+.rightDiv img:nth-of-type(9) {animation-delay: 40s;}
+.rightDiv img:nth-of-type(10) {animation-delay: 45s;}
+.rightDiv img:nth-of-type(11) {animation-delay: 50s;}
+.rightDiv img:nth-of-type(12) {animation-delay: 55s;}
+.rightDiv img:nth-of-type(13) {animation-delay: 60s;}
+.rightDiv img:nth-of-type(14) {animation-delay: 65s;}
+.rightDiv img:nth-of-type(15) {animation-delay: 70s;}
+.rightDiv img:nth-of-type(16) {animation-delay: 75s;}
+
+.galleryImg {
+	max-height: 100%;
+	max-width: 100%;
+	object-fit: cover;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: block;
+	margin: auto;
+	transition: opacity 1s ease-in-out;
+	animation-name: galleryFadeInOut;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-duration: 80s; /* length of the complete  carousel rotation of all images */
+	opacity: 0;
+	box-shadow: 0 0 10px rgba(0,0,0,0.8), 8px 8px 20px rgba(0,0,0,0.5);
+	border-radius: 15px;
+} @keyframes galleryFadeInOut {
+  0% {
+    opacity:0;
+  }
+  1.25% {  /*should be adjusted in line with next keyframe to represent first fade-in end time */
+    opacity:1;
+  }
+  6.25% {  /*should be adjusted to 100% / number of images */
+    opacity:1;
+  }
+  7.5% {  /*should be adjusted in line with previous keyframe to represent first fade-out end time */
+    opacity:0;
+  }
+  100% {
+    opacity:0;
+  }
+}

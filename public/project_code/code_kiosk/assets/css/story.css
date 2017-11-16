@@ -1,0 +1,759 @@
+html {
+/*	overflow: hidden; 				unhide to supress scrollbars */
+}
+body {
+	position: relative;
+}
+.backgroundDiv {
+	background: url('../img/LakesBG.jpg');
+}
+.allDiv {
+	width: 100%;
+	height: 1080px;
+	overflow: hidden;
+	position: relative;
+}
+p {
+	font-size: 1.25em;
+}
+figcaption {
+	padding-top: 15px;
+	font-size: 1.25em;
+}
+.allDiv img {
+	border: 3px solid black;
+	border-radius: 10px;
+	box-shadow: 5px 10px 20px 0px rgba(0,0,0,0.3);
+}
+hr {
+	border: 0;
+	height: 3px;
+	margin: 40px;
+	background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+#fireworkCanvas {
+	position: absolute;
+	z-index: 20;
+	pointer-events: none;
+	width: 1920px;
+	height: 1080px;
+} #fireworkOverlayText {
+	font-family: 'Anton', sans-serif;
+	text-transform: uppercase;
+	font-size: 12rem;
+	color: white;
+	position: absolute;
+	top: 200px;
+	width: 100%;
+	text-align: center;
+	z-index: 21;
+	white-space: nowrap;
+	transition: opacity 2s;
+	pointer-events: none;
+} #fireworkFootnote {
+	font-size: 4rem;
+	margin-top: 100px;
+	opacity: 0;
+	animation: reveal 1s 10s 1 forwards;
+}
+ .hiddenFireworkOverlayText {
+	opacity: 0;
+} .revealedFireworkOverlayText {
+	opacity: 1;
+}
+.disableBody {
+	pointer-events: none;
+}
+#overlay {
+	width: 1920px;
+	height: 1080px;
+	z-index: 10;
+	position: absolute;
+	background: black;
+	opacity: 0.5;
+}
+.activeOverlay {
+	visibility: visible;
+}
+.noOverlay {
+	visibility: hidden;
+}
+
+/* Timeline formatting */
+
+#timelineDiv {
+	height: 920px;
+	width: 250px;
+	margin: 20px;
+	margin-top: 120px;
+	padding-bottom: 20px;
+	overflow-y: none;
+	overflow-x: none;
+	float: left;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	position: relative;
+}
+.timelineContent {
+	box-shadow: 5px 10px 20px 0px rgba(0,0,0,0.6);
+}
+
+@keyframes btnFlash {
+	0% {background: white;}
+	50% {background: #f9c581;}
+	100% {background: white;}
+}
+@keyframes upPointerFlash {
+	0% {border-bottom-color: white;}
+	50% {border-bottom-color: #f9c581;}
+	100% {border-bottom-color: white;}
+}
+@keyframes downPointerFlash {
+	0% {border-top-color: white;}
+	50% {border-top-color: #f9c581;}
+	100% {border-top-color: white;}
+}
+.flashBtn {
+	animation: btnFlash 1.5s infinite;
+} .flashUpPointer {
+	animation: upPointerFlash 1.5s infinite;
+} .flashDownPointer {
+	animation: downPointerFlash 1.5s infinite;
+}
+.timeScrollBtn {
+	background: lightgrey;
+	height: 40px;
+	font-size: 1.8em;
+	text-align: center;
+	padding: 0;
+	border-left: 2px solid black;
+	border-right: 2px solid black;
+} 
+.pointer {
+	width: 0;
+	height: 0;
+	border-left: 100px solid transparent;
+	border-right: 100px solid transparent;
+}
+.upPointer {
+	border-bottom: 50px solid lightgrey;
+} .downPointer {
+	border-top: 50px solid lightgrey;
+} 
+.upScrollBtn {
+	padding-bottom: 10px;
+	border-bottom: 2px solid black;
+}.downScrollBtn {
+	padding-top: 10px;
+	border-top: 2px solid black;
+}
+.disabledBtnText {
+	color: #666666;
+}
+.timeBtn {
+	height: 100px;
+	width: 200px;
+}
+.arrowBorder {
+	width: 109px;
+	border: 1px solid black;
+	height: 0;
+	position: absolute;
+} #topLeftArrowBorder {
+	top: 25px;
+	left: 20px;
+	transform: rotate(-26.565deg);
+} #topRightArrowBorder {
+	top: 25px;
+	left: 119px;
+	transform: rotate(26.565deg);
+} #bottomLeftArrowBorder {
+	top: 895px;
+	left: 20px;
+	transform: rotate(26.565deg);
+} #bottomRightArrowBorder {
+	top: 895px;
+	left: 119px;
+	transform: rotate(-26.565deg);
+}
+#timeStamps {
+	width: 180px;
+	height: 800px; 
+	padding: 10px;
+	margin: 20px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	float: left;
+	overflow-y: hidden;
+	clear: both;
+	background: rgba(255, 255, 255, 0.6);
+	position: relative;
+	border: 2px solid black;
+} #timeStampsObscurer {
+	position: absolute;
+	pointer-events: none;
+	top: 122px;
+	left: 25px;
+	z-index: 1;
+	width: 200px;
+	height: 676px;
+    background: -webkit-linear-gradient(
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0.95) 3%,
+        rgba(255, 255, 255, 0) 10%,
+        rgba(255, 255, 255, 0) 90%,
+        rgba(255, 255, 255, 0.95) 97%,
+        rgba(255, 255, 255, 0.95) 100%
+    ); 
+}
+.timeStamp {
+	position: relative;
+	margin: 0;
+	width: 150px;
+	min-height: 100px; 
+	text-align: center;
+	font-size: 1.8em;
+	background: #cee5bc;
+	border: 3px solid black;
+	border-radius: 10px;
+	box-shadow: 0 0 3px 5px rgba(67, 104, 49, 0.5) inset, 5px 10px 20px 0px rgba(0,0,0,0.6);
+} .timeStamp .timeYearOnly {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -15%);
+} .timeStamp .timeYearBoth {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 15%);
+} .timeStamp .timeMonthBoth {
+	position: absolute;
+	font-size: 1.5rem;
+	left: 50%;
+	transform: translate(-50%, -25%);
+} .timeStamp .timeYearSub {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
+} .timeStamp .timeTextSub {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 115%);
+	font-size: 1.4rem;
+	white-space: nowrap;
+}
+
+
+.timeGap {
+	min-height: 80px;
+	width: 10px;
+	background: #609e42;
+	border-left: 3px solid black;
+	border-right: 3px solid black;
+} .timeGapLong {
+	min-height: 500px;
+}
+.timeStub {
+	width: 40px;
+	min-height: 40px;
+	border-radius: 40px;
+	border: 3px solid black;	
+	background: #cee5bc;
+	margin-top: -5px;
+	margin-bottom:  -5px;
+	z-index: 1;
+}
+.selected {
+	border: 3px solid red;
+	box-shadow: 0 0 3px 5px rgba(237, 134, 45, 1) inset, 5px 10px 20px 0px rgba(0,0,0,0.6);
+	background: #f7d185;
+}
+
+
+
+#contentAreaDiv {
+	width: 1600px;
+	height: 1000px;
+	padding-top: 50px;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: baseline;
+	float: left;
+	position: relative;
+}
+
+.hiddenSlide {
+	visibility: hidden;
+} .revealedSlide {
+	visibility: visible;
+}
+
+.contentDiv {
+	margin: 40px;
+	padding: 30px;
+	background: white;
+	position: absolute;
+	background: linear-gradient(340deg, #d5ffbf 0%,#ffffff 100%);
+	border: 3px solid black;
+	border-radius: 20px;
+	box-shadow: 5px 10px 20px 0px rgba(0,0,0,0.6), -5px -5px 10px 0px rgba(0,0,0,0.2), 0 0 0 10px #6da850;
+	opacity: 0;
+	text-align: center;
+} 
+.popupLink {
+	text-decoration: underline;
+	color: darkorange;
+}
+
+.reveal {
+	animation: reveal 2s forwards;
+} .reveal1 {
+	animation-delay: 0s;
+} .reveal2 {
+	animation-delay: 2s;
+} .reveal3 {
+	animation-delay: 4s;
+} .reveal4 {
+	animation-delay: 6s;
+} .reveal5 {
+	animation-delay: 8s;
+} .reveal6 {
+	animation-delay: 10s;
+}
+
+
+
+@keyframes reveal {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+.popupDiv {
+	left: 400px;
+	width: 600px;
+	z-index: 11;
+	position: absolute;
+	pointer-events: none;
+	box-shadow: 5px 10px 20px 0px rgba(0,0,0,0.6);
+} .activePopup {
+	pointer-events: auto;
+}
+.popupBtn {
+	width: 150px;
+	min-height: 50px;
+	display: inline-block;
+	font-size: 1.5rem;
+	border: 3px solid black;
+	border-radius: 10px;
+	margin: 0 auto;
+	box-shadow: 5px 10px 20px 0px rgba(0,0,0,0.3);
+}
+.closeBtn {
+	border: 3px solid red;
+	position: relative;
+	margin-top: 20px;
+} .XBtn {
+	position: absolute;
+	left: 20px;
+	top: -2px;
+	font-size: 3rem;
+	color: red;
+} .closeBtnText {
+	position: absolute;
+	top: 50%;
+	transform: translate(-15%, -45%);
+} .galleryPrevBtn {
+	position: absolute;
+	left: 100px;
+	bottom: 220px;
+}.galleryNextBtn {
+	position: absolute;
+	right: 100px;
+	bottom: 220px;
+} .popupBtnText {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  	white-space: nowrap;
+} .galleryFlipBtn {
+	width: 200px;
+	position: relative;
+	margin-top: 20px;
+	margin-right: 100px;
+}
+
+.picGallery {
+	min-width: 1000px;
+	min-height: 700px;
+	position: relative;
+}
+.gallerySlide {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+.activeGalSlide {
+	opacity: 1;
+}
+.flashText {
+	animation: flashText 1s linear infinite;
+}
+
+@keyframes flashText {
+	0% {color: red;}
+	33% {color: orange;}
+	67% {color: purple;}
+	100% {color: red;}
+}
+
+/*	Slide 1 	- "It all started in..."	*/
+[data-slide-1] > div:nth-child(1) {
+	left: 500px;
+	top: 20px;
+} [data-slide-1] > div:nth-child(2) {
+	left: 250px;
+	bottom: 0;
+	width: 900px;
+} [data-slide-1] figure {
+	display: inline-block;
+} [data-slide-1] img {
+	margin: 0 20px;
+	max-width: 400px;
+	max-height: 400px;
+	display: inline-block;
+	border: 3px solid black;
+	box-shadow: 5px 10px 20px 0px rgba(0,0,0,0.35);
+	border-radius: 10px;
+} [data-slide-1] > .popupDiv p {
+	padding: 0 50px;
+}[data-slide-1] > .popupDiv > img {
+	max-width: 500px;
+	max-height: 500px;
+}
+/*	Slide 2 	- "Dinas Dinlle"	 */
+[data-slide-2] > div:nth-child(1) {
+	left: 20px;
+	top: 40px;
+	width: 500px;
+} [data-slide-2] > div:nth-child(2) {
+	right: 50px;
+	top: 100px;
+	width: 700px;
+} [data-slide-2] > div:nth-child(3) {
+	top: 440px;
+	left: 60px;
+	width: 600px;
+} [data-slide-2] > div:nth-child(3) img {
+	width: 500px;
+} [data-slide-2] > div:nth-child(4) {
+	right: 20px;	
+	top: 520px;
+	width: 550px;
+} [data-slide-2] > div:nth-child(5) {
+	left: 100px;	
+	top: 50px;
+	width: 1000px;
+} [data-slide-2] > div:nth-child(5) img {
+	max-width: 900px;
+} [data-slide-2] > div:nth-child(6) {
+	width: 1400px;
+	left: -100px;
+} [data-slide-2] > div:nth-child(6) p {
+	padding-left: 100px;
+	padding-right: 100px;
+} [data-slide-2] > div:nth-child(6) span {
+	display: inline-block;
+	width: 50px;
+}
+/*	Slide 3 	-"Oasis site buying"	 */
+[data-slide-3] > div:nth-child(1) {
+	left: 0;
+	top: 30px;
+	width: 520px;
+} [data-slide-3] > div:nth-child(2) {
+	left: 0;
+	bottom: 0;
+	width: 520px;
+} [data-slide-3] > div:nth-child(3) {
+	right: 20px;
+	top: 180px;
+	width: 750px;
+} [data-slide-3] > div:nth-child(3) img {
+	width: 680px;
+} [data-slide-3] > div:nth-child(4) {
+	left: 180px;
+	top: 70px;
+	width: 1000px;
+} [data-slide-3] > div:nth-child(4) img {
+	max-width: 900px;
+}
+/*	Slide 4 	-"Building the Oasis 1" */
+[data-slide-4] > div:nth-child(1) {
+	left: 400px;
+	top: 40px;
+	width: 550px;
+} [data-slide-4] > div:nth-child(2) {
+	left: 20px;
+	top: 300px;
+	width: 700px;
+} [data-slide-4] > div:nth-child(3) {
+	left: 900px;
+	top: 500px;
+	width: 500px;
+}
+/*	Slide 5		-"Building ther Oasis 2" */
+[data-slide-5] > div:nth-child(1) {
+	left: 60px;
+	top: 80px;
+	width: 600px;
+} [data-slide-5] img {
+	border: 2px solid black;
+} [data-slide-5] > div:nth-child(2) {
+	left: 850px;
+	top: 200px;
+	width: 500px;
+} [data-slide-5] > div:nth-child(3) {
+	left: 100px;
+	top: 10px;
+	width: 1100px;
+	height: 900px;
+} [data-slide-5] > div:nth-child(3) img {
+	max-width: : 1000px;
+	border: 2px solid black;
+} [data-slide-5] > div:nth-child(3) > .picGallery {
+	min-height: 820px;
+} [data-slide-5] > div:nth-child(4) {
+	left: 100px;
+	top: 10px;
+	width: 1000px;
+	height: 760px;
+} 
+/*	Slide 6 	-"Opening Day"	*/
+[data-slide-6] > div:nth-child(1) {
+	left: 0;
+	top: 20px;
+	width: 680px;
+} [data-slide-6] > div:nth-child(2) {
+	left: 120px;
+	top: 500px;
+	width: 440px;
+} [data-slide-6] > div:nth-child(2) img {
+	width: 340px;
+} [data-slide-6] > div:nth-child(3) {
+	right: 20px;
+	top: 80px;
+	width: 600px;
+} [data-slide-6] > div:nth-child(3) img {
+	width: 500px;
+}
+/*	Slide 7 	-"Outside Bit"	*/
+[data-slide-7] > div:nth-child(1) {
+	left: 350px;
+	top: 100px;
+	width: 620px;
+	padding: 40px 60px;
+} [data-slide-7] > div:nth-child(2) {
+	width: 1420px;
+	min-height: 900px;
+	top: 0;
+	left: 0;
+} [data-slide-7] > div:nth-child(2) img {
+	width: 1035px;
+	height: 900px;
+	float: left;
+} [data-slide-7] > div:nth-child(2) figcaption {
+	float: right;
+	width: 250px;
+} [data-slide-7] > div:nth-child(2) figcaption:first-of-type {
+	padding-top: 320px;
+} [data-slide-7] > div:nth-child(3) {
+	width: 1100px;
+	left: 160px;
+	top: 80px;
+} [data-slide-7] > div:nth-child(4) {
+	width: 1100px;
+	left: 160px;
+	top: 30px;
+} [data-slide-7] > div:nth-child(5) {
+	width: 1100px;
+	left: 160px;
+	top: 30px;
+} [data-slide-7] > div:nth-child(6) {
+	width: 1000px;
+	left: 200px;
+	top: 30px;
+} [data-slide-7] > div:nth-child(7) {
+	width: 1000px;
+	left: 200px;
+	top: 30px;
+}
+/*	Slide 8 	-"Cafe and Fossas"	*/
+[data-slide-8] > div:nth-child(1) {
+	left: 50px;
+	top: 50px;
+	width: 500px;
+} [data-slide-8] > div:nth-child(2) {
+	left: 700px;
+	top: 100px;
+	width: 600px;
+} [data-slide-8] > div:nth-child(3) {
+	left: 20px;
+	top: 20px;
+	width: 1200px;
+} [data-slide-8] > div:nth-child(4) {
+	left: 120px;
+	top: 80px;
+	width: 1000px;
+}
+/*	Slide 9 	-"Lemur walkthrough"	*/
+[data-slide-9] > div:nth-child(1) {
+	left: 100px;
+	top: 50px;
+	width: 900px;
+} [data-slide-9] > div:nth-child(1) img {
+	float: left;
+} [data-slide-9] > div:nth-child(1) img:nth-of-type(2) {
+	margin-left: 80px;
+} [data-slide-9] > div:nth-child(1) p {
+	margin-left: 400px;
+} [data-slide-9] > div:nth-child(2) {
+	left: 550px;
+	top: 700px;
+	width: 700px;
+} [data-slide-9] > div:nth-child(3), [data-slide-9] > div:nth-child(4), [data-slide-9] > div:nth-child(5), [data-slide-9] > div:nth-child(6) {
+	left: 150px;
+	top: 50px;
+	width: 1000px;
+}
+/*	Slide 10 	-"Pavan arrives"	*/
+[data-slide-10] > div:nth-child(1) {
+	left: 50px;
+	top: 50px;
+	width: 740px;
+} [data-slide-10] > div:nth-child(1) img {
+	float: left;
+} [data-slide-10] > div:nth-child(1) div {
+	padding-top: 100px;
+	width: 300px;
+	float: right;
+} [data-slide-10] > div:nth-child(2) {
+	right: 20px;
+	top: 150px;
+	width: 500px;
+} [data-slide-10] > div:nth-child(3) {
+	left: 150px;
+	top: 20px;
+	width: 1000px;
+	min-height: 840px;
+} [data-slide-10] > div:nth-child(3) .closeBtn {
+	bottom: -60px;
+} [data-slide-10] > div:nth-child(4) {
+	left: 80px;
+	top: 20px;
+	width: 1200px;
+} 
+/*	Slide 11 	-"LTNS"	*/
+[data-slide-11] > div:nth-child(1) {
+	left: 50px;
+	top: 50px;
+	width: 500px;
+} [data-slide-11] > div:nth-child(2) {
+	right: 150px;
+	top: 400px;
+	width: 1100px;
+} [data-slide-11] > div:nth-child(2) figure {
+	float: left;
+} [data-slide-11] > div:nth-child(3) {
+	right: 50px;
+	top: 100px;
+	width: 700px;
+}  [data-slide-11] > div:nth-child(3) li {
+	font-size: 1.5em;
+	color: darkgreen;
+} 
+/*	Slide 12 	-"Leopard cubs"	*/
+[data-slide-12] > div:nth-child(1) {
+	left: 50px;
+	top: 50px;
+	width: 700px;
+} [data-slide-12] > div:nth-child(2) {
+	right: 20px;
+	top: 100px;
+	width: 500px;
+} [data-slide-12] > div:nth-child(3) {
+	right: 20px;
+	top: 650px;
+	width: 500px;
+} [data-slide-12] > div:nth-child(4) {
+	left: 150px;
+	top: 20px;
+	width: 1000px;
+} [data-slide-12] > div:nth-child(4) p:nth-of-type(2) {
+	margin: 20px -140px;
+} [data-slide-12] > div:nth-child(4) .galleryPrevBtn {
+	bottom: 240px;
+	left: 30px;
+} [data-slide-12] > div:nth-child(4) .galleryNextBtn {
+	bottom: 240px;
+	right: 30px;
+}
+/*	Slide 13 	-"Floods"	*/
+[data-slide-13] > div:nth-child(1) {
+	left: 0;
+	top: 0;
+	width: 770px;
+	padding: 5px 20px;
+} [data-slide-13] > div:nth-child(2) {
+	right: 0;
+	top: 20px;
+	width: 580px;
+} [data-slide-13] > div:nth-child(3) {
+	left: 0;
+	top: 650px;
+	width: 770px;
+	padding: 5px 20px;
+} [data-slide-13] > div:nth-child(4) {
+	left: 100px;
+	top: 50px;
+	width: 1100px;
+	min-height: 850px;
+} [data-slide-13] > div:nth-child(4) .closeBtn {
+	bottom: -80px;
+} [data-slide-13] > div:nth-child(4) .galleryPrevBtn {
+	bottom: 240px;
+	left: 30px;
+} [data-slide-13] > div:nth-child(4) .galleryNextBtn {
+	bottom: 240px;
+	right: 30px;
+}
+/*	Slide 14 	-"And beyond"	*/
+[data-slide-14] > div:nth-child(1) {
+	left: 0;
+	top: 0;
+	width: 800px;
+} [data-slide-14] > div:nth-child(2) {
+	right: 0;
+	top: 100px;
+	width: 500px;
+} [data-slide-14] > div:nth-child(3) {
+	left: 0;
+	top: 500px;
+	width: 800px;
+} [data-slide-14] > div:nth-child(4) {
+	left: 100px;
+	top: 100px;
+	width: 1000px;
+} [data-slide-14] > div:nth-child(5) {
+	left: 100px;
+	top: 100px;
+	width: 1000px;
+}

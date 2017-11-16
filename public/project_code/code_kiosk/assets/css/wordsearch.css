@@ -1,0 +1,236 @@
+.backgroundDiv {
+	background: url('../img/BG_Galapagos.jpg');
+}
+.red {
+	color: red;
+}
+h1, h2 {
+	text-align: center;
+}
+h1 {
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
+li {
+	list-style: none;
+}
+li:before {
+	margin-right: 10px;
+	list-style: none;
+	content: '\f1b0';
+	font-family: 'FontAwesome';
+}
+#hint {
+	color: green;
+}
+#hintBulb {
+	vertical-align: middle;
+}
+#hintBtn {
+	display: block;
+	margin: auto;
+	border: none;
+	background: none;
+	transition: 0.3s;
+}
+#hintBtn:hover { 
+    -webkit-filter: drop-shadow(0px 0px 10px #ffdd00);
+    filter: drop-shadow(0px 0px 10px #ffdd00);
+}
+
+/* Page layout styles */
+#divAll {
+	margin: 0 auto;
+	width: 1800px;
+	height: 1000px;
+}
+#mainDiv {
+	width: 812px;
+	height: 812px;
+	display: inline-block;
+	float: left;
+}
+#gridDiv {
+	display: inline-block;
+	width: 812px;
+}
+#gridCanvas {
+	position: absolute;
+	pointer-events: none;
+	height: 812;
+	width: 812;
+}
+#leftDiv {
+	float: left;
+	width: 494px;
+	height: 1000px;
+}
+#rightDiv {
+	float: left;
+	width: 494px;
+	height: 1000px;
+}
+#leftCanvas {
+	position: absolute;
+	pointer-events: none;
+}
+
+/* Grid square styles */
+.square {
+	font-family: 'Handlee', cursive;
+	font-weight: bold;
+	font-size: 2em;
+	text-shadow: none;
+	width: 52px;
+	height: 45px;
+	float: left;
+	text-align: center;
+	padding-top: 7px;
+	background-color: rgba(121, 210, 121, 0.5);
+	margin: 3px;
+	transition: 1.0s;
+}
+.first {
+	background: #39ac39;
+}
+.chosen {
+	background: #39ac39;
+}
+.hovered {
+	background: #39ac39;
+	transition: 0.3s;
+	animation-name: flashingsq;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-duration: 0.5s;
+}
+@keyframes flashingsq {
+  0% {
+	background: #39ac39;
+  }
+  50% {
+	background: #40bf40;
+  }
+  100% {
+	background: #39ac39;
+  }
+}
+.notFoundName {
+	color: green;
+	font-weight: bold;
+}
+.foundName {
+	text-decoration: line-through;
+	color: grey;
+}
+
+/* formatting for hint & popup */
+.modal {
+	font-family: 'Averia Sans Libre', cursive;
+	text-shadow: none;
+	font-size: 1.5em;
+    display: none; 		/* Hidden by default */
+    position: fixed; 	/* Stay in place */
+    z-index: 1; 		/* Sit on top */
+    padding-top: 180px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 1920px; /* Full width */
+    height: 1920px; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+#startPopup {
+	padding-top: 100px;
+}
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.8s;
+    animation-name: animatetop;
+    animation-duration: 0.8s
+}
+.bigModal-content {
+	max-width: 1000px;
+}
+@-webkit-keyframes animatetop {
+    from {top:-100px; opacity:0} 
+    to {top:0; opacity:1}
+}
+@keyframes animatetop {
+    from {top:-100px; opacity:0}
+    to {top:0; opacity:1}
+}
+.modalImg {
+	float: right;
+	margin-left: 50px;
+}
+.modal-header {
+    padding: 10px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+.modal-content-box {
+	padding: 10px;
+	float: left;
+	width: 580px;
+	background: white;
+	text-align: center;
+}
+.bigModal-content-box {
+	width: 800px;
+	padding: 20px 100px;
+	text-align: left;
+} .bigModal-content-box ul {
+	padding-left: 0;	
+	color: darkgreen;
+} .bigModal-content-box ul li {
+	padding-left: 20px;
+}
+.modal-body-left {
+	padding: 2px 2px;
+	width: 280px;
+	float: left;
+	text-align: left;
+}
+.modal-body-right {
+	padding: 2px 2px;
+	width: 280px;
+	float: right;
+	text-align: left;
+}
+.modal-footer {
+    padding: 30px 100px;
+    background-color: #5cb85c;
+    color: white;
+    clear:both;
+}
+#startBtn {
+	font-size: 1.6em;
+	text-align: center;
+	padding: 0px;
+}
+div.modal-btn:hover{
+	text-shadow: 0px 0px 10px yellow;
+	transition: 0.3s;
+} .modal-btn a {
+	text-decoration: none;
+	color: white;
+}
+#newGameBtn {
+	float: left;
+}
+#modalMainMenuBtn {
+	float: right;
+}
+.modal-footer, .modal-header > h1, h2, h3 {
+	text-shadow: none;
+} 

@@ -1,0 +1,69 @@
+@font-face { font-family: 'Pangolin'; src: url('../fonts/Pangolin-Regular.ttf'); } 
+@font-face { font-family: 'Handlee'; src: url('../fonts/Handlee-Regular.ttf'); }
+@font-face { font-family: 'Averia Sans Libre'; src: url('../fonts/AveriaSansLibre-Regular.ttf'); }
+@font-face { font-family: 'Anton'; src: url('../fonts/Anton-Regular.ttf'); }
+
+html {
+	zoom: 80%;				/*For laptop demo purposes only - sets master zoom */
+	user-select: none;
+}
+
+body {
+	width: 1920px;
+	height: 1080px;
+	display: none;
+	margin: 0;
+	padding: 0;
+	font-family: 'Pangolin', cursive;
+	background: white;
+	
+}
+h1 {
+	font-family: 'Averia Sans Libre', cursive;
+	font-size: 2.5em;
+}
+h2 {
+	font-family: 'Averia Sans Libre', cursive;
+	font-size: 1.5em;
+}
+a, .popupLink, .popupBtn, .timeStop, .timeBtn {
+	cursor: pointer;
+}
+
+.backgroundDiv {
+	width: 100%;
+	min-height: 100%;
+}
+
+.mainMenuBtn {
+	position: absolute;
+	width: 150px;
+	height: 44px;
+	border-radius: 20px;
+	margin-top: 25px;
+	margin-left: 40px;
+	padding-left: 10px;
+	left: 22px;
+	top: 20px;
+	font-size: 2.5em;
+	color: #133913;
+	border: 2px solid black;
+	background: rgba(240, 250, 240, 0.5);
+} .mainMenuBtnText {
+	padding-left: 10px;
+	position: relative;
+	top: -3px;
+	font-size: .5em;
+	vertical-align: middle;
+} .mainMenuBtnImg {
+	border: none;
+	position: relative;
+	top: -6px;
+	padding-top: 0;
+	height: 30px;
+	display: inline-block;
+	vertical-align: middle;
+} .mainMenuBtn a {
+	text-decoration: none;
+	color: black;
+}
