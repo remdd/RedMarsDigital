@@ -60,7 +60,7 @@ h1 {
   border: solid black 2px;
   margin-left: 10px;
   padding:  16px 19px 19px 16px;
-  background-image: url('../img/whoAmI/WoodTexture600.jpg');
+  background-image: url('../img/whoAmI/woodtexture600.jpg');
   width: 550px;
   height: 550px;
   float: left;
@@ -131,7 +131,7 @@ h1 {
   max-width: 90%;
   max-height: 90%;
   border: solid 2px;
-  border-image: url("../img/whoAmI/WoodTexture600.jpg") 30 round;
+  border-image: url("../img/whoAmI/woodtexture600.jpg") 30 round;
 }
 #clueImg2 {
   display: inline-block;
@@ -140,7 +140,7 @@ h1 {
   max-width: 90%;
   max-height: 90%;
   border: solid 2px;
-  border-image: url("../img/whoAmI/WoodTexture600.jpg") 30 round;
+  border-image: url("../img/whoAmI/woodtexture600.jpg") 30 round;
 }
 .revealedClueImgDiv {
   visibility: visible;
@@ -161,7 +161,7 @@ h1 {
   float: left;
   height: 850px;
   width: 70px;
-  background-image: url("../img/whoAmI/TimerBG.jpg");
+  background-image: url("../img/whoAmI/timerbg.jpg");
   position: relative;
   margin-left: 50px;
   margin-top: 120px;
