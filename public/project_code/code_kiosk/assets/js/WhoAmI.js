@@ -72,7 +72,6 @@ $(document).ready(function(){
 		if(whoAmI.allAnimals.length < whoAmI.roundsToPlay) {
 			whoAmI.allAnimals = loadAnimals();
 		};
-		console.log("new session!");
 		whoAmI.roundNumber = 0;
 		whoAmI.totalScore = 0;
 		whoAmI.winModalNextBtn.addEventListener("click", newGame);
@@ -93,7 +92,6 @@ $(document).ready(function(){
 		whoAmI.roundNumber++;
 		whoAmI.winRoundModal.style.display = "none";
 		whoAmI.outOfTimeModal.style.display = "none";
-		console.log("new game!");
 		clearDown();
 		whoAmI.startBtn.classList.add("flashBtn");
 		whoAmI.startBtn.addEventListener("click", startTimer);
@@ -132,7 +130,6 @@ $(document).ready(function(){
 	function startTimer() {
 		whoAmI.startBtn.classList.remove("flashBtn");
 		whoAmI.startBtn.disabled = true;
-		whoAmI.photo.classList.remove("noPhoto");
 		for(var i = 0; i < whoAmI.choiceBtns.length; i++) {
 			whoAmI.choiceBtns[i].disabled = false;
 		}
@@ -149,6 +146,9 @@ $(document).ready(function(){
 				break;
 		}
 		loadAnimal(whoAmI.allAnimals[whoAmI.game]);
+		imagesLoaded(whoAmI.photo, function() {
+			whoAmI.photo.classList.remove("noPhoto");
+		});
 		whoAmI.timeLeft = 600;										//	Start timer in 10ths of seconds
 		var timerHeight = (whoAmI.timeLeft * 1.4) + "px";
 		whoAmI.timeBar.style.height = timerHeight;	
