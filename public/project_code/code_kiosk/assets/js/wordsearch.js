@@ -57,13 +57,12 @@ $(document).ready(function() {
 		newGameBtn.addEventListener("click", function() {
 			gameNumber++;
 			if(gameNumber > numberOfGames) {gameNumber = 0};
-		clearDown();
+			clearDown();
 		});
 		for (var i = 0; i <= numberOfGames; i++) {
 			gameArray[i] = i;
 		}
 		shuffle(gameArray);
-		console.log(gameArray);
 		startModal.style.display = "block";
 		startBtn.addEventListener("click", newGame);
 	}
@@ -97,7 +96,9 @@ $(document).ready(function() {
 			hintModal.style.display = "block";
 			hint();
 		};
-		$('#divAll').fadeIn('slow');
+		$('canvas').imagesLoaded(function() {
+			$('#divAll').fadeIn('slow');
+		});
 	};
 
 	// Wipes images from all canvases and removes letters from grid
