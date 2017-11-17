@@ -19,6 +19,10 @@ $(document).ready(function(){
 		clearTimeout(handler);
 		inactivityCountdown();
 	});
+	document.querySelector('body').addEventListener('touchstart', function() {
+		clearTimeout(handler);
+		inactivityCountdown();
+	});
 	inactivityCountdown();
 
 });
