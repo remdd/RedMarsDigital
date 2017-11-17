@@ -12,7 +12,7 @@ $(document).ready(function(){
 		if(window.location.pathname.split('/').pop() != 'index.html') {					//	Check that index page is not already being displayed
 			handler = setTimeout(function() {
 				window.location.assign('index.html');
-			}, 6000);																	//	Inactivity time in ms (10 mins)
+			}, 10000);																	//	Inactivity time in ms (10 mins)
 		}					
 	}
 	document.querySelector('body').addEventListener('click', function() {
@@ -20,6 +20,7 @@ $(document).ready(function(){
 		inactivityCountdown();
 	});
 	document.querySelector('body').addEventListener('touchstart', function() {
+		console.log('touch!');
 		clearTimeout(handler);
 		inactivityCountdown();
 	});

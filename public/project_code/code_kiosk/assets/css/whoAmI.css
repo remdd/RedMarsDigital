@@ -271,7 +271,8 @@ h1 {
   transition: none;
 }
 #startBtn {
-  font-family: 'Averia Sans Libre', cursive;  position: relative;
+  font-family: 'Averia Sans Libre', cursive;  
+  position: relative;
   left: 200px;
   top: -230px;
   z-index: 2;
@@ -424,7 +425,8 @@ h1 {
     color: white;
 }
 .modal-btn {
-  font-family: 'Averia Sans Libre', cursive;  position: relative;
+  font-family: 'Averia Sans Libre', cursive;  
+  position: relative;
   display: inline-block;
   padding: 12px;
   margin: 10px auto;
@@ -437,7 +439,8 @@ h1 {
   border-image: url("../img/whoAmI/WoodTextureBtn.jpg") 30 round;
 }
 .bigModalBtn {
-  font-family: 'Averia Sans Libre', cursive;  position: relative;
+  font-family: 'Averia Sans Libre', cursive;  
+  position: relative;
   display: inline-block;
   padding: 12px;
   margin: 10px auto;

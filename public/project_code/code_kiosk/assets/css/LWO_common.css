@@ -1,7 +1,7 @@
-@font-face { font-family: 'Pangolin'; src: url('../fonts/Pangolin-Regular.ttf'); } 
+/*@font-face { font-family: 'Pangolin'; src: url('../fonts/Pangolin-Regular.ttf'); } 
 @font-face { font-family: 'Handlee'; src: url('../fonts/Handlee-Regular.ttf'); }
 @font-face { font-family: 'Averia Sans Libre'; src: url('../fonts/AveriaSansLibre-Regular.ttf'); }
-@font-face { font-family: 'Anton'; src: url('../fonts/Anton-Regular.ttf'); }
+@font-face { font-family: 'Anton'; src: url('../fonts/Anton-Regular.ttf'); }*/
 
 html {
 	zoom: 80%;				/*For laptop demo purposes only - sets master zoom */
