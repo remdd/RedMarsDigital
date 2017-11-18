@@ -288,13 +288,13 @@ $(document).ready(function() {
 			var x = this.imgX;
 			var y = this.imgY;
 			function fadeIn() {
+				ctx.globalAlpha = alpha;
+				ctx.drawImage(imageObj, x, y);
+				alpha += 0.03;
 				if(alpha >= 1) {
 					return;
 				}
 				requestAnimationFrame(fadeIn);
-				ctx.globalAlpha = alpha;
-				ctx.drawImage(imageObj, x, y);
-				alpha += 0.03;
 			};
 			fadeIn();
 		};
