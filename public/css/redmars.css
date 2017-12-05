@@ -49,6 +49,28 @@ hr {
 	height: 1px;
 	margin: 25px 0;
 }
+.noMarginContainer {
+	width: 100%;
+}
+.noMargin {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+.noMarginRow {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.techBlock {
+	width: 400px;
+}
+.portraitBlock {
+	text-align: right;
+	flex-grow: 1;
+} .portraitBlock img {
+	max-width: 400px;
+}
 .fig-img {
 	display: inline-block;
 	padding-bottom: 20px;
@@ -380,7 +402,7 @@ hr {
 	margin-bottom: 0;
 } .aboutDiv a {
 	text-decoration-color: #999999; 
-} 
+}
 .inlineDevicon {
 	float: right;
 	margin-left: 50px;
@@ -392,6 +414,9 @@ hr {
 	display: inline-block;
 	max-width: 100%;
 }
+.aboutPortraitImg {
+	margin: 0;
+} 
 .inlineImg {
 	display: inline-block;
 	float: right;
