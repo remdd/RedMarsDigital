@@ -10,6 +10,7 @@ var express 				= require('express'),
 	BlogPost				= require('./models/blogpost'),
 	ToDoItem				= require('./models/todoitem'),
 	ToDoCategory			= require('./models/todocategory'),
+	HiScore					= require('./models/hiscore'),
 	passport				= require('passport'),
 	LocalStrategy			= require('passport-local'),
 	expressSession			= require('express-session'),
@@ -223,6 +224,152 @@ app.get('/creative/:name', function(req, res) {
 app.get('/mars', function(req, res) {
 	res.render('mars');
 });
+
+//	Baron Backslash game
+app.get('/baronbackslash', function(req, res) {
+	res.render('baronbackslash');	//	Preloader instance
+});
+//	All time scores
+app.get('/baronbackslash/alltimescores', function(req, res) {
+	HiScore.find({})
+	.sort({'score': -1})
+	.limit(10)
+	.exec(function(err, hiScores) {
+		if(err) {
+			console.log(err);
+			res.json({});
+		} else {
+			hiScores = addDummyScores(hiScores);
+			res.json(hiScores);
+		}
+	});
+});
+//	Today's scores
+app.get('/baronbackslash/todayscores', function(req, res) {
+	//	Calculate 24 hrs ago
+	var period = Date.now() - (1000 * 60 * 60 * 24);
+	HiScore.find({ "date": { "$gte": period }})
+	.sort({'score': -1})
+	.limit(10)
+	.exec(function(err, hiScores) {
+		if(err) {
+			console.log(err);
+			res.json({});
+		} else {
+			hiScores = addDummyScores(hiScores);
+			res.json(hiScores);
+		}
+	});
+});
+//	Post new score
+app.post('/baronbackslash/score', function(req, res) {
+	HiScore.create(req.body, function(err, hiScore) {
+		if(err) {
+			console.log(err);
+			res.json({});
+		} else {
+			res.json({});
+		}
+	});
+});
+
+function addDummyScores(hiScores) {
+	if(hiScores.length >= 10) {
+		return hiScores;
+	} else {
+		console.log("Adding dummy scores...");
+		var add = 10 - hiScores.length;
+		for(var i = 0; i < add; i++) {
+			var suffix = dummySuffixes[Math.floor(Math.random() * dummySuffixes.length)];
+			var prefix = dummyPrefixes[Math.floor(Math.random() * dummyPrefixes.length)];
+			var score;
+			var rand = Math.floor(Math.random() * 2);
+			if(rand < 1) {
+				score = dummyScores[Math.floor(Math.random() * dummyScores.length)];
+			} else {
+				score = Math.floor(Math.random() * 1000);
+			}
+			var level;
+			var rand2 = Math.floor(Math.random() * 10);
+			if(rand2 < 6) {
+				level = 1;
+			} else if(rand2 < 9) {
+				level = 2;
+			} else {
+				level = 3;
+			}
+			var dummyScore = {
+				name: prefix + suffix,
+				score: score,
+				level: level,
+				defeatedBaron: false,
+				date: Date.now()
+			}
+			hiScores.push(dummyScore);
+		}
+		hiScores = sort_by_key_value(hiScores, 'score');
+		return hiScores;
+	}
+}
+
+var dummyPrefixes = [
+	'Sneaky_Skelton',
+	'Blue Squark',
+	'Urky McUrkFace',
+	'Campest_Vamp',
+	'Pixel Goblin',
+	'BlackWiz',
+	'RedWiz',
+	'Ogr',
+	'I_Heart_Baron',
+	'MiniGhostFace',
+	'Bitey Ian'
+];
+
+var dummySuffixes = [
+	'99',
+	' 34',
+	'!!!!',
+	' :)',
+	'_xox',
+	'123',
+	'78',
+	'',
+	'',
+	'101',
+	'_111',
+	'462'
+];
+
+var dummyScores = [
+	1500,
+	10,
+	999,
+	2300,
+	450,
+	125,
+	140
+];
+
+function sort_by_key_value(arr, key) {
+  var to_s = Object.prototype.toString;
+  var valid_arr = to_s.call(arr) === '[object Array]';
+  var valid_key = typeof key === 'string';
+
+  if (!valid_arr || !valid_key) {
+    return;
+  }
+
+  arr = arr.slice();
+
+  return arr.sort(function(a, b) {
+    var a_key = String(a[key]);
+    var b_key = String(b[key]);
+    var n = b_key - a_key;
+    return !isNaN(n) ? n : a_key.localeCompare(b_key);
+  });
+}
+
 
 //	ToDo list page - visible to registered users only
 app.get('/todo', isLoggedIn, function(req, res) {
