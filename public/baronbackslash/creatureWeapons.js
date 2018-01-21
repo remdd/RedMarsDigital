@@ -674,7 +674,7 @@ var creatureWeapons = [
 		currentSprite: { x: 16, y: 4},
 		use: function(direction) {
 			playSwish('big');
-			console.log("Attacking!");
+			// console.log("Attacking!");
 			this.position.y -= 8;
 			this.swipe(direction);
 			return this.attack;
@@ -1355,7 +1355,7 @@ var creatureWeapons = [
 		currentSprite: { x: 26, y: 30},
 		use: function(direction) {
 			playSwish();
-			console.log("Attacking!");
+			// console.log("Attacking!");
 			this.swipe(direction);
 			return this.attack;
 		},

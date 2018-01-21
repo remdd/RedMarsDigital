@@ -142,7 +142,7 @@ Obstacle = function(type, room, y, x, modifier, noOffset) {
 	}
 
 	//	Once size is known, switch type to populate obstacle array
-	level.obstacleArray[this.grid.y][this.grid.x] = 1;
+	level.obstacleArray[Math.floor(this.grid.y)][Math.floor(this.grid.x)] = 1;
 	switch(type) {
 		case EnumObstacle.DOOR:
 		case EnumObstacle.GOLD_KEY_DOOR:
@@ -1318,7 +1318,7 @@ Obstacle = function(type, room, y, x, modifier, noOffset) {
 			}
 			this.position = {
 				y: (this.grid.y * TILE_SIZE + TILE_SIZE),
-				x: (this.grid.x * TILE_SIZE + 12)
+				x: (this.grid.x * TILE_SIZE + TILE_SIZE)
 			}
 			this.box.type = EnumBoxtype.TALL_OBSTACLE;
 			this.box.topLeft = {

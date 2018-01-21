@@ -241,7 +241,7 @@ function setUpPlayer() {
 	$('.healthSpan').text(player.vars.currentHP + ' / ' + player.vars.maxHP);
 	player.addItem = function(item) {
 		player.items.push(item);
-		console.log(player.items);
+		// console.log(player.items);
 		if(item.name === "Exit Key") {
 			$('#exitkeyimg').fadeIn('slow');
 		}
@@ -289,7 +289,7 @@ function setUpCreatures() {
 			}
 		}
 	}
-	console.log(game.creatures);
+	// console.log(game.creatures);
 }
 
 function drawOnCanvas(entity, ctx) {
@@ -326,8 +326,8 @@ function drawOnCanvas(entity, ctx) {
 				);
 			}
 			catch(err) {
-				console.log(err);
-				console.log(entity);
+				// console.log(err);
+				// console.log(entity);
 				debugger;
 			}
 		}
@@ -1120,7 +1120,7 @@ Creature.prototype.hasClearPathToPlayer = function() {
 	}
 }
 Creature.prototype.addHealth = function(health) {
-	console.log("Adding health!");
+	// console.log("Adding health!");
 	this.vars.currentHP += health;
 	if(this.vars.currentHP > this.vars.maxHP) {
 		this.vars.currentHP = this.vars.maxHP;
@@ -1431,7 +1431,7 @@ function updatePlayer() {
 				player.effects[i].applied = true;
 				player.effects[i].endTime = performance.now() + player.effects[i].duration;
 				player.effects[i].apply();
-				console.log(player.effects[i].name);
+				// console.log(player.effects[i].name);
 			}
 		}
 	} else if(player.vars.color !== EnumColor.NORMAL) {
@@ -2105,9 +2105,9 @@ function updateColliders() {
 		if(offset.x >= CANVAS_WIDTH / TILE_SIZE + 1 || offset.y >= CANVAS_HEIGHT / TILE_SIZE + 1) {
 			if(!creature.vars.suspended) {
 				if(creature.checkIfCollides()) {
-					console.log(creature);
-					console.log("Collides with...");
-					console.log(creature.checkIfCollides());
+					// console.log(creature);
+					// console.log("Collides with...");
+					// console.log(creature.checkIfCollides());
 				}
 			}
 		} else {
@@ -2206,8 +2206,8 @@ function drawDebugCanvas() {
 }
 
 function playerDeath() {
-	console.log("The player has died!");
-	console.log(game.creatures);
+	// console.log("The player has died!");
+	// console.log(game.creatures);
 	game.creatures.forEach(function(creature) {
 		creature.ai.nextAction = -1;
 		creature.movement.speed = 0;
@@ -2317,7 +2317,7 @@ function endLevel() {
 }
 
 function initializeGame() {
-	console.log("Initializing game");
+	// console.log("Initializing game");
 	game.scoreStartTime = 0;
 	game.scoreOffset = 0;
 	game.redrawBackground = true;
@@ -2335,7 +2335,7 @@ function initializeGame() {
 }
 
 function initializeLevel() {
-	console.log("Initializing level");
+	// console.log("Initializing level");
 	level = {
 		height: 0,
 		width: 0,
@@ -2372,11 +2372,11 @@ function start(newGame) {
 	if(newGame) {
 		initializeSession();
  	}
-	console.log("Seed: " + session.seed);
+	// console.log("Seed: " + session.seed);
 	initializeLevel();
 	level = levelGen.loadLevel(session.levelNumber);
 	initializeGame();
-	console.log(level);
+	// console.log(level);
 	if(newGame) {
 		setUpPlayer();
 	} else {
@@ -2400,7 +2400,7 @@ function start(newGame) {
 		if(newGame) {
 			$('.finalScoreSpan').text('');
 		}
-		console.log("Starting game - level: " + level.levelNumber);
+		// console.log("Starting game - level: " + level.levelNumber);
 		// drawMap();
 	 	session.playing = true;
 		$('canvas').fadeIn('slow', function() {
@@ -2422,7 +2422,7 @@ function initializeSession() {
 	session.vars.dropFrequency = cloneArray(BBMaster.dropFrequency);
 	$('.scoreSpan').text('');
 	session.seed = Math.floor(Math.random() * 2147483647);
-	console.log("Session seed is: " + session.seed);
+	// console.log("Session seed is: " + session.seed);
 	session.prng = new Random(session.seed);
 }
 
@@ -2433,14 +2433,14 @@ $('#musicBtn').click(function() {
 		titleLoop.mute(session.vars.musicIsMuted);
 		victoryLoop.mute(session.vars.musicIsMuted);
 		$('#musicBtn').attr('src', 'img/NoMusic.png');
-		console.log("Muting music");
+		// console.log("Muting music");
 	} else {
 		session.vars.musicIsMuted = false;
 		bgMusic.mute(session.vars.musicIsMuted);
 		titleLoop.mute(session.vars.musicIsMuted);
 		victoryLoop.mute(session.vars.musicIsMuted);
 		$('#musicBtn').attr('src', 'img/Music.png');
-		console.log("Un-Muting music");
+		// console.log("Un-Muting music");
 	}
 });
 

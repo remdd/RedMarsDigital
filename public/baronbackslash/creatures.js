@@ -2975,7 +2975,7 @@ var creatureTemplates = [
 				newDeemon.type = deemonType;
 				newDeemon.ai.nextAction = 1;
 				newDeemon.ai.endTime = performance.now() + 1;
-				console.log(newDeemon);
+				// console.log(newDeemon);
 				creatureSounds1.play('summonImp')
 				game.creatures.push(newDeemon);
 			}
@@ -3115,7 +3115,7 @@ var creatureTemplates = [
 				newDeemon.type = deemonType;
 				newDeemon.ai.nextAction = 1;
 				newDeemon.ai.endTime = performance.now() + 1;
-				console.log(newDeemon);
+				// console.log(newDeemon);
 				creatureSounds1.play('summonImp')
 				game.creatures.push(newDeemon);
 			}

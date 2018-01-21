@@ -133,8 +133,8 @@ function mainMenuEventListener() {
 }
 
 function mainMenuChoice(e) {
+	e.preventDefault();
 	if(menuState.menuVisible) {
-		e.preventDefault();
 		if(menuState.menuScreen === 'Main menu' && (e.code === 'KeyS' || e.code === 'KeyW' || e.code === 'ArrowUp' || e.code === 'ArrowDown')) {
 			gameEffects.play('menuChange');
 			$('button').removeClass('selected');
@@ -214,11 +214,11 @@ function saveScore() {
 		url: '/baronbackslash/score',
 		data: score, 
 		success: function() {
-			console.log("Score successfully posted!");
+			// console.log("Score successfully posted!");
 			refreshHiScores();
 		},
 		error: function() {
-			console.log("Error - score not posted!")
+			// console.log("Error - score not posted!")
 		}
 	});
 }
@@ -260,7 +260,7 @@ function gameCompleteScreen() {
 }
 
 function refreshHiScores() {
-	console.log("Refreshing scores...");
+	// console.log("Refreshing scores...");
 	$.ajax({
 		type: "GET",
 		url: '/baronbackslash/todayscores',

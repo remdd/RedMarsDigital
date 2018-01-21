@@ -213,7 +213,7 @@ var kobNoises = new Howl({
 });
 
 var miniKobNoises = new Howl({
-	src: ['snd/MiniKobs.ogg', 'snd/MiniKobs.mp3'],
+	src: ['snd/MiniKobs2.ogg', 'snd/MiniKobs2.mp3'],
 	volume: 0.4,
 	sprite: {
 		noise1: [0, 700],
@@ -276,7 +276,7 @@ var zombiNoises = new Howl({
 });
 
 var impBites = new Howl({
-	src: ['snd/impBites2.ogg', 'snd/impBites2.mp3'],
+	src: ['snd/ImpBites2.ogg', 'snd/ImpBites2.mp3'],
 	volume: 0.7,
 	sprite: {
 		bite1: [0, 500],
@@ -398,7 +398,7 @@ var titleLoop = new Howl({
 });
 
 var victoryLoop = new Howl({
-	src: ['snd/victoryLoop.ogg', 'snd/victoryLoop.mp3'],
+	src: ['snd/VictoryLoop.ogg', 'snd/VictoryLoop.mp3'],
 	loop: true,
 	volume: 0.6,
 	html5: true,
@@ -422,7 +422,7 @@ function playMusic(level) {
 			}
 			titleLoop.play('titles');
 			titleLoop.volume(0);
-			titleLoop.fade(0, session.vars.musicVol, 0);
+			titleLoop.fade(0, session.vars.musicVol, 2000);
 			break;
 		}
 		case 1: {

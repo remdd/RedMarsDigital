@@ -29,7 +29,7 @@ var itemTemplates = [
 			if(player.vars.currentHP < player.vars.maxHP && !this.vars.collected) {
 				this.vars.collected = true;
 				gameEffects.play('healthHeart');
-				console.log("Picking up health heart!");
+				// console.log("Picking up health heart!");
 				var rand = Math.floor(Math.random() * 3) + 1;
 				player.addHealth(rand);
 				game.items.splice(game.items.indexOf(this), 1);
@@ -65,7 +65,7 @@ var itemTemplates = [
 			if(!this.vars.collected) {
 				this.vars.collected = true;
 				gameEffects.play('exitKey');
-				console.log("Picking up exit key!");
+				// console.log("Picking up exit key!");
 				player.addItem(this);
 				game.items.splice(game.items.indexOf(this), 1);
 				return true;
@@ -102,7 +102,7 @@ var itemTemplates = [
 			if(!this.vars.collected) {
 				this.vars.collected = true;
 				player.effects.push(new Effect(EnumItem.PURPLE_MUSHROOM));
-				console.log(this);
+				// console.log(this);
 				game.items.splice(game.items.indexOf(this), 1);
 				return true;
 			}
@@ -138,7 +138,7 @@ var itemTemplates = [
 			if(!this.vars.collected) {
 				this.vars.collected = true;
 				player.effects.push(new Effect(EnumItem.GREEN_MUSHROOM));
-				console.log(this);
+				// console.log(this);
 				game.items.splice(game.items.indexOf(this), 1);
 				return true;
 			}
@@ -174,7 +174,7 @@ var itemTemplates = [
 			if(!this.vars.collected) {
 				this.vars.collected = true;
 				player.effects.push(new Effect(EnumItem.ORANGE_MUSHROOM));
-				console.log(this);
+				// console.log(this);
 				game.items.splice(game.items.indexOf(this), 1);
 				return true;
 			}
@@ -204,7 +204,7 @@ var itemTemplates = [
 		},
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.KNIFE, EnumLode.IRON);
-			console.log("Picking up Basic Knife!");
+			// console.log("Picking up Basic Knife!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -222,7 +222,7 @@ var itemTemplates = [
 		box: { width: 10, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.KNIFE, EnumLode.ACID);
-			console.log("Picking up Acid Knife!");
+			// console.log("Picking up Acid Knife!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -240,7 +240,7 @@ var itemTemplates = [
 		box: { width: 10, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.KNIFE, EnumLode.CRYSTAL);
-			console.log("Picking up Crystal Knife!");
+			// console.log("Picking up Crystal Knife!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -258,7 +258,7 @@ var itemTemplates = [
 		box: { width: 10, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.KNIFE, EnumLode.SHADOW);
-			console.log("Picking up Shadow Knife!");
+			// console.log("Picking up Shadow Knife!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -276,7 +276,7 @@ var itemTemplates = [
 		box: { width: 10, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.KNIFE, EnumLode.FIRE);
-			console.log("Picking up Fire Knife!");
+			// console.log("Picking up Fire Knife!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -294,7 +294,7 @@ var itemTemplates = [
 		box: { width: 10, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.KNIFE, EnumLode.WATER);
-			console.log("Picking up Water Knife!");
+			// console.log("Picking up Water Knife!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -312,7 +312,7 @@ var itemTemplates = [
 		box: { width: 10, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.KNIFE, EnumLode.LIGHTNING);
-			console.log("Picking up Lightning Knife!");
+			// console.log("Picking up Lightning Knife!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -341,7 +341,7 @@ var itemTemplates = [
 		},
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.SWORD, EnumLode.IRON);
-			console.log("Picking up Basic Sword!");
+			// console.log("Picking up Basic Sword!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -360,7 +360,7 @@ var itemTemplates = [
 		box: { width: 13, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.SWORD, EnumLode.ACID);
-			console.log("Picking up Acid Sword!");
+			// console.log("Picking up Acid Sword!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -378,7 +378,7 @@ var itemTemplates = [
 		box: { width: 13, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.SWORD, EnumLode.CRYSTAL);
-			console.log("Picking up Crystal Sword!");
+			// console.log("Picking up Crystal Sword!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -396,7 +396,7 @@ var itemTemplates = [
 		box: { width: 13, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.SWORD, EnumLode.SHADOW);
-			console.log("Picking up Shadow Sword!");
+			// console.log("Picking up Shadow Sword!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -414,7 +414,7 @@ var itemTemplates = [
 		box: { width: 13, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.SWORD, EnumLode.FIRE);
-			console.log("Picking up Fire Sword!");
+			// console.log("Picking up Fire Sword!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -432,7 +432,7 @@ var itemTemplates = [
 		box: { width: 13, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.SWORD, EnumLode.WATER);
-			console.log("Picking up Water Sword!");
+			// console.log("Picking up Water Sword!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -450,7 +450,7 @@ var itemTemplates = [
 		box: { width: 13, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			switchPlayerWeapon(EnumPlayerWeapon.SWORD, EnumLode.LIGHTNING);
-			console.log("Picking up Lightning Sword!");
+			// console.log("Picking up Lightning Sword!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -468,7 +468,7 @@ var itemTemplates = [
 		box: { width: 10, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			addPlayerHelmet(EnumPlayerHelmet.ACID);
-			console.log("Equipping Acid Helmet!");
+			// console.log("Equipping Acid Helmet!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -486,7 +486,7 @@ var itemTemplates = [
 		box: { width: 10, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			addPlayerHelmet(EnumPlayerHelmet.CRYSTAL);
-			console.log("Equipping Crystal Helmet!");
+			// console.log("Equipping Crystal Helmet!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -504,7 +504,7 @@ var itemTemplates = [
 		box: { width: 10, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			addPlayerHelmet(EnumPlayerHelmet.SHADOW);
-			console.log("Equipping Shadow Helmet!");
+			// console.log("Equipping Shadow Helmet!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -522,7 +522,7 @@ var itemTemplates = [
 		box: { width: 10, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			addPlayerHelmet(EnumPlayerHelmet.FIRE);
-			console.log("Equipping Fire Helmet!");
+			// console.log("Equipping Fire Helmet!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -540,7 +540,7 @@ var itemTemplates = [
 		box: { width: 10, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			addPlayerHelmet(EnumPlayerHelmet.WATER);
-			console.log("Equipping Water Helmet!");
+			// console.log("Equipping Water Helmet!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -558,7 +558,7 @@ var itemTemplates = [
 		box: { width: 10, height: 6, type: EnumBoxtype.ITEM },
 		interact: function() {
 			addPlayerHelmet(EnumPlayerHelmet.LIGHTNING);
-			console.log("Equipping Lightning Helmet!");
+			// console.log("Equipping Lightning Helmet!");
 			game.items.splice(game.items.indexOf(this), 1);
 			return true;
 		}
@@ -592,7 +592,7 @@ var itemTemplates = [
 			if(player.vars.currentHP < player.vars.maxHP && !this.vars.collected) {
 				this.vars.collected = true;
 				gameEffects.play('goldHeart');
-				console.log("Picking up gold heart!");
+				// console.log("Picking up gold heart!");
 				var rand = Math.floor(Math.random() * 3) + 3;
 				player.addHealth(rand);
 				game.items.splice(game.items.indexOf(this), 1);
@@ -629,7 +629,7 @@ var itemTemplates = [
 				this.vars.collected = true;
 				player.addItem(this);
 				gameEffects.play('exitKey');
-				console.log("Picking up gold key!");
+				// console.log("Picking up gold key!");
 				// player.addItem(this);
 				game.items.splice(game.items.indexOf(this), 1);
 				return true;
@@ -666,7 +666,7 @@ var itemTemplates = [
 				// gameEffects.play('exitKey');
 				gameEffects.play('gem3');
 				session.score += 150;
-				console.log("Picking up loot necklace!");
+				// console.log("Picking up loot necklace!");
 				game.items.splice(game.items.indexOf(this), 1);
 				return true;
 			}
@@ -702,7 +702,7 @@ var itemTemplates = [
 				// gameEffects.play('exitKey');
 				session.score += 100;
 				gameEffects.play('gem2');
-				console.log("Picking up green jewel!");
+				// console.log("Picking up green jewel!");
 				game.items.splice(game.items.indexOf(this), 1);
 				return true;
 			}
@@ -738,7 +738,7 @@ var itemTemplates = [
 				// gameEffects.play('exitKey');
 				session.score += 50;
 				gameEffects.play('gem1');
-				console.log("Picking up blue jewel!");
+				// console.log("Picking up blue jewel!");
 				game.items.splice(game.items.indexOf(this), 1);
 				return true;
 			}
@@ -774,7 +774,7 @@ var itemTemplates = [
 				// gameEffects.play('exitKey');
 				session.score += 200;
 				gameEffects.play('gem4');
-				console.log("Picking up red jewel!");
+				// console.log("Picking up red jewel!");
 				game.items.splice(game.items.indexOf(this), 1);
 				return true;
 			}

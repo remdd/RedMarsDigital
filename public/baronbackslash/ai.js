@@ -789,7 +789,7 @@ setAiAction = function(creature) {
 						break;
 					}
 					case 2: {
-						console.log("Reanimating");
+						// console.log("Reanimating");
 						if(creature.checkIfCollides()) {
 							creature.ai.nextAction = 3;
 						} else {
@@ -835,7 +835,7 @@ setAiAction = function(creature) {
 						} else {
 							var rand = Math.floor(Math.random() * 8);
 							if(rand < 1) {
-								console.log("Raising zombies!");
+								// console.log("Raising zombies!");
 								game.creatures.forEach(function(zombi) {
 									if(zombi.ai.type === EnumAi.ZOMBI && zombi.vars.dead && getDistance(creature, zombi) < TILE_SIZE * 10) {
 										zombi.ai.nextAction = 2;
