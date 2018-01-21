@@ -143,6 +143,9 @@ var levelTilesets = [
 		flamePot: [
 			{y:4,x:12},{y:4,x:12.5},{y:4,x:13},{y:4,x:13.5},{y:4,x:14},{y:4,x:14.5}
 		],
+		flamePillar: [
+			{y:13,x:12},{y:13,x:12.5},{y:13,x:13},{y:13,x:13.5},{y:13,x:14},{y:13,x:14.5}
+		],
 		uniqueWallDecor: [
 			[{y:10,x:14}],	//	Black Wiz portrait
 			[{y:10,x:15}]	//	Red Wiz portrait
@@ -231,9 +234,13 @@ var obstacleTiles = [
 		{y:10,x:3},	//	66	Dirt Pile
 		{y:11,x:5},	//	67	Tipped Chair
 		{y:9,x:12},	//	68	Barrels & Sacks 1
-		{y:11,x:12},	//	69	Barrels & Sacks 2
+		{y:11,x:12},//	69	Barrels & Sacks 2
 		{y:10,x:7},	//	70	Smashed table
-		{y:12,x:0}	//	71	Baron's Throne
+		{y:12,x:0},	//	71	Baron's Throne
+		{y:11,x:14},//	72	Dirt pile 2
+		{y:9,x:15},	//	73	Barrel smashed
+		{y:10,x:15},//	74	Sack 3
+		{y:12,x:10},//	75	Big Monolith
 	]
 ];
 
@@ -342,6 +349,12 @@ var largeFloorDecor = [
 		{y:12,x:3},
 		{y:12,x:4}
 	],
+	[	//	Floor glyph
+		{y:9,x:12},{y:9,x:13},{y:9,x:14},{y:9,x:15},
+		{y:10,x:12},{y:10,x:13},{y:10,x:14},{y:10,x:15},
+		{y:11,x:12},{y:11,x:13},{y:11,x:14},{y:11,x:15},
+		{y:12,x:12},{y:12,x:13},{y:12,x:14},{y:12,x:15}
+	]
 ];
 
 var uniqueFloorDecor = [

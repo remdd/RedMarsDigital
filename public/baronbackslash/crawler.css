@@ -1,6 +1,7 @@
 @font-face {
 	font-family: 'dpcomic';
-	src: url('lib/dpcomic.ttf');
+	src: url('lib/dpcomic.eot?#iefix') format('embedded-opentype'), 
+		url('lib/dpcomic.ttf');
 }
 body {
 	font-family: 'dpcomic';
@@ -142,6 +143,7 @@ canvas {
 	image-rendering: -webkit-crisp-edges;
 	image-rendering: pixelated;
 	border: 5px solid #22171c;
+	pointer-events: none;
 }
 .tileSet {
 	display: none;
@@ -175,11 +177,18 @@ canvas {
 	z-index: 5;
 	color: rgba(255,255,255,0.65);
 }
-#scoreDiv {
+#scoreDiv, #healthDiv {
 	width: 100%;
 }
 #scoreDiv p {
 	margin: 0;
+}
+#healthDiv p {
+	margin: 0;
+}
+#musicBtn {
+	z-index: 99;
+	pointer-events: auto;
 }
 #messageDiv {
 	position: absolute;
@@ -292,7 +301,7 @@ canvas {
 
 
 /*	Hi score formatting */
-#hiScoreDiv, #creditsDiv {
+#hiScoreDiv, #creditsDiv, #footerDiv {
 	margin: 40px auto;
 	font-size: 2em;
 	color: #82606f;
@@ -302,6 +311,10 @@ canvas {
 	flex-direction: column;
 	justify-content: space-around;
 }
+#hiScoreDiv h3, #hiScoreDiv h5, #creditsDiv h3, #creditsDiv h5 {
+	color: #dec0ce;
+	font-weight: normal;
+}
 #creditsDiv {
 	color: #9f8591;
 	font-size: 24px;
@@ -309,10 +322,14 @@ canvas {
 	padding-right: 50px;
 }
 #creditsDiv p {
-	padding: 0 100px;
+	padding: 0 60px;
 	margin: 10px auto;
 }
 #hiScoreDiv p {
+	font-size: 24px;
+	margin: 0 auto;
+}
+#footerDiv p {
 	font-size: 24px;
 	margin: 0 auto;
 }
@@ -320,8 +337,16 @@ canvas {
 	text-align: left;
 	padding-bottom: 20px;
 }
-#creditsDiv a, #hiScoreDiv a {
+#creditsDiv a:hover, #hiScoreDiv a:hover {
+	text-decoration: underline;
 	color: #dec0ce;
+}
+#creditsDiv a, #hiScoreDiv a {
+	text-decoration: none;
+	color: #dec0ce;
+}
+.twitterIcon {
+	margin-top: 5px;
 }
 .scoreboardDiv {
 /*	display: flex;
@@ -363,4 +388,9 @@ th, td {
 }
 .hiScoreBtnSelected {
 	color: #82606f;
+}
+
+#disqus_thread {
+	width: 826px;
+	margin: 0 auto;
 }

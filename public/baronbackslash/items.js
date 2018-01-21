@@ -591,7 +591,7 @@ var itemTemplates = [
 		pickup: function() {
 			if(player.vars.currentHP < player.vars.maxHP && !this.vars.collected) {
 				this.vars.collected = true;
-				gameEffects.play('healthHeart');
+				gameEffects.play('goldHeart');
 				console.log("Picking up gold heart!");
 				var rand = Math.floor(Math.random() * 3) + 3;
 				player.addHealth(rand);
@@ -952,13 +952,11 @@ function Effect(type) {
 						if(player.vars.currentHP === player.vars.maxHP) {
 							this.good = false;
 							player.vars.currentHP -= 5;
+							$('.healthSpan').text(player.vars.currentHP + ' / ' + player.vars.maxHP);
 						} else {
 							var rand = Math.floor(Math.random() * 5) + 1;
-							if(player.vars.currentHP + rand > player.vars.maxHP) {
-								player.vars.currentHP = player.vars.maxHP;
-							} else {
-								player.vars.currentHP += rand;
-							}
+							player.addHealth(rand);
+							$('.healthSpan').text(player.vars.currentHP + ' / ' + player.vars.maxHP);
 						}
 					};
 					this.remove = function() {
@@ -974,7 +972,7 @@ function Effect(type) {
 						session.vars.defaultDropFrequency = 2;
 					};
 					this.remove = function() {
-						session.vars.defaultDropFrequency = master.defaultDropFrequency;
+						session.vars.defaultDropFrequency = BBMaster.defaultDropFrequency;
 					}
 					break;
 				}

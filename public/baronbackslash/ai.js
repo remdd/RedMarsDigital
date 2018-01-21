@@ -335,6 +335,11 @@ setAiAction = function(creature) {
 						creature.ai.nextAction = 0;
 						break;
 					}
+					case 2: {
+						creature.vars.touchDamage = true;
+						ai.moveAwayFromPlayer(creature, 0, 1000, 1);
+						creature.ai.nextAction = 1;
+					}
 					default: {
 						break;
 					}
@@ -1301,7 +1306,7 @@ setAiAction = function(creature) {
 				switch(creature.ai.nextAction) {
 					case 0: {
 						if(getPlayerDistance(creature) > TILE_SIZE * 6) {
-							ai.rest(creature, 1000, 500);
+							ai.rest(creature, 500, 500);
 						} else {
 							var action = Math.floor(Math.random() * 2);
 							if(action < 1 && creature.hasClearPathToPlayer()) {
@@ -1315,9 +1320,14 @@ setAiAction = function(creature) {
 						break;
 					}
 					case 1: {
-						ai.rest(creature, 0, 1000);
+						ai.rest(creature, 0, 500);
 						creature.ai.nextAction = 0;
 						break;
+					}
+					case 2: {
+						creature.vars.touchDamage = true;
+						ai.moveAwayFromPlayer(creature, 0, 1000, 1);
+						creature.ai.nextAction = 1;
 					}
 					default: {
 						break;
@@ -1587,9 +1597,9 @@ setAiAction = function(creature) {
 						var direction = getPlayerDirection(creature);
 						creature.setFacing(direction);							
 						if(creature.vars.facingRight) {
-							ai.attack(creature, 0, 400, direction, Math.PI / 8, 6);
+							ai.attack(creature, 0, 800, direction, Math.PI / 8, 6);
 						} else {
-							ai.attack(creature, 0, 400, direction, Math.PI / 8, 7);
+							ai.attack(creature, 0, 800, direction, Math.PI / 8, 7);
 						}
 						var action = Math.floor(Math.random() * 5);
 						if(action < 1) {

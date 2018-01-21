@@ -1,5 +1,5 @@
 var gameEffects = new Howl({
-	src: ['snd/GameEffects3.mp3'],
+	src: ['snd/GameEffects3.ogg', 'snd/GameEffects3.mp3'],
 	volume: 0.6,
 	sprite: {
 		playerDamage: [0, 750],
@@ -27,12 +27,13 @@ var gameEffects = new Howl({
 		gem3: [25500, 750],
 		gem4: [26500, 750],
 		charmed: [27500, 750],
-		menuAccept: [23500, 750]	//	copy of gem1
+		menuAccept: [23500, 750],	//	copy of gem1
+		goldHeart: [29500, 500]
 	}
 });
 
 var urkGrunts = new Howl({
-	src: ['snd/Urk3.mp3'],
+	src: ['snd/Urk3.ogg', 'snd/Urk3.mp3'],
 	volume: 0.6,
 	sprite: {
 		grunt1: [0, 500],
@@ -48,7 +49,7 @@ var urkGrunts = new Howl({
 });
 
 var goblinNoises = new Howl({
-	src: ['snd/Goblins3.mp3'],
+	src: ['snd/Goblins4.ogg', 'snd/Goblins4.mp3'],
 	volume: 0.5,
 	sprite: {
 		noise1: [0, 500],
@@ -65,7 +66,7 @@ var goblinNoises = new Howl({
 
 
 var hulkingUrkGrunts = new Howl({
-	src: ['snd/HulkingUrk.mp3'],
+	src: ['snd/HulkingUrk.ogg', 'snd/HulkingUrk.mp3'],
 	volume: 0.8,
 	sprite: {
 		grunt1: [0, 1500],
@@ -80,7 +81,7 @@ var hulkingUrkGrunts = new Howl({
 });
 
 var sludgieNoises = new Howl({
-	src: ['snd/Sludgie3.mp3'],
+	src: ['snd/Sludgie3.ogg', 'snd/Sludgie3.mp3'],
 	volume: 1,
 	sprite: {
 		noise1: [0, 300],
@@ -94,7 +95,7 @@ var sludgieNoises = new Howl({
 });
 
 var skeltonNoises = new Howl({
-	src: ['snd/Skelton.mp3'],
+	src: ['snd/Skelton.ogg', 'snd/Skelton.mp3'],
 	volume: 0.6,
 	sprite: {
 		noise1: [0, 1000],
@@ -107,7 +108,7 @@ var skeltonNoises = new Howl({
 
 
 var grimlinNoises = new Howl({
-	src: ['snd/Grimlin2.mp3'],
+	src: ['snd/Grimlin2.ogg', 'snd/Grimlin2.mp3'],
 	volume: 0.9,
 	sprite: {
 		noise1: [0, 500],
@@ -124,7 +125,7 @@ var grimlinNoises = new Howl({
 });
 
 var campVampNoises = new Howl({
-	src: ['snd/CampVamp2.mp3'],
+	src: ['snd/CampVamp2.ogg', 'snd/CampVamp2.mp3'],
 	volume: 0.5,
 	sprite: {
 		noise1: [0, 800],
@@ -138,7 +139,7 @@ var campVampNoises = new Howl({
 });
 
 var ogrNoises = new Howl({
-	src: ['snd/Ogr2.mp3'],
+	src: ['snd/Ogr2.ogg', 'snd/Ogr2.mp3'],
 	volume: 0.8,
 	sprite: {
 		noise1: [0, 800],
@@ -151,7 +152,7 @@ var ogrNoises = new Howl({
 });
 
 var squarkNoises = new Howl({
-	src: ['snd/Squark3.mp3'],
+	src: ['snd/Squark3.ogg', 'snd/Squark3.mp3'],
 	volume: 0.3,
 	sprite: {
 		noise1: [0, 1200],
@@ -164,7 +165,7 @@ var squarkNoises = new Howl({
 });
 
 var rockoNoises = new Howl({
-	src: ['snd/Rocko2.mp3'],
+	src: ['snd/Rocko2.ogg', 'snd/Rocko2.mp3'],
 	volume: 0.8,
 	sprite: {
 		noise1: [0, 700],
@@ -181,7 +182,7 @@ var rockoNoises = new Howl({
 });
 
 var pebblNoises = new Howl({
-	src: ['snd/Pebbl.mp3'],
+	src: ['snd/Pebbl.ogg', 'snd/Pebbl.mp3'],
 	volume: 0.7,
 	sprite: {
 		noise1: [0, 700],
@@ -198,7 +199,7 @@ var pebblNoises = new Howl({
 });
 
 var kobNoises = new Howl({
-	src: ['snd/Kobs4.mp3'],
+	src: ['snd/Kobs4.ogg', 'snd/Kobs4.mp3'],
 	volume: 0.5,
 	sprite: {
 		noise1: [0, 700],
@@ -212,7 +213,7 @@ var kobNoises = new Howl({
 });
 
 var miniKobNoises = new Howl({
-	src: ['snd/MiniKobs.mp3'],
+	src: ['snd/MiniKobs.ogg', 'snd/MiniKobs.mp3'],
 	volume: 0.4,
 	sprite: {
 		noise1: [0, 700],
@@ -226,7 +227,7 @@ var miniKobNoises = new Howl({
 });
 
 var gigaKobNoises = new Howl({
-	src: ['snd/GigaKob.mp3'],
+	src: ['snd/GigaKob.ogg', 'snd/GigaKob.mp3'],
 	volume: 0.8,
 	sprite: {
 		noise1: [0, 1200],
@@ -241,7 +242,7 @@ var gigaKobNoises = new Howl({
 
 
 var zombiMasterNoises = new Howl({
-	src: ['snd/ZombiMaster.mp3'],
+	src: ['snd/ZombiMaster.ogg', 'snd/ZombiMaster.mp3'],
 	volume: 0.9,
 	sprite: {
 		noise1: [0, 750],
@@ -254,7 +255,7 @@ var zombiMasterNoises = new Howl({
 
 
 var zombiNoises = new Howl({
-	src: ['snd/Zombis.mp3'],
+	src: ['snd/Zombis.ogg', 'snd/Zombis.mp3'],
 	volume: 0.2,
 	sprite: {  
 		noise1: [0, 1500],
@@ -275,7 +276,7 @@ var zombiNoises = new Howl({
 });
 
 var impBites = new Howl({
-	src: ['snd/impBites2.mp3'],
+	src: ['snd/impBites2.ogg', 'snd/impBites2.mp3'],
 	volume: 0.7,
 	sprite: {
 		bite1: [0, 500],
@@ -288,7 +289,7 @@ var impBites = new Howl({
 });
 
 var badbugNoises = new Howl({
-	src: ['snd/Badbugs2.mp3'],
+	src: ['snd/Badbugs2.ogg', 'snd/Badbugs2.mp3'],
 	volume: 0.7,
 	sprite: {
 		movement1: [0,750],
@@ -309,7 +310,7 @@ var badbugNoises = new Howl({
 });
 
 var creatureSounds1 = new Howl({
-	src: ['snd/creatureSounds1b.mp3'],
+	src: ['snd/creatureSounds1b.ogg', 'snd/creatureSounds1b.mp3'],
 	volume: 0.6,
 	sprite: {
 		teleport1: [0, 1000],
@@ -335,7 +336,7 @@ var creatureSounds1 = new Howl({
 });
 
 var creatureSounds2 = new Howl({
-	src: ['snd/creatureSounds2.mp3'],
+	src: ['snd/creatureSounds2.ogg', 'snd/creatureSounds2.mp3'],
 	volume: 0.6,
 	sprite: {
 		redWizDeath: [0,2500],
@@ -359,31 +360,35 @@ var creatureSounds2 = new Howl({
 });
 
 var bgMusic = new Howl({
-	src: ['snd/bgMusic.mp3'],
+	src: ['snd/bgMusic.ogg', 'snd/bgMusic.mp3'],
 	loop: true,
 	volume: 1,
+	html5: true,
+	preload: false,
 	sprite: {
 		music1: [0, 166957],
-		music2: [168000, 160000],
-		music3: [330000, 160000],
-		music4: [495000, 160000]
-	// },
-	// onload: function() {
-	// 	//	Show game start screen on load
-	// 	firstLoad();
+		music2: [170000, 160000],
+		music3: [335000, 160000],
+		music4: [498000, 160000]
+	},
+	onfaded: function() {
+		if(this.volume <= 0) {
+			this.stop();
+		}
+	},
+	onload: function() {
+		//	Show game start screen on load
+		playerName();
 	}
 });
-// firstLoad();
-
-		firstLoad();
-
 
 var titleLoop = new Howl({
-	src: ['snd/TitleLoop.mp3'],
+	src: ['snd/TitleLoop2.ogg', 'snd/TitleLoop2.mp3'],
 	loop: true,
 	volume: 1,
+	html5: true,
 	sprite: {
-		titles: [0, 10000]
+		titles: [0, 20000]
 	},
 	onfaded: function() {
 		if(this.volume <= 0) {
@@ -391,6 +396,100 @@ var titleLoop = new Howl({
 		}
 	}
 });
+
+var victoryLoop = new Howl({
+	src: ['snd/victoryLoop.ogg', 'snd/victoryLoop.mp3'],
+	loop: true,
+	volume: 0.6,
+	html5: true,
+	sprite: {
+		victory: [0,69818]
+	},
+	onfaded: function() {
+		if(this.volume <= 0) {
+			this.stop();
+		}
+	}
+});
+
+function playMusic(level) {
+	switch(level) {
+		case 'titles': {
+			if(bgMusic.playing()) {
+				bgMusic.stop();
+			} else if(victoryLoop.playing()) {
+				victoryLoop.stop();
+			}
+			titleLoop.play('titles');
+			titleLoop.volume(0);
+			titleLoop.fade(0, session.vars.musicVol, 0);
+			break;
+		}
+		case 1: {
+			if(titleLoop.playing()) {
+				titleLoop.stop();
+			} else if(victoryLoop.playing()) {
+				victoryLoop.stop();
+			} else if(bgMusic.playing()) {
+				bgMusic.stop();
+			}
+			bgMusic.play('music1');
+			bgMusic.volume(0);
+			bgMusic.fade(0, session.vars.musicVol, 2000);
+			break;
+		}
+		case 2: {
+			if(titleLoop.playing()) {
+				titleLoop.stop();
+			} else if(victoryLoop.playing()) {
+				victoryLoop.stop();
+			} else if(bgMusic.playing()) {
+				bgMusic.stop();
+			}
+			bgMusic.play('music2');
+			bgMusic.volume(0);
+			bgMusic.fade(0, session.vars.musicVol, 2000);
+			break;
+		}
+		case 3: {
+			if(titleLoop.playing()) {
+				titleLoop.stop();
+			} else if(victoryLoop.playing()) {
+				victoryLoop.stop();
+			} else if(bgMusic.playing()) {
+				bgMusic.stop();
+			}
+			bgMusic.play('music3');
+			bgMusic.volume(0);
+			bgMusic.fade(0, session.vars.musicVol, 2000);
+			break;
+		}
+		case 4: {
+			if(titleLoop.playing()) {
+				titleLoop.stop();
+			} else if(victoryLoop.playing()) {
+				victoryLoop.stop();
+			} else if(bgMusic.playing()) {
+				bgMusic.stop();
+			}
+			bgMusic.play('music4');
+			bgMusic.volume(0);
+			bgMusic.fade(0, session.vars.musicVol, 2000);
+			break;
+		}
+		case 'victory': {
+			if(bgMusic.playing()) {
+				bgMusic.stop();
+			}
+			victoryLoop.play('victory');
+			bgMusic.volume(session.vars.musicVol);
+			break;
+		}
+		default: {
+			break;
+		}
+	}
+}
 
 function playSwish(size) {
 	if(size === "big") {

@@ -1,6 +1,6 @@
 var level;											//	Current level object, loaded from levels.js
 
-var master = {
+var BBMaster = {
 	interactDistance: 15,							//	Distance at which player can interact with interactables
 	defaultDropFrequency: 3,						//	Average number of default death drops per pickup drop
 	defaultMushroomFactor: 90000,					//	Multiplier for default mushroom effect duration
@@ -37,8 +37,9 @@ var session = {
 	loadingLevel: false,
 	score: 0,
 	vars: {
-		musicVol: 0.4,
+		musicVol: 0.6,
 		soundVol: 1,
+		musicIsMuted: false
 	},
 	playing: false
 }
@@ -261,10 +262,10 @@ function setUpCreatures() {
 	// 		level.creatureArray[i][j] = undefined;
 	// 	}
 	// };
-	// level.creatureArray[player.grid.y+2][player.grid.x] = EnumCreature.BADBUG;
-	// level.creatureArray[player.grid.y+2][player.grid.x+2] = EnumCreature.BADBUG;
-	// level.creatureArray[player.grid.y][player.grid.x+2] = EnumCreature.GIGA_KOB;
-	// level.creatureArray[player.grid.y+2][player.grid.x+1] = EnumCreature.MUMI;
+	// level.creatureArray[player.grid.y+2][player.grid.x] = EnumCreature.GREEN_SLUDGIE;
+	// level.creatureArray[player.grid.y+2][player.grid.x+2] = EnumCreature.YELLOW_SLUDGIE;
+	// level.creatureArray[player.grid.y][player.grid.x+2] = EnumCreature.BADBUG;
+	// level.creatureArray[player.grid.y+2][player.grid.x+1] = EnumCreature.BADBUG;
 	// level.creatureArray[player.grid.y][player.grid.x+1] = EnumCreature.BADBUG;
 	// level.creatureArray[player.grid.y][player.grid.x+2] = EnumCreature.BADBUG;
 	// level.creatureArray[player.grid.y+1][player.grid.x+1] = EnumCreature.BADBUG;
@@ -1174,14 +1175,14 @@ interact = function() {
 		}
 		level.obstacles.forEach(function(obstacle) {
 			if(inViewport(obstacle.grid.x * TILE_SIZE, obstacle.grid.y * TILE_SIZE) && obstacle.interact) {
-				if(getDistanceToPlayer(obstacle.position.x, obstacle.position.y) < master.interactDistance) {
+				if(getDistanceToPlayer(obstacle.position.x, obstacle.position.y) < BBMaster.interactDistance) {
 					obstacle.interact();
 				}
 			}
 		});
 		game.items.forEach(function(item) {
 			if(inViewport(item.position.x, item.position.y) && item.interact && performance.now() > item.dropTime + 500) {
-				if(getDistanceToPlayer(item.position.x, item.position.y) < master.interactDistance) {
+				if(getDistanceToPlayer(item.position.x, item.position.y) < BBMaster.interactDistance) {
 					item.interact();
 				}
 			}
@@ -1445,6 +1446,8 @@ function updatePlayer() {
 	} else if(level.levelNumber === 99 && !session.flags.metBaron2 && (player.grid.y <= 19 || (player.grid.y <=24 && player.grid.x <= 11) || (player.grid.y <=24 && player.grid.x >= 22))) {
 		session.flags.metBaron2 = true;
 		baronEncounter2();
+	} else if(level.levelNumber === 99 && !victoryLoop.playing() && session.flags.victoryMusicTime && performance.now() > session.flags.victoryMusicTime) {
+		playMusic('victory');
 	}
 }
 
@@ -2260,7 +2263,7 @@ function draw(interpolationPercentage) {
 	drawDrawables();
 	attackCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	drawAttacks();
-	if(master.debugs) {
+	if(BBMaster.debugs) {
 		debugCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		drawDebugCanvas();
 	}
@@ -2275,7 +2278,7 @@ function reDraw() {
 	drawDrawables();
 	attackCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	drawAttacks();
-	if(master.debugs) {
+	if(BBMaster.debugs) {
 		debugCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		drawDebugCanvas();
 	}
@@ -2287,7 +2290,7 @@ function clearCanvases() {
 	bgCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	drawableCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	attackCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-	if(master.debugs) {
+	if(BBMaster.debugs) {
 		debugCtx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 	}
 }
@@ -2412,15 +2415,34 @@ function initializeSession() {
 	session.levelNumber = 1;
 	session.score = 0;
 	session.flags = {};
-	Object.assign(session.flags, master.flags);
-	session.vars.defaultDropFrequency = master.defaultDropFrequency;
-	session.vars.defaultMushroomMin = master.defaultMushroomMin;
-	session.vars.defaultMushroomFactor = master.defaultMushroomFactor;
-	session.vars.dropFrequency = cloneArray(master.dropFrequency);
+	Object.assign(session.flags, BBMaster.flags);
+	session.vars.defaultDropFrequency = BBMaster.defaultDropFrequency;
+	session.vars.defaultMushroomMin = BBMaster.defaultMushroomMin;
+	session.vars.defaultMushroomFactor = BBMaster.defaultMushroomFactor;
+	session.vars.dropFrequency = cloneArray(BBMaster.dropFrequency);
 	$('.scoreSpan').text('');
-	session.prng = new Random(Math.floor(Math.random() * 2147483647));
-	// session.prng = new Random(session.seed);
+	session.seed = Math.floor(Math.random() * 2147483647);
+	console.log("Session seed is: " + session.seed);
+	session.prng = new Random(session.seed);
 }
+
+$('#musicBtn').click(function() {
+	if(!session.vars.musicIsMuted) {
+		session.vars.musicIsMuted = true;
+		bgMusic.mute(session.vars.musicIsMuted);
+		titleLoop.mute(session.vars.musicIsMuted);
+		victoryLoop.mute(session.vars.musicIsMuted);
+		$('#musicBtn').attr('src', 'img/NoMusic.png');
+		console.log("Muting music");
+	} else {
+		session.vars.musicIsMuted = false;
+		bgMusic.mute(session.vars.musicIsMuted);
+		titleLoop.mute(session.vars.musicIsMuted);
+		victoryLoop.mute(session.vars.musicIsMuted);
+		$('#musicBtn').attr('src', 'img/Music.png');
+		console.log("Un-Muting music");
+	}
+});
 
 //	Pause & restart game when browser tab loses & regains focus
 window.onfocus = function() {
@@ -2432,7 +2454,7 @@ window.onfocus = function() {
 	if(player && player.vars && !player.vars.dead) {
 		session.score -= 1;
 	}
-	bgMusic.play();
+	Howler.mute(false);
 }
 window.onblur = function() {
 	session.focused = false;
@@ -2441,7 +2463,7 @@ window.onblur = function() {
 		MainLoop.stop();
 	}
 	session.score -= (game.scoreOffset);
-	bgMusic.pause();
+	Howler.mute(true);
 }
 
 function drawMap() {

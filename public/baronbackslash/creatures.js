@@ -270,7 +270,7 @@ var creatureTemplates = [
 			maxHP: 3,
 			currentHP: 3,
 			minFacingChangeTime: 50,
-			score: 75
+			score: 60
 		},
 		sprite: {
 			spriteSheet: monsterSprites,
@@ -313,6 +313,8 @@ var creatureTemplates = [
 			if(this.vars.currentHP <= 0) {
 				this.deathResponse();
 			} else {
+				this.ai.nextAction = 2;
+				clearAiAction(this);
 				playSludgieNoise();
 			}
 		},
@@ -643,11 +645,14 @@ var creatureTemplates = [
 			]
 		},
 		box: {
-			width: 18, 
+			width: 16, 
 			height: 24
 		},
 		ai: {
 			type: EnumAi.HULKING_URK,
+		},
+		movement: {
+			bounceRandom: true
 		},
 		inflictDamage: function(damage) {
 			this.vars.currentHP -= damage;
@@ -1150,6 +1155,8 @@ var creatureTemplates = [
 				} else {
 					zombiMasterNoises.play('noise4');
 				}
+				this.ai.nextAction = 1;
+				clearAiAction(this);
 			}
 		},
 		deathResponse: function() {
@@ -1401,7 +1408,7 @@ var creatureTemplates = [
 			currentHP: 7,
 			restingWeaponAnimation: true,
 			attackRate: 1,
-			score: 300
+			score: 350
 		},
 		sprite: {
 			spriteSheet: monsterSprites,
@@ -1593,7 +1600,7 @@ var creatureTemplates = [
 			teleportCooldown: 4000,
 			summoned: 0,
 			maxImps: 3,
-			score: 400
+			score: 500
 		},
 		sprite: {
 			spriteSheet: monsterSprites,
@@ -1698,7 +1705,7 @@ var creatureTemplates = [
 			summoned: 0,
 			maxElementals: 2,
 			minFireballs: 5,
-			score: 400
+			score: 500
 		},
 		sprite: {
 			spriteSheet: monsterSprites,
@@ -1893,7 +1900,7 @@ var creatureTemplates = [
 			attackRate: 1,
 			moveThroughColliders: true,
 			foreground: true,
-			score: 100
+			score: 0
 		},
 		sprite: {
 			spriteSheet: monsterSprites,
@@ -1975,7 +1982,7 @@ var creatureTemplates = [
 			currentHP: 3,
 			restingWeaponAnimation: false,
 			attackRate: 1,
-			score: 100
+			score: 0
 		},
 		sprite: {
 			spriteSheet: monsterSprites,
@@ -2188,6 +2195,8 @@ var creatureTemplates = [
 			if(this.vars.currentHP <= 0) {
 				this.deathResponse();
 			} else {
+				this.ai.nextAction = 2;
+				clearAiAction(this);
 				playSludgieNoise();
 			}
 		},
@@ -2275,7 +2284,7 @@ var creatureTemplates = [
 			currentHP: 5,
 			restingWeaponAnimation: true,
 			attackRate: 0.8,
-			score: 70
+			score: 100
 		},
 		sprite: {
 			spriteSheet: monsterSprites,
@@ -2347,7 +2356,7 @@ var creatureTemplates = [
 			maxHP: 3,
 			currentHP: 3,
 			restingWeaponAnimation: true,
-			score: 60
+			score: 50
 		},
 		sprite: {
 			spriteSheet: monsterSprites,
@@ -2463,7 +2472,7 @@ var creatureTemplates = [
 			]
 		},
 		box: {
-			width: 20, 
+			width: 16, 
 			height: 30
 		},
 		movement: {
@@ -2502,7 +2511,7 @@ var creatureTemplates = [
 			currentHP: 3,
 			restingWeaponAnimation: false,
 			attackRate: 1,
-			score: 100
+			score: 50
 		},
 		sprite: {
 			spriteSheet: monsterSprites,
@@ -3171,8 +3180,8 @@ var creatureTemplates = [
 				[ 600, [150, 300, 450, 600], [ 16,17,18,19] ],							//	Moving, facing L
 				[ 1800, [300, 600, 900, 1200, 1500, 1800], [8, 9, 10,11,12,13 ] ],									//	Death, facing R
 				[ 1800, [300, 600, 900, 1200, 1500, 1800], [8, 9, 10,11,12,13 ] ],									//	Death, facing L
-				[ 400, [200, 400], [6,7]],			//	Attacking R
-				[ 400, [200, 400], [20,21]]			//	Attacking L
+				[ 800, [300, 800], [6,7]],			//	Attacking R
+				[ 800, [300, 800], [20,21]]			//	Attacking L
 			]
 		},
 		movement: {

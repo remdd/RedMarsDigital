@@ -272,6 +272,7 @@ levelGen.loadLevel = function(levelNumber) {
 			sessionVars.uncommonCreatures.push(EnumCreature.KOB);
 			level.startRoomContents = function() {
 				new Obstacle(EnumObstacle.SIGNPOST, null, this.origin.y + 1, this.origin.x + 2);
+				// new Obstacle(EnumObstacle.FLAME_PILLAR, null, this.origin.y + 1, this.origin.x + 2);
 				console.log("Adding start room contents");
 			};
 			break;
@@ -493,7 +494,7 @@ levelGen.generateLastLevel = function() {
 		this.addFloorPatch(EnumFloorpatch.LIGHT_RED, 3, 5, 8, 5);
 		new Obstacle(EnumObstacle.DOOR, null, this.origin.y + this.height, 16);
 		new Obstacle(EnumObstacle.KEY_DOOR, null, this.origin.y - 2, 16);
-		new Obstacle(EnumObstacle.MONOLITH, null, this.origin.y + 5, 16);
+		new Obstacle(EnumObstacle.BIG_MONOLITH, null, this.origin.y + 5, 15.5);
 		new Obstacle(EnumObstacle.MONOLITH, null, this.origin.y + 5, 6);
 		new Obstacle(EnumObstacle.MONOLITH, null, this.origin.y + 5, 26);
 		new Obstacle(EnumObstacle.COLUMN, null, this.origin.y + 1, 13);
@@ -798,6 +799,8 @@ baronEncounter3 = function() {
 baronDeath = function() {
 	//	Flag stops score decay
 	session.flags.defeatedBaron = true;
+	bgMusic.stop();
+	session.flags.victoryMusicTime = performance.now() + 3000;
 }
 
 completeGame = function() {
@@ -1461,6 +1464,7 @@ levelGen.checkForCorridorStart = function(y, x) {
 };
 
 levelGen.addRandomCreatures = function() {
+
 	console.log(level.creatureCount + " creatures - minimum is " + sessionVars.minimumCreatureCount);
 	while(level.creatureCount < sessionVars.minimumCreatureCount) {
 		//	Add extra creatures in ratio 4 common to 1 uncommon
@@ -1472,20 +1476,60 @@ levelGen.addRandomCreatures = function() {
 			var rand = Math.floor(session.prng.nextFloat() * sessionVars.commonCreatures.length);
 			var creature = sessionVars.commonCreatures[rand];
 		}
-		var retry = true;
-		while(retry) {
-			var randY = Math.floor(session.prng.nextFloat() * (level.terrainArray.length));
-			var randX = Math.floor(session.prng.nextFloat() * (level.terrainArray[0].length));
-			if(		
-				//	Check that creature array and obstacle array are clear, and that position is not in the player start room
-				level.terrainArray[randY][randX] === 0 && level.creatureArray[randY][randX] === 0 && level.obstacleArray[randY][randX] === undefined &&
-				!(randY >= level.startRoom.origin.y && randY <= level.startRoom.origin.y + level.startRoom.height &&
-				randX >= level.startRoom.origin.x && randX <= level.startRoom.origin.x + level.startRoom.width)
-			) {			//	If so, add creature to level.creatureArray
-				level.creatureArray[randY][randX] = creature;
-				level.creatureCount++;
-				retry = false;
-				console.log("Adding extra creature...");
+
+		if(creature === EnumCreature.HULKING_URK || creature === EnumCreature.GIGA_KOB || creature === EnumCreature.WRONGWRAITH) {
+			var retry = true;
+			var tries = 100;
+			while(retry && tries) {
+				var randY = Math.floor(session.prng.nextFloat() * (level.terrainArray.length-2) +1);
+				var randX = Math.floor(session.prng.nextFloat() * (level.terrainArray[0].length-2) +1);
+				if(		
+					!(randY >= level.playerStart.y-5 && randY <= level.playerStart.y+5 && randX >= level.playerStart.x-5 && randX <= level.playerStart.x+5) &&
+					//	Check that creatureArray is empty for this and all surrounding tiles...
+					level.creatureArray[randY-1][randX-1] === 0 && level.creatureArray[randY-1][randX] === 0 && level.creatureArray[randY+1][randX+1] === 0 &&
+					level.creatureArray[randY][randX-1] === 0 && level.creatureArray[randY][randX] === 0 && level.creatureArray[randY][randX+1] === 0 &&
+					level.creatureArray[randY+1][randX-1] === 0 && level.creatureArray[randY+1][randX] === 0 && level.creatureArray[randY+1][randX+1] === 0 &&
+					//	Check that terrainArray is empty for this and all surrounding tiles...
+					level.terrainArray[randY-1][randX-1] === 0 && level.terrainArray[randY-1][randX] === 0 && level.terrainArray[randY+1][randX+1] === 0 &&
+					level.terrainArray[randY][randX-1] === 0 && level.terrainArray[randY][randX] === 0 && level.terrainArray[randY][randX+1] === 0 &&
+					level.terrainArray[randY+1][randX-1] === 0 && level.terrainArray[randY+1][randX] === 0 && level.terrainArray[randY+1][randX+1] === 0 &&
+					// //	...and that obstacle array is clear...
+					level.obstacleArray[randY-1][randX-1] === undefined && level.obstacleArray[randY-1][randX] === undefined && level.obstacleArray[randY+1][randX+1] === undefined &&
+					level.obstacleArray[randY][randX-1] === undefined && level.obstacleArray[randY][randX] === undefined && level.obstacleArray[randY][randX+1] === undefined &&
+					level.obstacleArray[randY+1][randX-1] === undefined && level.obstacleArray[randY+1][randX] === undefined && level.obstacleArray[randY+1][randX+1] === undefined
+				) {			//	If so, add creature to level.creatureArray
+					level.creatureArray[randY][randX] = creature;
+					level.creatureCount++;
+					retry = false;
+					console.log("Adding extra creature...");
+				} else {
+					tries--;
+				}
+			}
+		} else {
+			var retry = true;
+			var tries = 100;
+			while(retry && tries) {
+				var randY = Math.floor(session.prng.nextFloat() * (level.terrainArray.length-2) +1);
+				var randX = Math.floor(session.prng.nextFloat() * (level.terrainArray[0].length-2) +1);
+				if(		
+					!(randY >= level.playerStart.y-5 && randY <= level.playerStart.y+5 && randX >= level.playerStart.x-5 && randX <= level.playerStart.x+5) &&
+					//	Check that creatureArray is empty for this and all surrounding tiles...
+					level.creatureArray[randY-1][randX-1] === 0 && level.creatureArray[randY-1][randX] === 0 && level.creatureArray[randY+1][randX+1] === 0 &&
+					level.creatureArray[randY][randX-1] === 0 && level.creatureArray[randY][randX] === 0 && level.creatureArray[randY][randX+1] === 0 &&
+					level.creatureArray[randY+1][randX-1] === 0 && level.creatureArray[randY+1][randX] === 0 && level.creatureArray[randY+1][randX+1] === 0 &&
+					//	Check that terrainArray is empty
+					level.terrainArray[randY][randX] === 0 &&
+					// //	...and that obstacle array is clear...
+					level.obstacleArray[randY][randX] === undefined
+				) {			//	If so, add creature to level.creatureArray
+					level.creatureArray[randY][randX] = creature;
+					level.creatureCount++;
+					retry = false;
+					console.log("Adding extra creature...");
+				} else {
+					tries--;
+				}
 			}
 		}
 	}
@@ -2677,7 +2721,7 @@ Room.prototype.addObstacles = function(obstacleType) {
 			var rand = Math.floor(session.prng.nextFloat() * 10);
 			if(rand < 4) {
 				//	Empty room
-				var contents = Math.floor(session.prng.nextFloat() * 5);
+				var contents = Math.floor(session.prng.nextFloat() * 6);
 				if(contents < 1) {
 					var num = Math.floor(session.prng.nextFloat() * 3) + 1;
 					for(var i = 0; i < num; i++) {
@@ -2695,13 +2739,25 @@ Room.prototype.addObstacles = function(obstacleType) {
 				} else if(contents < 4) {		//	Add chasm 3
 					new Decor(largeFloorDecor[2][0].y, largeFloorDecor[2][0].x, this.origin.y + 2, this.origin.x + 2, 0, 0);
 					new Decor(largeFloorDecor[2][1].y, largeFloorDecor[2][1].x, this.origin.y + 2, this.origin.x + 3, 0, 0);
-				} else {						//	Add big grille
+				} else if(contents < 5) {						//	Add big grille
 					new Decor(largeFloorDecor[3][0].y, largeFloorDecor[3][0].x, this.origin.y + 1, this.origin.x + 1, 0, 0);
 					new Decor(largeFloorDecor[3][1].y, largeFloorDecor[3][1].x, this.origin.y + 1, this.origin.x + 2, 0, 0);
 					new Decor(largeFloorDecor[3][2].y, largeFloorDecor[3][2].x, this.origin.y + 2, this.origin.x + 1, 0, 0);
 					new Decor(largeFloorDecor[3][3].y, largeFloorDecor[3][3].x, this.origin.y + 2, this.origin.x + 2, 0, 0);
+				} else {
+					if(this.width >= 6 && this.height >= 6) {
+						for(var i = 0; i < 4; i++) {		//	Add floor glyph
+							new Decor(largeFloorDecor[4][i].y, largeFloorDecor[4][i].x, this.origin.y+1, this.origin.x+1+i, 0, 0);
+							new Decor(largeFloorDecor[4][i+4].y, largeFloorDecor[4][i+4].x, this.origin.y+2, this.origin.x+1+i, 0, 0);
+							new Decor(largeFloorDecor[4][i+8].y, largeFloorDecor[4][i+8].x, this.origin.y+3, this.origin.x+1+i, 0, 0);
+							new Decor(largeFloorDecor[4][i+12].y, largeFloorDecor[4][i+12].x, this.origin.y+4, this.origin.x+1+i, 0, 0);
+						}
+					} else {
+						this.addFloorDecor(2);
+					}
 				}
 				this.addFloorDecor(3);
+				this.addTorches();
 			} else if(rand < 6) {
 				//	Storeroom
 				this.addStoreRoomObstacles();
@@ -2709,14 +2765,17 @@ Room.prototype.addObstacles = function(obstacleType) {
 				if(level.specialItemCount > 0) {
 					levelGen.addSpecialItem(this);
 				}
+				this.addTorches();
 			} else if(rand < 7) {
 				//	Well room
 				this.addWellRoomObstacles();
 				this.addFloorDecor(2, [EnumDecortype.FILTH, EnumDecortype.PLANTS]);
+				this.addTorches();
 			} else if(rand < 8) {
 				//	Table room
 				this.addTableRoomObstacles();
 				this.addFloorDecor(2);
+				this.addTorches(3);
 			} else if(rand < 9) {
 				//	Food room
 				var rand2 = Math.floor(session.prng.nextFloat() * 5);
@@ -2739,10 +2798,13 @@ Room.prototype.addObstacles = function(obstacleType) {
 					new Obstacle(EnumObstacle.STOOL, this);
 				}
 				this.addFloorDecor(1);
+				this.addTorches(2);
 			} else if(rand < 10) {
 				//	???
 				new Obstacle(EnumObstacle.STONES, this);
-				this.addFloorDecor(1);
+				new Obstacle(EnumObstacle.DIRT_PILE, this);
+				this.addFloorDecor(4);
+				this.addTorches();
 			}
 			break;
 		}
@@ -2760,6 +2822,7 @@ Room.prototype.addObstacles = function(obstacleType) {
 				this.addTableRoomObstacles();
 				this.addFloorDecor(2, [EnumDecortype.SPLATS]);
 			}
+			this.addTorches();
 			break;
 		}
 		case EnumObstacletype.PUDDLE: {
@@ -2779,6 +2842,26 @@ Room.prototype.addObstacles = function(obstacleType) {
 		}
 	}
 }
+
+Room.prototype.addTorches = function(max, num) {
+	var torches;
+	if(num) {
+		torches = num;
+	} else if(max) {
+		torches = Math.floor(session.prng.nextFloat() * max) + 1;
+	} else {
+		torches = Math.floor(session.prng.nextFloat() * 4) - 1;
+	}
+	for(var i = 0; i < torches; i++) {
+		var type = Math.floor(session.prng.nextFloat() * 2);
+		if(type < 1) {
+			new Obstacle(EnumObstacle.FLAME_POT, this);
+		} else {
+			new Obstacle(EnumObstacle.FLAME_PILLAR, this);
+		}
+	}
+}
+
 Room.prototype.addStoreRoomObstacles = function(num) {
 	if(!num) {
 		num = Math.floor(session.prng.nextFloat() * 10) + 1;		//	Random 1-10
@@ -2788,8 +2871,10 @@ Room.prototype.addStoreRoomObstacles = function(num) {
 		EnumObstacle.BARREL_2,
 		EnumObstacle.BARRELSx2,
 		EnumObstacle.BARRELSx3,
+		EnumObstacle.SMASHED_BARREL,
 		EnumObstacle.SACK,
 		EnumObstacle.SACK_2,
+		EnumObstacle.SACK_3,
 		EnumObstacle.SACKx2,
 		EnumObstacle.TIPPED_BARREL,
 		EnumObstacle.SPLIT_SACK,
@@ -2798,6 +2883,7 @@ Room.prototype.addStoreRoomObstacles = function(num) {
 		EnumObstacle.WIDE_SHELVES,
 		EnumObstacle.NARROW_SHELVES,
 		EnumObstacle.RUBBLE,
+		EnumObstacle.DIRT_PILE,
 		EnumObstacle.DIRT_PILE,
 		EnumObstacle.BARRELS_AND_SACKS_1,
 		EnumObstacle.BARRELS_AND_SACKS_2

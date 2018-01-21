@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html lang="EN">
 <head>
-	<title>Crawler</title>
+	<title>The Deadly Dungeons of Baron Backslash</title>
 	<link rel="stylesheet" type="text/css" href="crawler.css">
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="lib/jquery-3.3.1.min.js"></script>
 </head>
 <body>
+
+<div id="result" style="color:white;">
+
+</div>
+<div id="details" style="color:white;">
+	
+</div>
+
+<script type="text/javascript">
+	
+	// Get IE or Edge browser version
+
+
+</script>
+
 	<img class="tileSet" id="dungeon1Tiles" src="Dungeon1.png">
 	<img class="tileSet" id="playerSpriteImg" src="Player.png">
 	<img class="tileSet" id="monsterSprites" src="Monsters.png">
@@ -14,7 +29,18 @@
 
 	<div id="container">
 		<div id="gameMenuDiv">
-			<div id="loadingScreen" class="gameMenuScreen">
+
+			<div id="ieScreen" class="gameMenuScreen" hidden>
+				<div class="centredMenuScreen">
+					<div>
+						<h3>It looks like you're using <span id="browserSpan">browser</span>!</h3>
+						<h3>Unfortunately Microsoft's browsers don't want to play nicely with pixel graphics :(</h3>
+						<h3>Please try again using another browser such as Firefox, Chrome or Opera.</h3>
+					</div>
+				</div>
+ 			</div>
+
+			<div id="loadingScreen" class="gameMenuScreen" hidden>
 				<div class="centredMenuScreen">
 					<div>
 						<h3>Loading</h3>
@@ -26,7 +52,7 @@
  			<div id="playerNameScreen" class="gameMenuScreen" hidden>
  				<div class="centredMenuScreen">
 					<form class="playerNameForm">
-						<h3>Another victim!</h3>
+						<h3>More meat for the dungeon!</h3>
 						<h3>By what name will you be remembered?</h3>
 						<input type="text" name="playerName" id="playerName" maxlength="20" placeholder="Anonymous Victim" autofocus>
 						<button class="enterNameBtn">
@@ -143,7 +169,7 @@
 		</div>
 
 		<div id="interfaceDivLeft" hidden>
-			<div id="scoreDiv">
+			<div id="healthDiv">
 				<p>
 					<img src="img/heart.png"> 
 					<span class="healthSpan"></span>
@@ -162,7 +188,10 @@
 
 		<div id="interfaceDivRight">
 			<div id="scoreDiv">
-				<p class="scoreSpan"></p>
+				<p>
+					<span class="scoreSpan"></span>
+					<img id="musicBtn" src="img/Music.png">
+				</p>
 			</div>
 		</div>
 	</div>
@@ -171,8 +200,9 @@
 	<div id="hiScoreDiv">
 
 		<p>The Deadly Dungeons of Baron Backslash is currently running version 1.0.0.</p>
-		<p>I hope to add many more creatures, items, levels, loot and surprises in future!</p>
-		<p>To hear about future updates, follow the Baron on Twitter: <a href="https://twitter.com/Baron_Backslash">@Baron_Backslash</a></p>
+		<p>I plan to add more content, creatures, items, levels and other surprises in future!</p>
+		<p>To hear about future updates, follow the Baron on Twitter:</p>
+		<p><img class="twitterIcon" src="img/Twitter.png"> <a href="https://twitter.com/Baron_Backslash">@Baron_Backslash</a></p>
 		<br>
 
 		<hr class="symbol">
@@ -226,13 +256,13 @@
 		});
 	</script>
 
-
-	<hr class="symbol">
-
 	<div id="creditsDiv">
+
+		<hr class="symbol">
+
 		<h3>Credits</h3>
 		<p>A game by <a href="www.redmarsdigital.com">Red Mars Digital</a>.</p>
-		<p>Concept, music, sound, graphics, animation, programming etc by Robin Marsden, with essential contributions from the following:</p>
+		<p>Concept, game engine, music, sound, graphics, animation and programming by Robin Marsden, with essential contributions from the following:</p>
 		<ul>
 			<li>Enormous thanks to Robert Norenberg for his most excellent <a href="https://0x72.itch.io/16x16-dungeon-tileset">Dungeon Tileset</a>, which supplied all of the best creature sprites and dungeon graphics - as well as laying the foundations for and inspiring the rest of the visuals. Legend!</li>
 			<li>Huge credit to Isaac Sukin (@IceCreamYou) for his watertight open source game loop, <a href="https://github.com/IceCreamYou/MainLoop.js">MainLoop.js</a>, around which the whole game is built.</li>
@@ -242,8 +272,35 @@
 			<li>Finally, love to "Blue Squark" Laura for her unique monster noises... and more importantly for putting up with losing me to this nonsense for the last 6 weeks!</li>	
 		</ul>
 		<hr class="symbol">
+	</div>
+
+	<div id="disqus_thread"></div>
+	<script>
+
+	/**
+	*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+	*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+	/*
+	var disqus_config = function () {
+	this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+	this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+	*/
+	(function() { // DON'T EDIT BELOW THIS LINE
+	var d = document, s = d.createElement('script');
+	s.src = 'https://baronbackslash.disqus.com/embed.js';
+	s.setAttribute('data-timestamp', +new Date());
+	(d.head || d.body).appendChild(s);
+	})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+
+	<div id="footerDiv">
+		<hr class="symbol">
 		<p>Copyright Red Mars Digital 2018</p>
 	</div>
+
 
 	<script type="text/javascript" src="constants.js"></script>
 	<script type="text/javascript" src="lib/mainloop.js"></script>
@@ -257,10 +314,12 @@
 	<script type="text/javascript" src="creatures.js"></script>
 	<script type="text/javascript" src="creatureWeapons.js"></script>
 	<script type="text/javascript" src="gear.js"></script>
+	<script type="text/javascript" src="audio.js"></script>
 	<script type="text/javascript" src="menuScreens.js"></script>
 	<script type="text/javascript" src="crawler.js"></script>
 	<script type="text/javascript" src="ai.js"></script>
-	<script type="text/javascript" src="audio.js"></script>
+
+	<script id="dsq-count-scr" src="//baronbackslash.disqus.com/count.js" async></script>
 
 </body>
 </html>
