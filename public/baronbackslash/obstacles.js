@@ -96,7 +96,7 @@ Obstacle = function(type, room, y, x, modifier, noOffset) {
 		}
 	}
 	//	If grid co-ordinates are passed, use them - otherwise attempt to fit randomly in passed room 
-	if(x && y) {
+	if(x >= 0 && y >= 0) {
 		this.grid = {
 			x: x,
 			y: y
@@ -1318,7 +1318,7 @@ Obstacle = function(type, room, y, x, modifier, noOffset) {
 			}
 			this.position = {
 				y: (this.grid.y * TILE_SIZE + TILE_SIZE),
-				x: (this.grid.x * TILE_SIZE + TILE_SIZE)
+				x: (this.grid.x * TILE_SIZE + 12)
 			}
 			this.box.type = EnumBoxtype.TALL_OBSTACLE;
 			this.box.topLeft = {

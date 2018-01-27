@@ -247,13 +247,13 @@ function setUpPlayer() {
 		}
 	}
 	// player.lode = EnumLode.WATER;
-	// new Item(itemTemplates[EnumItem.CRYSTAL_SWORD], player.grid.x-1,player.grid.y);
-	// new Item(itemTemplates[EnumItem.ACID_HELMET], player.grid.x+1,player.grid.y+1);
-	// new Item(itemTemplates[EnumItem.CRYSTAL_HELMET], player.grid.x+1,player.grid.y+2);
-	// new Item(itemTemplates[EnumItem.SHADOW_HELMET], player.grid.x+1,player.grid.y+3);
-	// new Item(itemTemplates[EnumItem.FIRE_HELMET], player.grid.x+2,player.grid.y+1);
-	// new Item(itemTemplates[EnumItem.WATER_HELMET], player.grid.x+2,player.grid.y+2);
-	// new Item(itemTemplates[EnumItem.LIGHTNING_HELMET], player.grid.x+2,player.grid.y+3);
+	// new Item(itemTemplates[EnumItem.ORANGE_MUSHROOM], player.grid.x-1,player.grid.y);
+	// new Item(itemTemplates[EnumItem.ORANGE_MUSHROOM], player.grid.x+1,player.grid.y+1);
+	// new Item(itemTemplates[EnumItem.ORANGE_MUSHROOM], player.grid.x+1,player.grid.y+2);
+	// new Item(itemTemplates[EnumItem.ORANGE_MUSHROOM], player.grid.x+1,player.grid.y+3);
+	// new Item(itemTemplates[EnumItem.ORANGE_MUSHROOM], player.grid.x+2,player.grid.y+1);
+	// new Item(itemTemplates[EnumItem.ORANGE_MUSHROOM], player.grid.x+2,player.grid.y+2);
+	// new Item(itemTemplates[EnumItem.ORANGE_MUSHROOM], player.grid.x+2,player.grid.y+3);
 }
 
 function setUpCreatures() {
@@ -262,9 +262,9 @@ function setUpCreatures() {
 	// 		level.creatureArray[i][j] = undefined;
 	// 	}
 	// };
-	// level.creatureArray[player.grid.y+2][player.grid.x] = EnumCreature.GREEN_SLUDGIE;
-	// level.creatureArray[player.grid.y+2][player.grid.x+2] = EnumCreature.YELLOW_SLUDGIE;
-	// level.creatureArray[player.grid.y][player.grid.x+2] = EnumCreature.BADBUG;
+	// level.creatureArray[player.grid.y+2][player.grid.x] = EnumCreature.KOB;
+	// level.creatureArray[player.grid.y+2][player.grid.x+2] = EnumCreature.GIGA_KOB;
+	// level.creatureArray[player.grid.y][player.grid.x+2] = EnumCreature.MINI_KOB;
 	// level.creatureArray[player.grid.y+2][player.grid.x+1] = EnumCreature.BADBUG;
 	// level.creatureArray[player.grid.y][player.grid.x+1] = EnumCreature.BADBUG;
 	// level.creatureArray[player.grid.y][player.grid.x+2] = EnumCreature.BADBUG;
@@ -1050,8 +1050,16 @@ Creature.prototype.hasClearPathToPlayer = function() {
 	// if(Math.abs(diffX) <= 1 && Math.abs(diffY) <= 1) {				//	If grid squares are adjacent, return clear
 	// 	return true;
 	if(
+		(level.terrainArray[player.grid.y+2][player.grid.x] === 2 && this.grid.y > player.grid.y+1) ||
+		(level.terrainArray[player.grid.y+2][player.grid.x+1] === 2 && this.grid.y > player.grid.y+1) ||
+		(level.terrainArray[player.grid.y+2][player.grid.x-1] === 2 && this.grid.y > player.grid.y+1) ||
 		(level.terrainArray[player.grid.y+1][player.grid.x] === 2 && this.grid.y > player.grid.y) ||
-		(level.terrainArray[player.grid.y-1][player.grid.x] === 2 && this.grid.y < player.grid.y)
+		(level.terrainArray[player.grid.y][player.grid.x] === 2 && this.grid.y < player.grid.y) ||
+		(level.terrainArray[player.grid.y][player.grid.x+1] === 2 && this.grid.y < player.grid.y) ||
+		(level.terrainArray[player.grid.y][player.grid.x-1] === 2 && this.grid.y < player.grid.y) ||
+		(level.terrainArray[player.grid.y-1][player.grid.x] === 2 && this.grid.y < player.grid.y) ||
+		(level.terrainArray[player.grid.y-1][player.grid.x+1] === 2 && this.grid.y < player.grid.y) ||
+		(level.terrainArray[player.grid.y-1][player.grid.x-1] === 2 && this.grid.y < player.grid.y)
 	) {
 		// console.log("Blocked by a door!");
 		return false;

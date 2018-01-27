@@ -177,10 +177,21 @@ canvas {
 	z-index: 5;
 	color: rgba(255,255,255,0.65);
 }
+#interfaceDivMid {
+	position: absolute;
+	top: 43px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	z-index: 5;
+	color: rgba(255,255,255,0.65);
+}
 #scoreDiv, #healthDiv {
 	width: 100%;
 }
 #scoreDiv p {
+	margin: 0;
+}
+#interfaceDivMid p {
 	margin: 0;
 }
 #healthDiv p {
@@ -314,6 +325,9 @@ canvas {
 #hiScoreDiv h3, #hiScoreDiv h5, #creditsDiv h3, #creditsDiv h5 {
 	color: #dec0ce;
 	font-weight: normal;
+}
+.centredDiv {
+	margin: 0 auto;
 }
 #creditsDiv {
 	color: #9f8591;

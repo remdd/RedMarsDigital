@@ -4,6 +4,14 @@
 	<title>The Deadly Dungeons of Baron Backslash</title>
 	<link rel="stylesheet" type="text/css" href="crawler.css">
 	<script type="text/javascript" src="lib/jquery-3.3.1.min.js"></script>
+	<meta property="og:url" content="http://www.redmarsdigital.com/baronbackslash" />
+	<meta property="og:title" content="The Deadly Dungeons of Baron Backslash">
+	<meta property="og:description" content="A fast-paced pixel art dungeon crawler game for the browser.">
+	<meta property="og:image" content="http://www.redmarsdigital.com/baronbackslash/img/Screenshot.jpg">
+	<meta property="og:image:width" content="1418">
+	<meta property="og:image:height" content="860">
+	<meta property="og:site_name" content="The Deadly Dungeons of Baron Backslash">
+	<meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
 
@@ -133,25 +141,33 @@
 			</div>
 
 			<div id="deathScreen" class="gameMenuScreen" hidden>
-				<h1>You have died!</h1>
-				<h3>You scored <span class="finalScoreSpan">0</span> points.</h3>
-				<hr class="symbol">
-				<button class="newGameBtn" autofocus="true">
-					<h3>Play again</h3>
-				</button>
-				<button class="mainMenuBtn">
-					<h3>Main menu</h3>
-				</button>
+				<div class="centredMenuScreen">
+					<div>
+						<h1>You have died!</h1>
+						<h3>You scored <span class="finalScoreSpan">0</span> points.</h3>
+						<hr class="symbol">
+						<button class="newGameBtn" autofocus="true">
+							<h3>Play again</h3>
+						</button>
+						<button class="mainMenuBtn">
+							<h3>Main menu</h3>
+						</button>
+					</div>
+				</div>
 			</div>
 
 			<div id="endLevelScreen" class="gameMenuScreen" hidden>
-				<h1>Level <span id="completedLevelSpan">X</span> complete!</h1>
-				<h3>Our hero descends into the dark stairwell.</h3>
-				<h3>What fresh horrors lie in wait below...?</h3>
-				<hr class="symbol">
-				<button class="nextLevelBtn selected" autofocus="true">
-					<h3>Start level <span id="nextLevelSpan">X</span></h3>
-				</button>
+				<div class="centredMenuScreen">
+					<div>
+						<h1>Level <span id="completedLevelSpan">X</span> complete!</h1>
+						<h3>Our hero descends into the dark stairwell.</h3>
+						<h3>What fresh horrors lie in wait below...?</h3>
+						<hr class="symbol">
+						<button class="nextLevelBtn selected" autofocus="true">
+							<h3>Start level <span id="nextLevelSpan">X</span></h3>
+						</button>
+					</div>
+				</div>
 			</div>
 
 			<div id="gameCompleteScreen" class="gameMenuScreen" hidden>
@@ -186,6 +202,12 @@
 			<span id="messageSpan"></span>
 		</div>
 
+		<div id="interfaceDivMid">
+			<p>
+				<span class="hiScoreSpan"></span>
+			</p>
+		</div>
+
 		<div id="interfaceDivRight">
 			<div id="scoreDiv">
 				<p>
@@ -199,10 +221,36 @@
 
 	<div id="hiScoreDiv">
 
-		<p>The Deadly Dungeons of Baron Backslash is currently running version 1.0.0.</p>
+		<p>The Deadly Dungeons of Baron Backslash is currently running version 1.0.2.</p>
 		<p>I plan to add more content, creatures, items, levels and other surprises in future!</p>
 		<p>To hear about future updates, follow the Baron on Twitter:</p>
 		<p><img class="twitterIcon" src="img/Twitter.png"> <a href="https://twitter.com/Baron_Backslash">@Baron_Backslash</a></p>
+		<br>
+
+		<div class="centredDiv">
+			<!-- AddToAny BEGIN -->
+			<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+				<div class="centredDiv">
+					<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+					<a class="a2a_button_facebook"></a>
+					<a class="a2a_button_twitter"></a>
+<!-- 					<a class="a2a_button_google_plus"></a> -->
+					<a class="a2a_button_tumblr"></a>
+				</div>
+			</div>
+			<script>
+			var a2a_config = a2a_config || {};
+			a2a_config.color_main = "82606f";
+			a2a_config.color_border = "82606f";
+			a2a_config.color_link_text = "1c1117";
+			a2a_config.color_link_text_hover = "1c1117";
+			a2a_config.color_bg = "dec0ce";
+			a2a_config.color_arrow_hover = "fff";
+			</script>
+			<script async src="https://static.addtoany.com/menu/page.js"></script>
+			<!-- AddToAny END -->
+		</div>
+
 		<br>
 
 		<hr class="symbol">
@@ -234,27 +282,6 @@
 			</table>
 		</div>
 	</div>
-
-	<script type="text/javascript">
-		$('#todayBtn').click(function() {
-			$('.hiScoreBtn').removeClass('hiScoreBtnSelected');
-			$(this).addClass('hiScoreBtnSelected');
-			if(!$('#todayScoreTableDiv').is(':visible')) {
-				$('#allTimeScoreTableDiv').fadeOut('slow', function() {
-					$('#todayScoreTableDiv').fadeIn('slow');
-				});
-			}
-		});
-		$('#allTimeBtn').click(function() {
-			$('.hiScoreBtn').removeClass('hiScoreBtnSelected');
-			$(this).addClass('hiScoreBtnSelected');
-			if(!$('#allTimeScoreTableDiv').is(':visible')) {
-				$('#todayScoreTableDiv').fadeOut('slow', function() {
-					$('#allTimeScoreTableDiv').fadeIn('slow');
-				});
-			}
-		});
-	</script>
 
 	<div id="creditsDiv">
 

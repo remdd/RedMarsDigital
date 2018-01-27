@@ -334,8 +334,62 @@ hr {
 	height: 10px;
 	z-index: 1;
 }
+#crossfadeContainerBB {
+	position: relative;
+	width: 100%;
+	padding: 0;
+}
+.crossfadeImg {
+	position: absolute;
+	opacity: 0;
+	animation-name: cf4FadeInOut;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-duration: 17s;
+	animation-direction: forwards;
+}
 
+@keyframes cf4FadeInOut {
+  0% {
+    opacity:0;
+  }
+  5% {
+  	opacity: 1;
+  }
+  17% {
+  	opacity: 1;
+  }
+  20% {
+  	opacity: 0;
+  }
+  100% {
+    opacity:0;
+  }
+}
 
+.imgPad {
+	padding-left: 50px;
+}
+
+#crossfadeContainerBB img:nth-of-type(1) {
+  animation-delay: 0s;
+}
+#crossfadeContainerBB img:nth-of-type(2) {
+  animation-delay: 3s;
+}
+#crossfadeContainerBB img:nth-of-type(3) {
+  animation-delay: 6s;
+}
+#crossfadeContainerBB img:nth-of-type(4) {
+  animation-delay: 9s;
+}
+#crossfadeContainerBB img:nth-of-type(5) {
+  animation-delay: 12s;
+}
+#crossfadeContainerBB img:nth-of-type(6) {
+	position: relative;
+  animation-delay: 15s;
+}
 
 .projectLink {
 	font-family: 'Nunito', Helvetica, sans-serif;

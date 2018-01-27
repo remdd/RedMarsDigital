@@ -1,0 +1,17 @@
+Dev todos for next patch:
+
+
+Tweaks
+
+- Increase orange mushroom +maxHP effect to +2 (not +1)
+- Consider tracking session hi-score (under current score?)
+- 
+
+
+Bugfixes
+
+- Look into creatues' refusal to attack when directly below doors or up against walls
+- Look into contact points sometimes failing to connect when using sword against smaller enemies
+
+
+

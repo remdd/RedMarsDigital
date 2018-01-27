@@ -243,36 +243,38 @@ levelGen.loadLevel = function(levelNumber) {
 	};
 	//	Default startRoom contents function
 	level.startRoomContents = function() {
-		if(
-			level.terrainArray[this.origin.y-2][this.origin.x] === 1 && level.terrainArray[this.origin.y-2][this.origin.x+1] === 1 &&
-			level.terrainArray[this.origin.y-1][this.origin.x] === 1 && level.terrainArray[this.origin.y-1][this.origin.x+1] === 1 &&
-			level.terrainArray[this.origin.y][this.origin.x] === 0 && level.terrainArray[this.origin.y][this.origin.x] === 0
-		) {
-			new Obstacle(EnumObstacle.ENTRANCE_STAIRS, null, this.origin.y-2, this.origin.x);
-		} else if(
-			level.terrainArray[this.origin.y-2][this.origin.x+1] === 1 && level.terrainArray[this.origin.y-2][this.origin.x+2] === 1 &&
-			level.terrainArray[this.origin.y-1][this.origin.x+1] === 1 && level.terrainArray[this.origin.y-1][this.origin.x+2] === 1 &&
-			level.terrainArray[this.origin.y][this.origin.x+1] === 0 && level.terrainArray[this.origin.y][this.origin.x+1] === 0
-		) {
-			new Obstacle(EnumObstacle.ENTRANCE_STAIRS, null, this.origin.y-2, this.origin.x+1);
-		} else if(
-			level.terrainArray[this.origin.y-2][this.origin.x+2] === 1 && level.terrainArray[this.origin.y-2][this.origin.x+3] === 1 &&
-			level.terrainArray[this.origin.y-1][this.origin.x+2] === 1 && level.terrainArray[this.origin.y-1][this.origin.x+3] === 1 &&
-			level.terrainArray[this.origin.y][this.origin.x+2] === 0 && level.terrainArray[this.origin.y][this.origin.x+2] === 0
-		) {
-			new Obstacle(EnumObstacle.ENTRANCE_STAIRS, null, this.origin.y-2, this.origin.x+2);
-		} else if(
-			level.terrainArray[this.origin.y-2][this.origin.x+3] === 1 && level.terrainArray[this.origin.y-2][this.origin.x+4] === 1 &&
-			level.terrainArray[this.origin.y-1][this.origin.x+3] === 1 && level.terrainArray[this.origin.y-1][this.origin.x+4] === 1 &&
-			level.terrainArray[this.origin.y][this.origin.x+3] === 0 && level.terrainArray[this.origin.y][this.origin.x+3] === 0
-		) {
-			new Obstacle(EnumObstacle.ENTRANCE_STAIRS, null, this.origin.y-2, this.origin.x+3);
-		} else if(
-			level.terrainArray[this.origin.y-2][this.origin.x+4] === 1 && level.terrainArray[this.origin.y-2][this.origin.x+5] === 1 &&
-			level.terrainArray[this.origin.y-1][this.origin.x+4] === 1 && level.terrainArray[this.origin.y-1][this.origin.x+5] === 1 &&
-			level.terrainArray[this.origin.y][this.origin.x+4] === 0 && level.terrainArray[this.origin.y][this.origin.x+4] === 0
-		) {
-			new Obstacle(EnumObstacle.ENTRANCE_STAIRS, null, this.origin.y-2, this.origin.x+4);
+		if(this.origin.y > 1) {
+			if(
+				level.terrainArray[this.origin.y-2][this.origin.x] === 1 && level.terrainArray[this.origin.y-2][this.origin.x+1] === 1 &&
+				level.terrainArray[this.origin.y-1][this.origin.x] === 1 && level.terrainArray[this.origin.y-1][this.origin.x+1] === 1 &&
+				level.terrainArray[this.origin.y][this.origin.x] === 0 && level.terrainArray[this.origin.y][this.origin.x] === 0
+			) {
+				new Obstacle(EnumObstacle.ENTRANCE_STAIRS, null, this.origin.y-2, this.origin.x);
+			} else if(
+				level.terrainArray[this.origin.y-2][this.origin.x+1] === 1 && level.terrainArray[this.origin.y-2][this.origin.x+2] === 1 &&
+				level.terrainArray[this.origin.y-1][this.origin.x+1] === 1 && level.terrainArray[this.origin.y-1][this.origin.x+2] === 1 &&
+				level.terrainArray[this.origin.y][this.origin.x+1] === 0 && level.terrainArray[this.origin.y][this.origin.x+1] === 0
+			) {
+				new Obstacle(EnumObstacle.ENTRANCE_STAIRS, null, this.origin.y-2, this.origin.x+1);
+			} else if(
+				level.terrainArray[this.origin.y-2][this.origin.x+2] === 1 && level.terrainArray[this.origin.y-2][this.origin.x+3] === 1 &&
+				level.terrainArray[this.origin.y-1][this.origin.x+2] === 1 && level.terrainArray[this.origin.y-1][this.origin.x+3] === 1 &&
+				level.terrainArray[this.origin.y][this.origin.x+2] === 0 && level.terrainArray[this.origin.y][this.origin.x+2] === 0
+			) {
+				new Obstacle(EnumObstacle.ENTRANCE_STAIRS, null, this.origin.y-2, this.origin.x+2);
+			} else if(
+				level.terrainArray[this.origin.y-2][this.origin.x+3] === 1 && level.terrainArray[this.origin.y-2][this.origin.x+4] === 1 &&
+				level.terrainArray[this.origin.y-1][this.origin.x+3] === 1 && level.terrainArray[this.origin.y-1][this.origin.x+4] === 1 &&
+				level.terrainArray[this.origin.y][this.origin.x+3] === 0 && level.terrainArray[this.origin.y][this.origin.x+3] === 0
+			) {
+				new Obstacle(EnumObstacle.ENTRANCE_STAIRS, null, this.origin.y-2, this.origin.x+3);
+			} else if(
+				level.terrainArray[this.origin.y-2][this.origin.x+4] === 1 && level.terrainArray[this.origin.y-2][this.origin.x+5] === 1 &&
+				level.terrainArray[this.origin.y-1][this.origin.x+4] === 1 && level.terrainArray[this.origin.y-1][this.origin.x+5] === 1 &&
+				level.terrainArray[this.origin.y][this.origin.x+4] === 0 && level.terrainArray[this.origin.y][this.origin.x+4] === 0
+			) {
+				new Obstacle(EnumObstacle.ENTRANCE_STAIRS, null, this.origin.y-2, this.origin.x+4);
+			}
 		}
 	};
 
@@ -281,13 +283,7 @@ levelGen.loadLevel = function(levelNumber) {
 		case 1: {
 			level.height = 70;
 			level.width = 70;
-			var rand = Math.floor(session.prng.nextFloat() * 2);
-			if(rand < 1) {
-				level.specialItemCount = 0;
-			} else {
-				level.specialItemCount = 1;
-			}
-			// level.specialItemCount = 10;
+			level.specialItemCount = 1;
 			sessionVars.uncommonCreatures.push(EnumCreature.SNEAKY_SKELTON);
 			sessionVars.uncommonCreatures.push(EnumCreature.KOB);
 			level.startRoomContents = function() {

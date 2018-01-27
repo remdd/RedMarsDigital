@@ -262,7 +262,7 @@ var creatureWeapons = [
 			}
 		},
 		attack: {
-			reach: TILE_SIZE * 1.125,					//	Reach of attack from centre of player object position
+			reach: TILE_SIZE * 1.0625,					//	Reach of attack from centre of player object position
 			damagePlayer: true,
 			damageCreatures: false,
 			type: EnumAttack.SWIPE,

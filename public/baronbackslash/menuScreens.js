@@ -102,7 +102,38 @@ function startNewGame() {
 	if(!session.loadingLevel) {
 		session.loadingLevel = true;
 		menuState.menuVisible = false;
-		playMusic(1);
+		var musicOrder = Math.floor(Math.random() * 6);
+		switch (musicOrder) {
+			case 0: {
+				session.vars.musicOrder = [1,2,3];
+				break;
+			}
+			case 1: {
+				session.vars.musicOrder = [1,3,2];
+				break;
+			}
+			case 2: {
+				session.vars.musicOrder = [2,1,3];
+				break;
+			}
+			case 3: {
+				session.vars.musicOrder = [2,3,1];
+				break;
+			}
+			case 4: {
+				session.vars.musicOrder = [3,1,2];
+				break;
+			}
+			case 5: {
+				session.vars.musicOrder = [3,2,1];
+				break;
+			}
+			default: {
+				break;
+			}
+		}
+		console.log(session.vars.musicOrder);
+		playMusic(session.vars.musicOrder[1]);
 		start(true);
 	}
 }
@@ -201,6 +232,10 @@ function deathScreen() {
 }
 
 function saveScore() {
+	if(!session.hiScore || session.score > session.hiScore) {
+		session.hiScore = session.score;
+		$('.hiScoreSpan').text('Highest Score: ' + session.hiScore);
+	}
 	var score = {
 		name: session.playerName,
 		score: session.score,
@@ -305,10 +340,7 @@ function startNextLevel() {
 		playMusic(4);
 	} else {
 		var track = session.levelNumber % 3;
-		if(track === 0) {
-			track = 3;
-		}
-		playMusic(track);
+		playMusic(session.vars.musicOrder[track]);
 	}
 	start();
 }

@@ -1597,9 +1597,9 @@ setAiAction = function(creature) {
 						var direction = getPlayerDirection(creature);
 						creature.setFacing(direction);							
 						if(creature.vars.facingRight) {
-							ai.attack(creature, 0, 800, direction, Math.PI / 8, 6);
+							ai.attack(creature, 0, 1000, direction, Math.PI / 8, 6);
 						} else {
-							ai.attack(creature, 0, 800, direction, Math.PI / 8, 7);
+							ai.attack(creature, 0, 1000, direction, Math.PI / 8, 7);
 						}
 						var action = Math.floor(Math.random() * 5);
 						if(action < 1) {

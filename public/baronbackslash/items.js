@@ -30,8 +30,9 @@ var itemTemplates = [
 				this.vars.collected = true;
 				gameEffects.play('healthHeart');
 				// console.log("Picking up health heart!");
-				var rand = Math.floor(Math.random() * 3) + 1;
-				player.addHealth(rand);
+				// var rand = Math.floor(Math.random() * 3) + 1;
+				// player.addHealth(rand);
+				player.addHealth(3);
 				game.items.splice(game.items.indexOf(this), 1);
 				return true;
 			}
@@ -593,8 +594,10 @@ var itemTemplates = [
 				this.vars.collected = true;
 				gameEffects.play('goldHeart');
 				// console.log("Picking up gold heart!");
-				var rand = Math.floor(Math.random() * 3) + 3;
-				player.addHealth(rand);
+				// var rand = Math.floor(Math.random() * 3) + 3;
+				// player.addHealth(rand);
+				// player.addHealth(3);
+				player.addHealth(5);
 				game.items.splice(game.items.indexOf(this), 1);
 				return true;
 			}
@@ -1143,8 +1146,8 @@ function Effect(type) {
 					this.message3 = "";
 					this.duration = 5000;
 					this.apply = function() {
-						player.vars.maxHP++;
-						player.vars.currentHP++;
+						player.vars.maxHP+=2;
+						player.vars.currentHP+=2;
 						$('.healthSpan').text(player.vars.currentHP + ' / ' + player.vars.maxHP);
 					};
 					this.remove = function() {
@@ -1257,7 +1260,11 @@ function Effect(type) {
 	}
 	displayMessage(3000, this.message1, this.message2, this.message3);
 	if(!this.duration) {
-		this.duration = Math.random() * session.vars.defaultMushroomFactor + session.vars.defaultMushroomMin;
+		if(this.good) {
+			this.duration = Math.random() * session.vars.defaultMushroomFactor + session.vars.defaultMushroomMin;
+		} else {
+			this.duration = (Math.random() * session.vars.defaultMushroomFactor + session.vars.defaultMushroomMin) * 0.6;
+		}
 	}
 	if(this.good) {
 		gameEffects.play('goodMushroom');

@@ -1,0 +1,35 @@
+v1.0.0 	- 22/01/18
+
+************************************************
+
+v1.0.1	- 23/01/18
+
+***	Gameplay ***
+Reduced difficulty level:
+-	Health Heart now gives 3 health instead of 1-3
+-	Gold Heart now gives 5 health instead of 3-5
+-	Urk Sword attack reach reduced to 1.0625 instead of 1.125
+-	Pebbl HP reduced from 4 to 3
+-	Rocko repeat attack time increased from 800 to 1000 ms
+-	Changed default mushroom effect times so that bad effects last just 60% as long as good effects
+-	Changed levelGen to make 1st level always contain 1 special item
+
+***	Bugfixes ***
+-	Fix bug where creatures occasionally attack through doors 
+
+***	Cosmetic ***
+-	Tweak Kob family colour palette
+
+************************************************
+
+v1.0.2	-	27/01/18
+
+***	Gameplay tweaks ***
+-	Orange mushroom with the 'pretty, pretty good' effect now gives +2 to maxHP, not +1
+
+***	Cosmetic ***
+-	Adjusted music so that tracks 1-3 play in a random order for levels 1-3, then the same random order for levels 4-6.
+
+
+
+

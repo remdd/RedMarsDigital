@@ -3220,8 +3220,8 @@ var creatureTemplates = [
 		currentSprite: { x: 17, y: 38},
 		vars: {
 			speed: 0.6,
-			maxHP: 4,
-			currentHP: 4,
+			maxHP: 3,
+			currentHP: 3,
 			restingWeaponAnimation: false,
 			score: 70
 		},

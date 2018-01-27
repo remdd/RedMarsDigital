@@ -263,6 +263,7 @@ app.get('/baronbackslash/todayscores', function(req, res) {
 });
 //	Post new score
 app.post('/baronbackslash/score', function(req, res) {
+	console.log(req.body);
 	HiScore.create(req.body, function(err, hiScore) {
 		if(err) {
 			console.log(err);
@@ -280,29 +281,15 @@ function addDummyScores(hiScores) {
 		console.log("Adding dummy scores...");
 		var add = 10 - hiScores.length;
 		for(var i = 0; i < add; i++) {
-			var suffix = dummySuffixes[Math.floor(Math.random() * dummySuffixes.length)];
-			var prefix = dummyPrefixes[Math.floor(Math.random() * dummyPrefixes.length)];
+			var name = dummyNames[Math.floor(Math.random() * dummyNames.length)];
 			var score;
-			var rand = Math.floor(Math.random() * 2);
-			if(rand < 1) {
-				score = dummyScores[Math.floor(Math.random() * dummyScores.length)];
-			} else {
-				score = Math.floor(Math.random() * 1000);
-			}
-			var level;
-			var rand2 = Math.floor(Math.random() * 10);
-			if(rand2 < 6) {
-				level = 1;
-			} else if(rand2 < 9) {
-				level = 2;
-			} else {
-				level = 3;
-			}
+			score = dummyScores[Math.floor(Math.random() * dummyScores.length)];
 			var dummyScore = {
-				name: prefix + suffix,
+				name: name,
 				score: score,
-				level: level,
+				level: 1,
 				defeatedBaron: false,
+				seed: 0,
 				date: Date.now()
 			}
 			hiScores.push(dummyScore);
@@ -312,43 +299,32 @@ function addDummyScores(hiScores) {
 	}
 }
 
-var dummyPrefixes = [
-	'Sneaky_Skelton',
+var dummyNames = [
+	'Sneaky Skelton',
 	'Blue Squark',
-	'Urky McUrkFace',
-	'Campest_Vamp',
-	'Pixel Goblin',
-	'BlackWiz',
-	'RedWiz',
+	'Camp Vamp',
+	'Green Goblin',
+	'Black Wiz',
+	'Red Wiz',
 	'Ogr',
-	'I_Heart_Baron',
-	'MiniGhostFace',
-	'Bitey Ian'
-];
-
-var dummySuffixes = [
-	'99',
-	' 34',
-	'!!!!',
-	' :)',
-	'_xox',
-	'123',
-	'78',
-	'',
-	'',
-	'101',
-	'_111',
-	'462'
+	'Urk Shaman',
+	'Black Knight',
+	'Green Sludgie',
+	'Badbug',
+	'Zombi Master',
+	'Mini Kob',
+	'Rocko',
+	'Pebbl',
+	'Mumi',
+	'Grimlin'
 ];
 
 var dummyScores = [
-	1500,
 	10,
-	999,
-	2300,
-	450,
-	125,
-	140
+	20,
+	30,
+	40,
+	50
 ];
 
 function sort_by_key_value(arr, key) {
