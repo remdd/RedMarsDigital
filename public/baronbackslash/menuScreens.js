@@ -234,7 +234,7 @@ function deathScreen() {
 function saveScore() {
 	if(!session.hiScore || session.score > session.hiScore) {
 		session.hiScore = session.score;
-		$('.hiScoreSpan').text('Highest Score: ' + session.hiScore);
+		$('.hiScoreSpan').text('Highest: ' + session.hiScore);
 	}
 	var score = {
 		name: session.playerName,
@@ -242,11 +242,12 @@ function saveScore() {
 		defeatedBaron: session.flags.defeatedBaron,
 		level: session.levelNumber,
 		seed: session.seed,
+		source: window.location.href,
 		date: Date.now()
 	}
 	$.ajax({
 		type: "POST",
-		url: '/baronbackslash/score',
+		url: 'http://www.redmarsdigital.com/baronbackslash/score',
 		data: score, 
 		success: function() {
 			// console.log("Score successfully posted!");
@@ -298,7 +299,7 @@ function refreshHiScores() {
 	// console.log("Refreshing scores...");
 	$.ajax({
 		type: "GET",
-		url: '/baronbackslash/todayscores',
+		url: 'https://www.redmarsdigital.com/baronbackslash/todayscores',
 		success: function(hiScores) {
 			$('#todayScoreboard').empty();
 			var headers = $('<tr><th>Name</th><th>Score</th><th>Level</th><th></th></tr>');
@@ -316,7 +317,7 @@ function refreshHiScores() {
 	});
 	$.ajax({
 		type: "GET",
-		url: '/baronbackslash/alltimescores',
+		url: 'https://www.redmarsdigital.com/baronbackslash/alltimescores',
 		success: function(hiScores) {
 			$('#allTimeScoreboard').empty();
 			var headers = $('<tr><th>Name</th><th>Score</th><th>Level</th><th></th></tr>');

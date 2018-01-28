@@ -7,7 +7,8 @@ var hiScoreSchema = new mongoose.Schema({
 	seed: Number,
 	date: Date,
 	defeatedBaron: Boolean,
-	level: Number
+	level: Number,
+	source: String
 });
 
 hiScoreSchema.plugin(mongoosePaginate);

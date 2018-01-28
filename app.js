@@ -1,28 +1,32 @@
 var express 				= require('express'),
-	logger					= require('morgan'),
-	dotenv					= require('dotenv'),
-	favicon					= require('serve-favicon'),
-	mongoose				= require('mongoose'),
-	mongoosePaginate 		= require('mongoose-paginate'),
+	logger						= require('morgan'),
+	dotenv						= require('dotenv'),
+	favicon						= require('serve-favicon'),
+	mongoose					= require('mongoose'),
+	mongoosePaginate 	= require('mongoose-paginate'),
 	bodyParser 				= require('body-parser'),
-	methodOverride			= require('method-override'),
-	User					= require('./models/user'),
-	BlogPost				= require('./models/blogpost'),
-	ToDoItem				= require('./models/todoitem'),
+	methodOverride		= require('method-override'),
+	User							= require('./models/user'),
+	BlogPost					= require('./models/blogpost'),
+	ToDoItem					= require('./models/todoitem'),
 	ToDoCategory			= require('./models/todocategory'),
-	HiScore					= require('./models/hiscore'),
-	passport				= require('passport'),
+	HiScore						= require('./models/hiscore'),
+	passport					= require('passport'),
 	LocalStrategy			= require('passport-local'),
-	expressSession			= require('express-session'),
+	expressSession		= require('express-session'),
 	mongoDBStore			= require('connect-mongodb-session')(expressSession),
-	flash					= require('connect-flash'),
-	striptags				= require('striptags');
-	app 					= express();
+	flash							= require('connect-flash'),
+	cors 							=	require('cors'),
+	striptags					= require('striptags');
+	app 							= express();
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(logger('dev'));
 app.use(favicon('public/img/favicon20.png'));
+
+//	Allow cross-origin requests (gathering baron backslash hiscores)
+app.use(cors());
 
 dotenv.config({path: '.env'});				//	Loads environment variables file
 

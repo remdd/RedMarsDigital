@@ -190,6 +190,7 @@ canvas {
 }
 #scoreDiv p {
 	margin: 0;
+	text-align: right;
 }
 #interfaceDivMid p {
 	margin: 0;

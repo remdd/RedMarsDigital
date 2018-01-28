@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /public/baronbackslash/Dungeon1.png
+Disallow: /public/baronbackslash/Monsters.png
+Disallow: /public/baronbackslash/Decor.png
+Disallow: /public/baronbackslash/Obstacles.png
+Disallow: /public/baronbackslash/Player.png
+Disallow: /public/baronbackslash/img/
