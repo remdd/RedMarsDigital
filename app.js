@@ -1,17 +1,17 @@
 var express 				= require('express'),
-	logger						= require('morgan'),
+	logger						= require('morgan'),									//	Logger
 	dotenv						= require('dotenv'),
 	favicon						= require('serve-favicon'),
 	mongoose					= require('mongoose'),
-	mongoosePaginate 	= require('mongoose-paginate'),
+	mongoosePaginate 	= require('mongoose-paginate'),				//	Paginate blogposts
 	bodyParser 				= require('body-parser'),
 	methodOverride		= require('method-override'),
-	User							= require('./models/user'),
+	User							= require('./models/user'),						//	Site user schema for authentication
 	BlogPost					= require('./models/blogpost'),
-	ToDoItem					= require('./models/todoitem'),
+	ToDoItem					= require('./models/todoitem'),				
 	ToDoCategory			= require('./models/todocategory'),
-	HiScore						= require('./models/hiscore'),
-	passport					= require('passport'),
+	HiScore						= require('./models/hiscore'),				//	Baron Backslash player high score schema
+	passport					= require('passport'),								//	User auth
 	LocalStrategy			= require('passport-local'),
 	expressSession		= require('express-session'),
 	mongoDBStore			= require('connect-mongodb-session')(expressSession),
@@ -19,6 +19,11 @@ var express 				= require('express'),
 	cors 							=	require('cors'),
 	striptags					= require('striptags');
 	app 							= express();
+
+//	Catchall container for config settings
+var config = {
+	mongo: {}
+};
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
@@ -28,11 +33,17 @@ app.use(favicon('public/img/favicon20.png'));
 //	Allow cross-origin requests (gathering baron backslash hiscores)
 app.use(cors());
 
-dotenv.config({path: '.env'});				//	Loads environment variables file
+//	Load environment variables from file
+dotenv.config({path: '.env'});
 
 //	Connects mongoose to db
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.DBPATH, {useMongoClient: true});
+if(process.env.DBPATH) {
+	config.mongo.connected = true;
+	mongoose.connect(process.env.DBPATH, {useMongoClient: true});
+} else {
+	config.mongo.connected = false;
+}
 
 //	Default use of body parser
 app.use(bodyParser.urlencoded({extended: true}));
@@ -41,23 +52,30 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 
 //	MongoDBStore config
-var store = new mongoDBStore(
-	{
-		uri: process.env.DBPATH,
-		collection: 'sessions'
-	}, function(err) {
+if(config.mongo.connected) {
+	var store = new mongoDBStore(
+		{
+			uri: process.env.DBPATH,
+			collection: 'sessions'
+		}, function(err) {
+			if(err) {
+				config.mongo.connected = false;
+				console.log(err);
+			} else {
+				config.mongo.connected = true;
+			}
+		}
+	);
+
+	//	Catch MongoDBStore errors
+	store.on('error', function(err) {
 		if(err) {
+			config.mongo.connected = false;
 			console.log(err);
 		}
-	}
-);
+	});
+}
 
-//	Catch MongoDBStore errors on startup
-store.on('error', function(err) {
-	if(err) {
-		console.log(err);
-	}
-});
 
 //	Express-session and Passport config
 app.use(expressSession({
@@ -114,27 +132,26 @@ app.get('/projects/:name', function(req, res) {
 	res.render('projects/' + req.params.name, { footerIcon: footerIcon });
 });
 
-// app.get('/project_code/code_kiosk/index.html', function(req, res) {
-// 	res.render('project_code/code_kiosk/index.html');
-// });
-
 app.get('/blog', function(req, res) {
-	if(!(req.query.page)) {
-		req.query.page = 1;
-	}
-	BlogPost.paginate( {}, { 
-		limit: 10, 
-		sort: {datePosted: -1}, 
-		page: req.query.page 
-	}, function(err, blogPosts) {
-		if(err) {
-			console.log(err);
-			res.redirect('/');
-		} else {
-			res.render("blog", {blogPosts: blogPosts});
+	if(config.mongo.connected) {
+		if(!(req.query.page)) {
+			req.query.page = 1;
 		}
-	});
-
+		BlogPost.paginate( {}, { 
+			limit: 10, 
+			sort: {datePosted: -1}, 
+			page: req.query.page 
+		}, function(err, blogPosts) {
+			if(err) {
+				console.log(err);
+				res.redirect('/');
+			} else {
+				res.render("blog", {blogPosts: blogPosts});
+			}
+		});
+	} else {
+		res.render('404');
+	}
 });
 
 //	NEW blog post form

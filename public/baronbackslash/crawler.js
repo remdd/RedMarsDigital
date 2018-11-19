@@ -141,6 +141,8 @@ var Key = {
 		this._pressed[event.code] = true;
 	},
 	onKeyup: function(event) {
+		console.log("keyup!");
+		console.log(event);
 		delete this._pressed[event.code];
 	},
 	clearPressed: function() {
@@ -149,10 +151,10 @@ var Key = {
 }
 
 //	Input control event listeners
-window.addEventListener('keyup', function(event) {
+document.addEventListener('keyup', function(event) {
 	Key.onKeyup(event);
 }, false);
-window.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function(event) {
 	if(MainLoop.isRunning()) {
 		if(event.code === 'Space') {
 			event.preventDefault();
