@@ -17,7 +17,6 @@ var express 				= require('express'),
 	mongoDBStore			= require('connect-mongodb-session')(expressSession),
 	flash							= require('connect-flash'),
 	cors 							=	require('cors'),
-	striptags					= require('striptags');
 	app 							= express();
 
 //	Catchall container for config settings
@@ -74,40 +73,40 @@ if(config.mongo.connected) {
 			console.log(err);
 		}
 	});
+
+	//	Express-session and Passport config
+	app.use(expressSession({
+		secret: process.env.EXP_KEY,
+		store: store,									//	Connects to MongoDBStore
+		resave: true,									//	Was false - need to read into, is 'true' a risk?
+		saveUninitialized: true,						//	Was false - need to read into, is 'true' a risk?
+		httpOnly: true,									//	Don't let browser javascript access cookies
+		secure: false									//	Set to true to limit cookies to https only (SET FOR PRODUCTION)
+	}));
+
+	app.use(passport.initialize());
+	app.use(passport.session());
+
+	passport.use(new LocalStrategy({
+		usernameField: 'email',
+		passwordField: 'password'
+	}, User.authenticate()));
+
+	passport.serializeUser(User.serializeUser());
+	passport.deserializeUser(User.deserializeUser());
+
+	//	Flash messages
+	app.use(flash());
+
+	//	Middleware to make req.user etc available to all routes
+	app.use(function(req, res, next){
+		res.locals.currentUser = req.user;
+		res.locals.error = req.flash("error");
+		res.locals.success = req.flash("success");
+		next();
+	});
 }
 
-
-//	Express-session and Passport config
-app.use(expressSession({
-	secret: process.env.EXP_KEY,
-	store: store,									//	Connects to MongoDBStore
-	resave: true,									//	Was false - need to read into, is 'true' a risk?
-	saveUninitialized: true,						//	Was false - need to read into, is 'true' a risk?
-	httpOnly: true,									//	Don't let browser javascript access cookies
-	secure: false									//	Set to true to limit cookies to https only (SET FOR PRODUCTION)
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(new LocalStrategy({
-	usernameField: 'email',
-	passwordField: 'password'
-}, User.authenticate()));
-
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-//	Flash messages
-app.use(flash());
-
-//	Middleware to make req.user etc available to all routes
-app.use(function(req, res, next){
-	res.locals.currentUser = req.user;
-	res.locals.error = req.flash("error");
-	res.locals.success = req.flash("success");
-	next();
-});
 
 //	Array of images to enable display of random graphic in footer of blogPosts
 var icons = ['Mariner4.png', 'Mars3.png', 'MRO.png', 'Phobos.png', 'Rover.png', 'Deimos.png', 'Sojourner.png'];
@@ -523,12 +522,6 @@ function addDate(req) {
 	req.body.blogPost.dateDisplay = curr_date + " " + m_names[curr_month] + " " + curr_year;
 	return req;
 }
-
-// function stripHtml(html) {
-// 	var temporaryElement = document.createElement('div');
-// 	temporaryElement.innerHTML = html;
-// 	return temporaryElement.textContent || temporaryElement.innerText || "";
-// }
 
 // //	Render new user form
 // app.get('/register', function(req, res) {

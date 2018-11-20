@@ -44,12 +44,12 @@
 						<span class="btn"><a href="/blog">Blog</a></span>
 						<span class="btn"><a href="/creative">Creative</a></span>
 						<span class="btn"><a href="/mars">Mars</a></span>
-						<% if(currentUser) { %>
+						<% if(typeof currentUser !== 'undefined') { %>
 							<span class="btn"><a href="/todo">Todo</a></span>
 						<% } %>
 					</div>
 					<div class="col col-3-sm navicons">
-						<% if(currentUser) { %>
+						<% if(typeof currentUser !== 'undefined') { %>
 							<i class="fa fa-check-square" aria-hidden="true"></i>
 						<% } %>
 						<a href="https://github.com/remdd"><i class="fa fa-github" aria-hidden="true"></i></a>
@@ -59,7 +59,7 @@
 					</div>
 				</div>
 
-				<% if(success && success.length > 0) { %>
+				<% if(typeof success !== 'undefined' && success.length > 0) { %>
 					<div class="row navbar alertDiv">
 						<div class="col col-12-lg">
 							<div class="alert alert-success" role="alert"><%= success %></div>
@@ -67,7 +67,7 @@
 					</div>
 				<% } %>
 
-				<% if(error && error.length > 0) { %>
+				<% if(typeof error !== 'undefined' && error.length > 0) { %>
 					<div class="row navbar alertDiv">
 						<div class="col col-12-lg">
 							<div class="alert alert-danger" role="alert"><%= error %></div>
