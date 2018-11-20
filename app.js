@@ -57,7 +57,7 @@ if(config.mongo.connected) {
 		{
 			uri: process.env.DBPATH,
 			collection: 'sessions'
-		}, function(err) {
+		}, err => {
 			if(err) {
 				config.mongo.connected = false;
 				console.log(err);
@@ -68,7 +68,7 @@ if(config.mongo.connected) {
 	);
 
 	//	Catch MongoDBStore errors
-	store.on('error', function(err) {
+	store.on('error', err => {
 		if(err) {
 			config.mongo.connected = false;
 			console.log(err);
@@ -100,7 +100,7 @@ if(config.mongo.connected) {
 	app.use(flash());
 
 	//	Middleware to make req.user etc available to all routes
-	app.use(function(req, res, next){
+	app.use((req, res, next) => {
 		res.locals.currentUser = req.user;
 		res.locals.error = req.flash("error");
 		res.locals.success = req.flash("success");
@@ -114,25 +114,25 @@ var icons = ['Mariner4.png', 'Mars3.png', 'MRO.png', 'Phobos.png', 'Rover.png', 
 
 
 //	ROUTES	//
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
 	res.render('index');
 });
 
-app.get('/about', function(req, res) {
+app.get('/about', (req, res) => {
 	res.render('about');
 });
 
-app.get('/projects', function(req, res) {
+app.get('/projects', (req, res) => {
 	res.render('projects');
 });
 
-app.get('/projects/:name', function(req, res) {
+app.get('/projects/:name', (req, res) => {
 	var randomIcon = Math.floor(Math.random() * icons.length);
 	var footerIcon = icons[randomIcon];
 	res.render('projects/' + req.params.name, { footerIcon: footerIcon });
 });
 
-app.get('/blog', function(req, res) {
+app.get('/blog', (req, res) => {
 	if(config.mongo.connected) {
 		if(!(req.query.page)) {
 			req.query.page = 1;
@@ -141,7 +141,7 @@ app.get('/blog', function(req, res) {
 			limit: 10, 
 			sort: {datePosted: -1}, 
 			page: req.query.page 
-		}, function(err, blogPosts) {
+		}, (err, blogPosts) => {
 			if(err) {
 				console.log(err);
 				res.redirect('/');
@@ -155,15 +155,15 @@ app.get('/blog', function(req, res) {
 });
 
 //	NEW blog post form
-app.get('/blog/new', isLoggedIn, function(req, res) {
+app.get('/blog/new', isLoggedIn, (req, res) => {
 	res.render('blog/new');
 });
 
 //	CREATE blog post
-app.post('/blog', isLoggedIn, function(req, res) {
+app.post('/blog', isLoggedIn, (req, res) => {
 	req = addDate(req);
 	req.body.blogPost.textContent = striptags(req.body.blogPost.content);
-	BlogPost.create(req.body.blogPost, function(err, blogPost) {
+	BlogPost.create(req.body.blogPost, (err, blogPost) => {
 		if(err) {
 			console.log(err);
 			res.redirect('back');
@@ -174,9 +174,9 @@ app.post('/blog', isLoggedIn, function(req, res) {
 });
 
 //	SHOW blog post
-app.get('/blog/:id', function(req, res) {
+app.get('/blog/:id', (req, res) => {
 	BlogPost.findById(req.params.id)
-	.exec(function(err, blogPost) {
+	.exec((err, blogPost) => {
 		if(err) {
 			console.log(err);
 			res.redirect('/blog');
@@ -184,13 +184,13 @@ app.get('/blog/:id', function(req, res) {
 			res.render('404');
 		} else {
 			BlogPost.find({"datePosted": {"$gt": blogPost.datePosted}}).sort({"datePosted": 1}).limit(1)
-			.exec(function(err, nextPost) {
+			.exec((err, nextPost) => {
 				if(err) {
 					console.log(err);
 					res.redirect('/blog');
 				} else {
 					BlogPost.find({"datePosted": {"$lt": blogPost.datePosted}}).sort({"datePosted": -1}).limit(1)
-					.exec(function(err, prevPost) {
+					.exec((err, prevPost) => {
 						if(err) {
 							console.log(err);
 							res.redirect('/blog');
@@ -207,9 +207,9 @@ app.get('/blog/:id', function(req, res) {
 });
 
 //	EDIT blog post form
-app.get('/blog/:id/edit', isLoggedIn, function(req, res) {
+app.get('/blog/:id/edit', isLoggedIn, (req, res) => {
 	BlogPost.findById(req.params.id)
-	.exec(function(err, blogPost) {
+	.exec((err, blogPost) => {
 		if(err) {
 			console.log(err);
 			res.redirect('back');
@@ -220,9 +220,9 @@ app.get('/blog/:id/edit', isLoggedIn, function(req, res) {
 });
 
 //	UPDATE blog post
-app.put('/blog/:id', isLoggedIn, function(req, res) {
+app.put('/blog/:id', isLoggedIn, (req, res) => {
 	req.body.blogPost.textContent = striptags(req.body.blogPost.content);
-	BlogPost.findByIdAndUpdate(req.params.id, req.body.blogPost, function(err, blogPost) {
+	BlogPost.findByIdAndUpdate(req.params.id, req.body.blogPost, (err, blogPost) => {
 		if(err) {
 			console.log(err);
 			res.redirect('back');
@@ -232,31 +232,31 @@ app.put('/blog/:id', isLoggedIn, function(req, res) {
 	});
 });
 
-app.get('/creative', function(req, res) {
+app.get('/creative', (req, res) => {
 	res.render('creative');
 });
 
-app.get('/creative/:name', function(req, res) {
+app.get('/creative/:name', (req, res) => {
 	var randomIcon = Math.floor(Math.random() * icons.length);
 	var footerIcon = icons[randomIcon];
 	res.render('creative/' + req.params.name, { footerIcon: footerIcon });
 });
 
-app.get('/mars', function(req, res) {
+app.get('/mars', (req, res) => {
 	res.render('mars');
 });
 
 //	Baron Backslash game
-app.get('/baronbackslash', function(req, res) {
+app.get('/baronbackslash', (req, res) => {
 	res.render('baronbackslash');	//	Preloader instance
 });
 
 //	All time scores
-app.get('/baronbackslash/alltimescores', cors(), function(req, res) {
+app.get('/baronbackslash/alltimescores', cors(), (req, res) => {
 	HiScore.find({})
 	.sort({'score': -1})
 	.limit(10)
-	.exec(function(err, hiScores) {
+	.exec((err, hiScores) => {
 		if(err) {
 			console.log(err);
 			res.json({});
@@ -268,13 +268,13 @@ app.get('/baronbackslash/alltimescores', cors(), function(req, res) {
 });
 
 //	Today's scores
-app.get('/baronbackslash/todayscores', cors(), function(req, res) {
+app.get('/baronbackslash/todayscores', cors(), (req, res) => {
 	//	Calculate 24 hrs ago
 	var period = Date.now() - (1000 * 60 * 60 * 24);
 	HiScore.find({ "date": { "$gte": period }})
 	.sort({'score': -1})
 	.limit(10)
-	.exec(function(err, hiScores) {
+	.exec((err, hiScores) => {
 		if(err) {
 			console.log(err);
 			res.json({});
@@ -286,9 +286,9 @@ app.get('/baronbackslash/todayscores', cors(), function(req, res) {
 });
 
 //	Post new score
-app.post('/baronbackslash/score', cors(), function(req, res) {
+app.post('/baronbackslash/score', cors(), (req, res) => {
 	console.log(req.body);
-	HiScore.create(req.body, function(err, hiScore) {
+	HiScore.create(req.body, (err, hiScore) => {
 		if(err) {
 			console.log(err);
 			res.json({});
@@ -312,7 +312,7 @@ function sort_by_key_value(arr, key) {
 
   arr = arr.slice();
 
-  return arr.sort(function(a, b) {
+  return arr.sort((a, b) => {
     var a_key = String(a[key]);
     var b_key = String(b[key]);
     var n = b_key - a_key;
@@ -322,11 +322,11 @@ function sort_by_key_value(arr, key) {
 
 
 //	ToDo list page - visible to registered users only
-app.get('/todo', isLoggedIn, function(req, res) {
+app.get('/todo', isLoggedIn, (req, res) => {
 	ToDoCategory.find({})
 	.populate( { path: "todos", options: { sort: {'complete': 1, 'name': 1}} } )
 	.sort( {'complete': 1, 'name': 1} )
-	.exec(function(err, categories) {
+	.exec((err, categories) => {
 		if(err) {
 			console.log(err);
 			req.flash('error', 'Something went wrong...');
@@ -337,8 +337,8 @@ app.get('/todo', isLoggedIn, function(req, res) {
 	});
 });
 
-app.post('/todo/cat', isLoggedIn, function(req, res) {
-	ToDoCategory.create(req.body, function(err, category) {
+app.post('/todo/cat', isLoggedIn, (req, res) => {
+	ToDoCategory.create(req.body, (err, category) => {
 		if(err) {
 			console.log(err);
 			req.flash("error", "Something went wrong...");
@@ -348,8 +348,8 @@ app.post('/todo/cat', isLoggedIn, function(req, res) {
 	});
 });
 
-app.put('/todo/:id', isLoggedIn, function(req, res) {
-	ToDoItem.findOne( { 'name': req.params.id } , function(err, todo) {
+app.put('/todo/:id', isLoggedIn, (req, res) => {
+	ToDoItem.findOne( { 'name': req.params.id } , (err, todo) => {
 		if(err) {
 			console.log(err);
 			req.flash('error', 'Something went wrong...');
@@ -358,7 +358,7 @@ app.put('/todo/:id', isLoggedIn, function(req, res) {
 			if(todo.complete) {
 				complete = false;
 			}
-			ToDoItem.findByIdAndUpdate(todo._id, { 'complete': complete }, function(err, todo) {
+			ToDoItem.findByIdAndUpdate(todo._id, { 'complete': complete }, (err, todo) => {
 				if(err) {
 					console.log(err);
 					req.flash('error', 'Something went wrong...');
@@ -370,13 +370,13 @@ app.put('/todo/:id', isLoggedIn, function(req, res) {
 	});
 });
 
-app.post('/todo/newToDo', isLoggedIn, function(req, res) {
-	ToDoItem.create(req.body, function(err, todo) {
+app.post('/todo/newToDo', isLoggedIn, (req, res) => {
+	ToDoItem.create(req.body, (err, todo) => {
 		if(err) {
 			console.log(err);
 			req.flash("error", "Something went wrong...");
 		} else {
-			ToDoCategory.findOneAndUpdate( { 'name': req.body.cat }, { $push: { todos: todo._id } }, function(err, cat) {
+			ToDoCategory.findOneAndUpdate( { 'name': req.body.cat }, { $push: { todos: todo._id } }, (err, cat) => {
 				if(err) {
 					console.log(err);
 					req.flash("error", "Something went wrong...");
@@ -390,14 +390,14 @@ app.post('/todo/newToDo', isLoggedIn, function(req, res) {
 	});
 });
 
-app.delete('/todo/:id', isLoggedIn, function(req, res) {
-	ToDoItem.findOne( { name: req.params.id }, function(err, todo) {
+app.delete('/todo/:id', isLoggedIn, (req, res) => {
+	ToDoItem.findOne( { name: req.params.id }, (err, todo) => {
 		if(err) {
 			console.log(err);
 			req.flash("error", "Something went wrong...");
 			res.redirect('back');
 		} else {
-			ToDoItem.findByIdAndRemove(todo._id, function(err) {
+			ToDoItem.findByIdAndRemove(todo._id, (err) => {
 				if(err) {
 					console.log(err);
 					req.flash("error", "Something went wrong...");
@@ -410,15 +410,15 @@ app.delete('/todo/:id', isLoggedIn, function(req, res) {
 	})
 });
 
-app.delete('/todo/cat/:id', isLoggedIn, function(req, res) {
-	ToDoCategory.findOne( { name: req.params.id }, function(err, cat) {
+app.delete('/todo/cat/:id', isLoggedIn, (req, res) => {
+	ToDoCategory.findOne( { name: req.params.id }, (err, cat) => {
 		if(err) {
 			console.log(err);
 			req.flash("error", "Something went wrong...");
 			res.redirect('back');
 		} else {
 		console.log('deleting cat...');
-			ToDoCategory.findByIdAndRemove(cat._id, function(err) {
+			ToDoCategory.findByIdAndRemove(cat._id, (err) => {
 				if(err) {
 					console.log(err);
 					req.flash("error", "Something went wrong...");
@@ -432,7 +432,7 @@ app.delete('/todo/cat/:id', isLoggedIn, function(req, res) {
 });
 
 //	Render login form
-app.get('/login', function(req, res) {
+app.get('/login', (req, res) => {
 	res.render('users/login');
 });
 
@@ -445,14 +445,14 @@ app.post('/login', passport.authenticate('local', {
 }));
 
 //	Logout route
-app.get('/logout', function(req, res) {
+app.get('/logout', (req, res) => {
 	req.logout();			// all that passport requires to end session
 	req.flash("success", "You have successfully logged out.");
 	res.redirect('/');
 });
 
 //	Catch-all
-app.get('*', function(req,res) {
+app.get('*', (req,res) => {
 	res.render('404')
 });
 
@@ -478,14 +478,14 @@ function addDate(req) {
 }
 
 // //	Render new user form
-// app.get('/register', function(req, res) {
+// app.get('/register', (req, res) => {
 // 	res.render('users/register');
 // });
 
 // //	Register new user route
-// app.post('/register', function(req, res) {
+// app.post('/register', (req, res) => {
 // 	var newUser = new User(req.body.user);
-// 	User.register(newUser, req.body.password, function(err, user) {
+// 	User.register(newUser, req.body.password, (err, user) => {
 // 		if(err) {
 // 			req.flash('error', err);
 // 			res.redirect('/register');
@@ -496,6 +496,6 @@ function addDate(req) {
 // 	});
 // });
 
-app.listen(process.env.PORT || '3003', process.env.IP, function() {
+app.listen(process.env.PORT || '3003', process.env.IP, () => {
 	console.log("Server started");
 });

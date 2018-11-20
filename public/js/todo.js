@@ -1,17 +1,17 @@
-$(function() {
-	$('#addCategoryBtn').click(function() {
+$(() => {
+	$('#addCategoryBtn').click(() => {
 		var newCategory = {
 			name: $('#newCategory').val()
 		}
 		$.ajax("/todo/cat", {
 			data: newCategory,
 			type: 'post'
-		}).done(function() {
+		}).done(() => {
 			location.reload();
 		});
 	});
 
-	$('#addToDoBtn').click(function() {
+	$('#addToDoBtn').click(() => {
 		console.log('adding todo...');
 		var newToDo = {
 			name: $('#newToDo').val(),
@@ -21,7 +21,7 @@ $(function() {
 		$.ajax("/todo/newToDo", {
 			data: newToDo,
 			type: 'post'
-		}).done(function() {
+		}).done(() => {
 			window.location.href = '/todo/'
 		});
 	});
@@ -31,7 +31,7 @@ $(function() {
 		var $that = $(this);
 		$.ajax("/todo/" + itemName, {
 			type: 'put'
-		}).done(function() {
+		}).done(() => {
 			$that.toggleClass('complete');
 			if($that.hasClass('complete')) {
 				$that.siblings().first().next().addClass('fa-check-circle-o');

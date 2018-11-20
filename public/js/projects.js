@@ -1,4 +1,4 @@
-$(window).on('load', function($) {
+$(() => {
 	var csvid = document.getElementById('csvid');
 	var csbtn = document.getElementById('csbtn');
 	var csplaying = true;

@@ -10,7 +10,7 @@
 				<form>
 					<label class="inlineLabel" for="newToDo"><h3>Add new ToDo Item</h3></label>
 					<select id="catList" default="Misc">
-						<% categories.forEach(function(category) { %>
+						<% categories.forEach(category => { %>
 							<option value="<%= category.name %>" label="<%= category.name %>"><%= category.name %></option>
 						<% }) %>
 					</select>
@@ -31,7 +31,7 @@
 		<div class="row">
 			<div class="col col-12">
 				<ul class="toDoList">
-					<% categories.forEach(function(category) { %>
+					<% categories.forEach(category => { %>
 					<li data-name="<%= category.name %>">
 						<i class="fa fa-times deleteCatBtn" aria-hidden="true"></i>
 						<% if(category.complete === true) { %>
@@ -42,7 +42,7 @@
 					</li>
 						
 						<ul>
-							<% category.todos.forEach(function(todo) { %>
+							<% category.todos.forEach(todo => { %>
 								<li class="toDoItem" data-name="<%= todo.name %>">
 									<i class="fa fa-times deleteItemBtn" aria-hidden="true"></i>
 									<% if(todo.complete === true) { %>

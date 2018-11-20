@@ -14,7 +14,7 @@
 				<p>Showing <%= blogPosts.limit %> results per page - page <%= blogPosts.page %> of <%= blogPosts.pages %> (<%= blogPosts.total %> results total)</p>
 			<% } %>
 
-			<% blogPosts.docs.forEach(function(blogPost) { %>
+			<% blogPosts.docs.forEach(blogPost => { %>
 				<a href="/blog/<%= blogPost._id %>" class="thumbLink blogTitle">
 					<div class="col col-12 blogThumb">
 						<div class="truncatedBlogContent">

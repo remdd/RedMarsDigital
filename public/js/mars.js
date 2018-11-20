@@ -1,14 +1,13 @@
+//  Controls for three.js Mars map
 //  Constants
 var WIDTH = $('#globe').width();
 var HEIGHT = WIDTH * 0.6;
-console.log(WIDTH);
-console.log(HEIGHT);
-var RADIUS = 600;
-var FOV = 45;
-var NEAR = 1;
-var FAR = 4000;
+const RADIUS = 600;
+const FOV = 45;
+const NEAR = 1;
+const FAR = 4000;
 
-//  Global vars
+//  three.js config vars
 var camera_pos = {
     x: 1800,
     y: 0,
@@ -19,41 +18,43 @@ var light_pos = {
     y: 200,
     z: 1800
 }
-
-var timer = 0;
-var speed = 0.001;
-var points_geography = [];
-var points_missions = [];
+//  Config variables
 var point_full_opacity = 0.7;
 var point_fade_time = 300;
 var camera_angle_time = 1000;
+var points_geography = [];
+var points_missions = [];
 var point_labelled;
 
-//  basic renderer
+//  Globe rotation variables
+var timer = 0;
+var speed = 0.001;
+
+//  Basic three.js renderer
 var renderer = new THREE.WebGLRenderer( { alpha: true });
 renderer.setSize(WIDTH,HEIGHT);
 renderer.setClearColor(0x000000, 0);
 renderer.shadowMap.enabled = true;
 renderer.shadowMapSoft = true;
 
-//  add renderer to DOM
+//  Add renderer to DOM
 var $globe = $('#globe');
 $globe.append(renderer.domElement);
 var $canvas = $('canvas').first();
 window.addEventListener('mousemove', onMouseMove, false);
 window.addEventListener('click', onTouch, false);
 
-//  setup a camera that points to the origin
+//  create a camera that always points to the origin (ie centre of globe)
 var camera = new THREE.PerspectiveCamera(FOV,WIDTH / HEIGHT, NEAR, FAR);    //  Configure camera params
 camera.position.set(camera_pos.x, camera_pos.y, camera_pos.z);              //  Initialize camera position
 camera.lookAt(new THREE.Vector3(0,0,0));                                    //  Keeps camera pointing at centre of render space
 
-//  create a basic scene and add the camera
+//  create a basic scene and attach the camera
 var scene = new THREE.Scene();
 scene.add(camera);
 
 //	run on document ready
-$(document).ready(function() {
+$(() => {
     addLight();
     var mars = addMars();
     scene.add(mars);
@@ -123,6 +124,7 @@ function addPoints() {
                 opacity: point_full_opacity
             });
         } else if(points[i].type === 'newest') {
+            //  Debug type for checking position of new points 
             var geometry = new THREE.BoxGeometry(20, 10, 10);
             var material = new THREE.MeshLambertMaterial({
                 color: 0xFFFFFF,
@@ -152,7 +154,6 @@ function addPoints() {
 // convert the positions from a lat, lon to a position on a sphere.
 function latLongToVector3(lat, lon, height) {
     var radius = RADIUS;
-
     var phi = (lat)*Math.PI/180;
     var theta = (lon-180)*Math.PI/180;
     var x = -(radius+height) * Math.cos(phi) * Math.cos(theta);
@@ -312,7 +313,7 @@ function onMouseMove(e) {
     }
 }
 
-//  Select point of interest on click(add touchscreen support)
+//  Select point of interest on click (for touchscreen support)
 function onTouch(e) {
     var offset = $canvas.offset();
     var canvasWidth = $canvas.width();
@@ -371,13 +372,13 @@ function highlightLabel(point) {
 }
 
 //  Click to close info overlay for points of interest
-$('.closeSpan').click(function() {
+$('.closeSpan').click(() => {
     scene.remove(scene.getObjectByName('highlight'));
     $('.pointDetails').fadeOut('fast'); 
 });
 
 //  Determine whether 'point info' panes should be displayed overlaying or below the globe on window resize
-$(window).resize(function() {
+$(window).resize(() => {
     setSize();
 });
 function setSize() {
