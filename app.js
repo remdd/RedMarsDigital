@@ -11,6 +11,7 @@ var express 				= require('express'),
 	ToDoItem					= require('./models/todoitem'),				
 	ToDoCategory			= require('./models/todocategory'),
 	HiScore						= require('./models/hiscore'),				//	Baron Backslash player high score schema
+	baron							=	require('baron'),										//	Baron Backslash integration
 	passport					= require('passport'),								//	User auth
 	LocalStrategy			= require('passport-local'),
 	expressSession		= require('express-session'),
@@ -29,8 +30,8 @@ app.use(express.static(__dirname + '/public'));
 app.use(logger('dev'));
 app.use(favicon('public/img/favicon20.png'));
 
-//	Allow cross-origin requests (gathering baron backslash hiscores)
-app.use(cors());
+//	Allow cross-origin requests (for gathering baron backslash hiscores)
+// app.use(cors());
 
 //	Load environment variables from file
 dotenv.config({path: '.env'});
@@ -249,8 +250,9 @@ app.get('/mars', function(req, res) {
 app.get('/baronbackslash', function(req, res) {
 	res.render('baronbackslash');	//	Preloader instance
 });
+
 //	All time scores
-app.get('/baronbackslash/alltimescores', function(req, res) {
+app.get('/baronbackslash/alltimescores', cors(), function(req, res) {
 	HiScore.find({})
 	.sort({'score': -1})
 	.limit(10)
@@ -264,8 +266,9 @@ app.get('/baronbackslash/alltimescores', function(req, res) {
 		}
 	});
 });
+
 //	Today's scores
-app.get('/baronbackslash/todayscores', function(req, res) {
+app.get('/baronbackslash/todayscores', cors(), function(req, res) {
 	//	Calculate 24 hrs ago
 	var period = Date.now() - (1000 * 60 * 60 * 24);
 	HiScore.find({ "date": { "$gte": period }})
@@ -281,8 +284,9 @@ app.get('/baronbackslash/todayscores', function(req, res) {
 		}
 	});
 });
+
 //	Post new score
-app.post('/baronbackslash/score', function(req, res) {
+app.post('/baronbackslash/score', cors(), function(req, res) {
 	console.log(req.body);
 	HiScore.create(req.body, function(err, hiScore) {
 		if(err) {
@@ -294,58 +298,8 @@ app.post('/baronbackslash/score', function(req, res) {
 	});
 });
 
-function addDummyScores(hiScores) {
-	if(hiScores.length >= 10) {
-		return hiScores;
-	} else {
-		console.log("Adding dummy scores...");
-		var add = 10 - hiScores.length;
-		for(var i = 0; i < add; i++) {
-			var name = dummyNames[Math.floor(Math.random() * dummyNames.length)];
-			var score;
-			score = dummyScores[Math.floor(Math.random() * dummyScores.length)];
-			var dummyScore = {
-				name: name,
-				score: score,
-				level: 1,
-				defeatedBaron: false,
-				seed: 0,
-				date: Date.now()
-			}
-			hiScores.push(dummyScore);
-		}
-		hiScores = sort_by_key_value(hiScores, 'score');
-		return hiScores;
-	}
-}
+baron.configure();
 
-var dummyNames = [
-	'Sneaky Skelton',
-	'Blue Squark',
-	'Camp Vamp',
-	'Green Goblin',
-	'Black Wiz',
-	'Red Wiz',
-	'Ogr',
-	'Urk Shaman',
-	'Black Knight',
-	'Green Sludgie',
-	'Badbug',
-	'Zombi Master',
-	'Mini Kob',
-	'Rocko',
-	'Pebbl',
-	'Mumi',
-	'Grimlin'
-];
-
-var dummyScores = [
-	10,
-	20,
-	30,
-	40,
-	50
-];
 
 function sort_by_key_value(arr, key) {
   var to_s = Object.prototype.toString;
@@ -542,6 +496,6 @@ function addDate(req) {
 // 	});
 // });
 
-app.listen(process.env.PORT, process.env.IP, function() {
+app.listen(process.env.PORT || '3003', process.env.IP, function() {
 	console.log("Server started");
 });
