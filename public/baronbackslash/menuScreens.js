@@ -247,7 +247,7 @@ function saveScore() {
 	}
 	$.ajax({
 		type: "POST",
-		url: 'http://www.redmarsdigital.com/baronbackslash/score',
+		url: '//www.redmarsdigital.com/baronbackslash/score',
 		data: score, 
 		success: function() {
 			// console.log("Score successfully posted!");
@@ -299,7 +299,7 @@ function refreshHiScores() {
 	// console.log("Refreshing scores...");
 	$.ajax({
 		type: "GET",
-		url: 'https://www.redmarsdigital.com/baronbackslash/todayscores',
+		url: '//www.redmarsdigital.com/baronbackslash/todayscores',
 		success: function(hiScores) {
 			$('#todayScoreboard').empty();
 			var headers = $('<tr><th>Name</th><th>Score</th><th>Level</th><th></th></tr>');
@@ -317,7 +317,7 @@ function refreshHiScores() {
 	});
 	$.ajax({
 		type: "GET",
-		url: 'https://www.redmarsdigital.com/baronbackslash/alltimescores',
+		url: '//www.redmarsdigital.com/baronbackslash/alltimescores',
 		success: function(hiScores) {
 			$('#allTimeScoreboard').empty();
 			var headers = $('<tr><th>Name</th><th>Score</th><th>Level</th><th></th></tr>');

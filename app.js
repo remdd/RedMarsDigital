@@ -11,7 +11,6 @@ var express 				= require('express'),
 	ToDoItem					= require('./models/todoitem'),				
 	ToDoCategory			= require('./models/todocategory'),
 	HiScore						= require('./models/hiscore'),				//	Baron Backslash player high score schema
-	baron							=	require('baron'),										//	Baron Backslash integration
 	passport					= require('passport'),								//	User auth
 	LocalStrategy			= require('passport-local'),
 	expressSession		= require('express-session'),
@@ -247,7 +246,62 @@ app.get('/mars', (req, res) => {
 });
 
 //	Baron Backslash game
-app.get('/baronbackslash', (req, res) => {
+function addDummyScores(hiScores) {
+	if(hiScores.length >= 10) {
+		return hiScores;
+	} else {
+		console.log("Adding dummy scores...");
+		var add = 10 - hiScores.length;
+		for(var i = 0; i < add; i++) {
+			var name = dummyNames[Math.floor(Math.random() * dummyNames.length)];
+			var score;
+			score = dummyScores[Math.floor(Math.random() * dummyScores.length)];
+			var dummyScore = {
+				name: name,
+				score: score,
+				level: 1,
+				defeatedBaron: false,
+				seed: 0,
+				date: Date.now()
+			}
+			hiScores.push(dummyScore);
+		}
+		hiScores = sort_by_key_value(hiScores, 'score');
+		return hiScores;
+	}
+}
+
+var dummyNames = [
+	'Sneaky Skelton',
+	'Blue Squark',
+	'Camp Vamp',
+	'Green Goblin',
+	'Black Wiz',
+	'Red Wiz',
+	'Ogr',
+	'Urk Shaman',
+	'Black Knight',
+	'Green Sludgie',
+	'Badbug',
+	'Zombi Master',
+	'Mini Kob',
+	'Rocko',
+	'Pebbl',
+	'Mumi',
+	'Grimlin'
+];
+
+var dummyScores = [
+	10,
+	20,
+	30,
+	40,
+	50
+];
+	
+console.log("Baron Backslash configured...");
+
+app.get('/baronbackslash', cors(), (req, res) => {
 	res.render('baronbackslash');	//	Preloader instance
 });
 
@@ -297,9 +351,6 @@ app.post('/baronbackslash/score', cors(), (req, res) => {
 		}
 	});
 });
-
-baron.configure();
-
 
 function sort_by_key_value(arr, key) {
   var to_s = Object.prototype.toString;

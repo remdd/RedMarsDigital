@@ -141,8 +141,6 @@ var Key = {
 		this._pressed[event.code] = true;
 	},
 	onKeyup: function(event) {
-		console.log("keyup!");
-		console.log(event);
 		delete this._pressed[event.code];
 	},
 	clearPressed: function() {
