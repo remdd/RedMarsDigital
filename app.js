@@ -548,5 +548,5 @@ function addDate(req) {
 // });
 
 app.listen(process.env.PORT || '3003', process.env.IP, () => {
-	console.log("Server started");
+	console.log(`Server started on port ${ process.env.PORT || '3003' }`);
 });

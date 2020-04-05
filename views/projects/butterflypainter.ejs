@@ -6,16 +6,16 @@
 			<div class="col col-12 projectDiv">
 				<h3>Butterfly Painter</h3>
 				<p>An interactive, animated 3D installation for a zoo visitor centre in Cumbria.</p>
-				<h5 class="projectLink">Installed on site at the <a href="http://www.wildlifeoasis.co.uk">Lakeland Wildlife Oasis</a></h5>
-				<h5 class="projectLink"><a href="https://github.com/remdd/LWO_ButterflyPainter">View on GitHub <i class="devicon-github-plain"></i></a></h5>
+				<h5 class="projectLink">Installed on site at the <a href="http://www.wildlifeoasis.co.uk" rel="noopener noreferrer" target="_blank">Lakeland Wildlife Oasis</a></h5>
+				<h5 class="projectLink"><a href="https://github.com/remdd/LWO_ButterflyPainter" rel="noopener noreferrer" target="_blank">View on GitHub <i class="devicon-github-plain"></i></a></h5>
 				<div class="centreDiv">
 					<hr>
-					<a href="https://unity3d.com/">
+					<a href="https://unity3d.com/" rel="noopener noreferrer" target="_blank">
 						<div class="devicon-figure fig-img fig-unity">
 							<img class="unityImg" src="/img/unity.png">
 						</div>
 					</a>
-					<a href="https://www.blender.org/">
+					<a href="https://www.blender.org/" rel="noopener noreferrer" target="_blank">
 						<div class="devicon-figure fig-img fig-blender">
 							<img class="blenderImg" src="/img/blender.png">
 						</div>
@@ -115,13 +115,13 @@
 
 				<p>Behind the scenes, the program flows like this:</p>
 				<ol>
-					<li>The touch-screen paint 'app' is built in <span class="spanTech spanHTML">HTML</span> and <span class="spanTech spanLibrary">jQuery</span>. A <span class="spanTech spanHTML">Canvas</span> element is defined by a series of quadratic curves outlining the wing template onto which the user can paint. The colour-picking palette code is adapted from <a href="https://github.com/DavidDurman/FlexiColorPicker">David Durman's FlexiColorPicker tool</a>.</li>
+					<li>The touch-screen paint 'app' is built in <span class="spanTech spanHTML">HTML</span> and <span class="spanTech spanLibrary">jQuery</span>. A <span class="spanTech spanHTML">Canvas</span> element is defined by a series of quadratic curves outlining the wing template onto which the user can paint. The colour-picking palette code is adapted from <a href="https://github.com/DavidDurman/FlexiColorPicker" rel="noopener noreferrer" target="_blank">David Durman's FlexiColorPicker tool</a>.</li>
 					<li>The app is 'locked down' as a simple kiosk installation, i.e. browser navigation and all other controls not required for public interaction are disabled.</li>
-					<li>The projected 'scene' within which the butterflies are flying is a simple <a href="https://unity3d.com/"><span class="spanTech spanLanguage">Unity3D</span></a> app, with a static rainforest image displayed at the far end of an invisible 3D 'boundary box' within which the butterflies are constrained.</li>
-					<li>The butterfly model was adapted from a <a href="https://www.turbosquid.com/3d-models/blue-butterfly-3ds-free/607415">freely available model</a> using <a href="https://www.blender.org/"><span class="spanTech spanLanguage">Blender</span></a>, and animated within Unity.</li>
+					<li>The projected 'scene' within which the butterflies are flying is a simple <a href="https://unity3d.com/" rel="noopener noreferrer" target="_blank"><span class="spanTech spanLanguage">Unity3D</span></a> app, with a static rainforest image displayed at the far end of an invisible 3D 'boundary box' within which the butterflies are constrained.</li>
+					<li>The butterfly model was adapted from a <a href="https://www.turbosquid.com/3d-models/blue-butterfly-3ds-free/607415" rel="noopener noreferrer" target="_blank">freely available model</a> using <a href="https://www.blender.org/" rel="noopener noreferrer" target="_blank"><span class="spanTech spanLanguage">Blender</span></a>, and animated within Unity.</li>
 					<li>The butterflies are controlled by a very simple AI, which randomly reassigns each of them a flight path vector, movement speed and wing-flapping animation (from a small number of slightly different animation modes) at short random intervals.</li>
 					<li>Once a new wing design has been painted and is saved by a user, a representation of their artwork is saved to a .png file to the browser's default download directory.</li>
-					<li>This directory is monitored by a <span class="spanTech spanLanguage">C#</span> script running in Unity. When a new file with the relevant filename is detected, a batch file is triggered which uses <a href="https://www.imagemagick.org/script/index.php"><span class="spanTech">Image Magick</span></a> command line tools to rotate and resize the image for mapping to the butterfly model in Unity, and copies the formatted output file to a Unity working directory.</li>
+					<li>This directory is monitored by a <span class="spanTech spanLanguage">C#</span> script running in Unity. When a new file with the relevant filename is detected, a batch file is triggered which uses <a href="https://www.imagemagick.org/script/index.php" rel="noopener noreferrer" target="_blank"><span class="spanTech">Image Magick</span></a> command line tools to rotate and resize the image for mapping to the butterfly model in Unity, and copies the formatted output file to a Unity working directory.</li>
 					<li>This working directory is also monitored by a Unity C# script which, on detection of a new formatted wing texture file, removes the 'eldest' butterfly in the scene and instantiates (out of camera shot) a new one mapped with the new wing texture.</li>
 				</ol>
 
