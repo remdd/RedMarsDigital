@@ -8,7 +8,7 @@ var express 				= require('express'),
 	methodOverride		= require('method-override'),
 	User							= require('./models/user'),						//	Site user schema for authentication
 	BlogPost					= require('./models/blogpost'),
-	ToDoItem					= require('./models/todoitem'),				
+	ToDoItem					= require('./models/todoitem'),
 	ToDoCategory			= require('./models/todocategory'),
 	HiScore						= require('./models/hiscore'),				//	Baron Backslash player high score schema
 	passport					= require('passport'),								//	User auth
@@ -17,6 +17,7 @@ var express 				= require('express'),
 	mongoDBStore			= require('connect-mongodb-session')(expressSession),
 	flash							= require('connect-flash'),
 	cors 							=	require('cors'),
+	striptags					= require('striptags'),
 	app 							= express();
 
 //	Catchall container for config settings
@@ -39,7 +40,7 @@ dotenv.config({path: '.env'});
 mongoose.Promise = global.Promise;
 if(process.env.DBPATH) {
 	config.mongo.connected = true;
-	mongoose.connect(process.env.DBPATH, {useMongoClient: true});
+	mongoose.connect(process.env.DBPATH);
 } else {
 	config.mongo.connected = false;
 }
