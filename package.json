@@ -28,6 +28,6 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose-email": "^0.1.4",
     "serve-favicon": "^2.5.0",
-    "striptags": "^3.1.1"
+    "striptags": "^3.2.0"
   }
 }
